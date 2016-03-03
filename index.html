@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pfan123.github.io"></form>
@@ -94,39 +94,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考资料：<br>    hexo中文文档：<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">https://hexo.io/zh-cn/docs/</a><br>    Hexo在github上构建免费的Web应用：<a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">http://blog.fens.me/hexo-blog-github/</a></p>
-<p>什么是 Hexo？ </p>
-<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>安装前提</p>
-<p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
-<p>Node.js<br>Git</p>
-<p>安装 Hexo</p>
-<p>npm install -g hexo-cli</p>
-<p>建站</p>
-<p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
-<p>$ hexo init <folder>   //新建网站目录<br>$ cd <folder>           //进入文件夹<br>$ npm install<br>$ hexo new [layout] <title><br>新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。</title></folder></folder></p>
-<p>generate<br>$ hexo generate<br>生成静态文件。</p>
-<p>publish<br>$ hexo publish [layout] <filename><br>发表草稿。</filename></p>
-<p>server<br>$ hexo server<br>启动服务器。默认情况下，访问网址为： <a href="http://localhost:4000/。" target="_blank" rel="external">http://localhost:4000/。</a></p>
-<p>选项    描述<br>-p, –port    重设端口<br>-s, –static    只使用静态文件<br>-l, –log    启动日记记录，使用覆盖记录格式</p>
-<p>新建完成后，指定文件夹的目录如下：</p>
-<p>.<br>├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── source<br>|   ├── _drafts<br>|   └── _posts<br>└── themes</p>
+        <h2 id="什么是-Hexo？"><a href="#什么是-Hexo？" class="headerlink" title="什么是 Hexo？"></a>什么是 Hexo？</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<h3 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h3><p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Node.js</span><br><span class="line">Git</span><br></pre></td></tr></table></figure>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;   //新建网站目录</span><br><span class="line">$ cd &lt;folder&gt;		   //进入文件夹</span><br><span class="line">$ npm install      //安装hexo依赖</span><br><span class="line">$ hexo new [layout] &lt;title&gt;   //建立新文章</span><br><span class="line">新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。</span><br></pre></td></tr></table></figure></p>
+<h3 id="generate-生产静态文件"><a href="#generate-生产静态文件" class="headerlink" title="generate  生产静态文件"></a>generate  生产静态文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>生成静态文件，静态文件生成到public。</p>
+<h3 id="publish"><a href="#publish" class="headerlink" title="publish"></a>publish</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo publish [layout] &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+<p>发表草稿。</p>
+<h3 id="server"><a href="#server" class="headerlink" title="server"></a>server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>启动服务器。默认情况下，访问网址为： <a href="http://localhost:4000/。" target="_blank" rel="external">http://localhost:4000/。</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">选项	描述</span><br><span class="line">-p, --port	重设端口</span><br><span class="line">-s, --static	只使用静态文件</span><br><span class="line">-l, --log	启动日记记录，使用覆盖记录格式</span><br></pre></td></tr></table></figure>
+<p>新建完成后，指定文件夹的目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure></p>
 <p>_config.yml</p>
 <p>网站的 配置 信息，您可以在此配置大部分的参数。</p>
 <p>package.json<br>应用程序的信息。EJS, Stylus 和 Markdown renderer 已默认安装，您可以自由移除。</p>
-<p>{<br>  “name”: “hexo-site”,<br>  “version”: “0.0.0”,<br>  “private”: true,<br>  “hexo”: {<br>    “version”: “”<br>  },<br>  “dependencies”: {<br>    “hexo”: “^3.0.0”,<br>    “hexo-generator-archive”: “^0.1.0”,<br>    “hexo-generator-category”: “^0.1.0”,<br>    “hexo-generator-index”: “^0.1.0”,<br>    “hexo-generator-tag”: “^0.1.0”,<br>    “hexo-renderer-ejs”: “^0.1.0”,<br>    “hexo-renderer-stylus”: “^0.2.0”,<br>    “hexo-renderer-marked”: “^0.2.4”,<br>    “hexo-server”: “^0.1.2”<br>  }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;hexo-site&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.0.0&quot;,</span><br><span class="line">  &quot;private&quot;: true,</span><br><span class="line">  &quot;hexo&quot;: &#123;</span><br><span class="line">    &quot;version&quot;: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;hexo&quot;: &quot;^3.0.0&quot;,</span><br><span class="line">    &quot;hexo-generator-archive&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">    &quot;hexo-generator-category&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">    &quot;hexo-generator-index&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">    &quot;hexo-generator-tag&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">    &quot;hexo-renderer-ejs&quot;: &quot;^0.1.0&quot;,</span><br><span class="line">    &quot;hexo-renderer-stylus&quot;: &quot;^0.2.0&quot;,</span><br><span class="line">    &quot;hexo-renderer-marked&quot;: &quot;^0.2.4&quot;,</span><br><span class="line">    &quot;hexo-server&quot;: &quot;^0.1.2&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>scaffolds<br>模版 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
 <p>source<br>资源文件夹是存放用户资源的地方。除 <em>posts 文件夹之外，开头命名为 </em> (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
-<p>scaffolds 脚手架，也就是一个工具模板<br>scripts 写文件的js，扩展hexo的功能<br>source 存放博客正文内容<br>source/_drafts 草稿箱<br>source/_posts 文件箱<br>themes 存放皮肤的目录<br>themes/landscape 默认的皮肤<br>_config.yml 全局的配置文件<br>db.json 静态常量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scaffolds 脚手架，也就是一个工具模板</span><br><span class="line">scripts 写文件的js，扩展hexo的功能</span><br><span class="line">source 存放博客正文内容</span><br><span class="line">source/_drafts 草稿箱</span><br><span class="line">source/_posts 文件箱</span><br><span class="line">themes 存放皮肤的目录</span><br><span class="line">themes/landscape 默认的皮肤</span><br><span class="line">_config.yml 全局的配置文件</span><br><span class="line">db.json 静态常量</span><br></pre></td></tr></table></figure>
 <p>themes<br>主题 文件夹。Hexo 会根据主题来生成静态页面。</p>
+<h2 id="其中遇到的问题："><a href="#其中遇到的问题：" class="headerlink" title="其中遇到的问题："></a>其中遇到的问题：</h2><p>1.hexo3.0之后，hexo deploy 配置 type类型，只能是git，请配合安装安装 hexo-deployer-git。</p>
+<p>2.hexo deploy 部署到线上通常是gh-pages分支。</p>
+<p>3.github通常会自动分配，xx.github.io，xx.github.com域名，但是我们访问通常是在xx.github.io/xx/下访问，请在_config.yml里面设置url ，root，就行修复。</p>
+<p>4._config.yml编译不通过，yml语法极度严格，不通过往往是空格问题，记得所有设置参数属性末尾都要加空格</p>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">hexo中文文档</a></li>
+<li><a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">Hexo在github上构建免费的Web应用</a></li>
+<li><a href="https://xuanwo.org/2014/08/14/hexo-usual-problem/" target="_blank" rel="external">Hexo常见问题解决方案</a></li>
+<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">Hexo你的博客</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pfan123.github.io/hexo-blog/2016/02/28/hexo初始/" data-id="cilbofaex0001f8fy4f0shb32" class="article-share-link">Share</a>
+      <a data-url="http://pfan123.github.io/hexo-blog/2016/02/28/hexo初始/" data-id="cilbp2ns30000gsfyyq2t5m33" class="article-share-link">Partager</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-blog/tags/hexo初始/">hexo初始</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-blog/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-blog/tags/hexo初始/">hexo初始</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-blog/tags/hexo相关问题/">hexo相关问题</a></li></ul>
 
     </footer>
   </div>
@@ -170,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pfan123.github.io/hexo-blog/2016/02/28/hello-world/" data-id="cilbofaer0000f8fy9l61zrea" class="article-share-link">Share</a>
+      <a data-url="http://pfan123.github.io/hexo-blog/2016/02/28/hello-world/" data-id="cilbp2ns80001gsfyobd31ub3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -187,7 +194,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo-blog/categories/日志/">日志</a></li></ul>
     </div>
@@ -197,9 +204,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/hexo-blog/tags/hexo初始/">hexo初始</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/hexo-blog/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-blog/tags/hexo初始/">hexo初始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-blog/tags/hexo相关问题/">hexo相关问题</a></li></ul>
     </div>
   </div>
 
@@ -207,9 +214,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/hexo-blog/tags/hexo初始/" style="font-size: 10px;">hexo初始</a>
+      <a href="/hexo-blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/hexo-blog/tags/hexo初始/" style="font-size: 10px;">hexo初始</a> <a href="/hexo-blog/tags/hexo相关问题/" style="font-size: 10px;">hexo相关问题</a>
     </div>
   </div>
 
@@ -226,7 +233,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -251,7 +258,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 pfan<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
