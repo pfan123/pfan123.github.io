@@ -718,6 +718,9 @@ a {
 #disqus_thread {
   padding: 0 40px;
 }
+.share_jia {
+  display: none !important;
+}
 .archives-wrap {
   position: relative;
   margin: 0 30px;
