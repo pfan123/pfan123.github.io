@@ -79,7 +79,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -237,8 +237,10 @@
 <p>source<br>资源文件夹是存放用户资源的地方。除 <em>posts 文件夹之外，开头命名为 </em> (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scaffolds 脚手架，也就是一个工具模板</span><br><span class="line">scripts 写文件的js，扩展hexo的功能</span><br><span class="line">source 存放博客正文内容</span><br><span class="line">source/_drafts 草稿箱</span><br><span class="line">source/_posts 文件箱</span><br><span class="line">themes 存放皮肤的目录</span><br><span class="line">themes/landscape 默认的皮肤</span><br><span class="line">_config.yml 全局的配置文件</span><br><span class="line">db.json 静态常量</span><br></pre></td></tr></table></figure>
 <p>themes<br>主题 文件夹。Hexo 会根据主题来生成静态页面。</p>
-<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><p>1.GitHub Pages的public形式，不要使用系统推荐的Launch automatic page generator，系统会默认分配xx.github.io，我们直接把分支名变成xx.github.io的public形式最好。</p>
-<p>2.域名绑定，一定记得添加CNAME域名。二级域名绑定的时候，这样CNAME  blog  默认  pfan123.github.io即可。</p>
+<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><p>1.GitHub Pages的public形式，不要使用系统推荐的Launch automatic page generator，系统会默认分配xx.github.io，我们直接把分支名变成xx.github.io的public形式最好。<br><!-- <div style="text-align:center">
+  <img src="/img/hexo1/1.png" alt="">
+</div> --><br><img src="/img/hexo1/1.png" alt="Alt text" title="Optional title"></p>
+<p>2.域名绑定，一定记得添加CNAME域名。二级域名绑定的时候，这样CNAME  blog  默认  pfan123.github.io即可。<br><img src="/img/hexo1/2.png" alt="Alt text" title="Optional title"></p>
 <h2 id="其中遇到的问题："><a href="#其中遇到的问题：" class="headerlink" title="其中遇到的问题："></a>其中遇到的问题：</h2><p>1.hexo3.0之后，hexo deploy 配置 type类型，只能是git，请配合安装安装 hexo-deployer-git。</p>
 <p>2.hexo deploy 部署到线上通常是gh-pages分支。</p>
 <p>3.github通常会自动分配，xx.github.io，xx.github.com域名，但是我们访问通常是在xx.github.io/xx/下访问，请在_config.yml里面设置url ，root，就行修复。</p>
