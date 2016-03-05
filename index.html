@@ -112,7 +112,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo初始/" style="font-size: 10px;">hexo初始</a> <a href="/tags/hexo相关问题/" style="font-size: 10px;">hexo相关问题</a>
+						<a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo初始/" style="font-size: 10px;">hexo初始</a> <a href="/tags/hexo相关问题/" style="font-size: 10px;">hexo相关问题</a> <a href="/tags/insertAdjacentHTML方法/" style="font-size: 10px;">insertAdjacentHTML方法</a> <a href="/tags/insertAdjacentText方法/" style="font-size: 10px;">insertAdjacentText方法</a>
 					</div>
 				</section>
 				
@@ -189,6 +189,87 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-insertAdjacentText方法与 insertAdjacentHTML方法详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/05/insertAdjacentText方法与 insertAdjacentHTML方法详解/" class="article-date">
+  	<time datetime="2016-03-05T15:50:43.000Z" itemprop="datePublished">2016-03-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/05/insertAdjacentText方法与 insertAdjacentHTML方法详解/">insertAdjacentText方法与 insertAdjacentHTML方法详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="insertAdjacentText方法与-insertAdjacentHTML方法使用场景"><a href="#insertAdjacentText方法与-insertAdjacentHTML方法使用场景" class="headerlink" title="insertAdjacentText方法与 insertAdjacentHTML方法使用场景"></a>insertAdjacentText方法与 insertAdjacentHTML方法使用场景</h2><p>添加HTML内容与文本内容以前用的是innerHTML与innerText方法，最近发现还有insertAdjacentHTML和 insertAdjacentText方法，这两个方法更灵活，可以在指定的地方插入html内容和文本内容。</p>
+<p>insertAdjacentText方法与 insertAdjacentHTML方法类似，只不过只能插入纯文本，参数相同</p>
+<h2 id="方法insertAdjacentText"><a href="#方法insertAdjacentText" class="headerlink" title="方法insertAdjacentText"></a>方法insertAdjacentText</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">语法：insertAdjacentText(where,text)</span><br><span class="line"></span><br><span class="line">参数：</span><br><span class="line"></span><br><span class="line">swhere: 指定插入html标签语句的地方，</span><br><span class="line"></span><br><span class="line">text:要插入的内容</span><br><span class="line"></span><br><span class="line">有四种值可用：</span><br><span class="line"></span><br><span class="line">1. beforeBegin: 插入到标签开始前</span><br><span class="line"></span><br><span class="line">2. afterBegin:插入到标签开始标记之后</span><br><span class="line"></span><br><span class="line">3. beforeEnd:插入到标签结束标记前</span><br><span class="line"></span><br><span class="line">4. afterEnd:插入到标签结束标记后</span><br></pre></td></tr></table></figure>
+<h2 id="方法insertAdjacentHTML"><a href="#方法insertAdjacentHTML" class="headerlink" title="方法insertAdjacentHTML"></a>方法insertAdjacentHTML</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">语法：insertAdjacentHTML(where,text)</span><br><span class="line"></span><br><span class="line">参数：</span><br><span class="line"></span><br><span class="line">swhere: 指定插入html标签语句的地方，</span><br><span class="line"></span><br><span class="line">text:要插入的内容</span><br><span class="line"></span><br><span class="line">有四种值可用：</span><br><span class="line"></span><br><span class="line">1. beforeBegin: 插入到标签开始前</span><br><span class="line"></span><br><span class="line">2. afterBegin:插入到标签开始标记之后</span><br><span class="line"></span><br><span class="line">3. beforeEnd:插入到标签结束标记前</span><br><span class="line"></span><br><span class="line">4. afterEnd:插入到标签结束标记后</span><br></pre></td></tr></table></figure>
+<p>insertAdjacentHTML例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"> &lt;head&gt;</span><br><span class="line"> &lt;title&gt;24.htm insertAdjacentHTML插入新内容&lt;/title&gt;</span><br><span class="line"> &lt;script language=&quot;jscript&quot;&gt;</span><br><span class="line"> function addsome()</span><br><span class="line"> &#123;</span><br><span class="line">     document.all.paral.insertAdjacentHTML(&quot;afterBegin&quot;,&quot;&lt;h1&gt; 在文本前容器内插入内容1&lt;/h1&gt;&quot;);</span><br><span class="line">     document.all.paral.insertAdjacentHTML(&quot;beforeEnd&quot;,&quot;&lt;h2&gt; 在文本后容器内插入内容2&lt;/h2&gt;&quot;);</span><br><span class="line">     document.all.paral.insertAdjacentHTML(&quot;beforeBegin&quot;,&quot;&lt;h4&gt; 在文本前容器外插入内容4&lt;/h1&gt;&quot;);</span><br><span class="line">     document.all.paral.insertAdjacentHTML(&quot;afterEnd&quot;,&quot;&lt;h5&gt; 在文本后容器外插入内容5&lt;/h2&gt;&quot;);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> &lt;/head&gt;</span><br><span class="line"> &lt;body onload=&quot;addsome()&quot;&gt;</span><br><span class="line"> &lt;div id=&quot;paral&quot; style=&quot;fontsize:6;color=&apos;#ff00ff&apos;&quot; mce_style=&quot;fontsize:6;color=&apos;#ff00ff&apos;&quot;&gt;原来的内容&lt;/div&gt;&lt;hr&gt;</span><br><span class="line"> &lt;/body&gt;</span><br><span class="line"> &lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h2><ol>
+<li><p>这两种方法必须在整个文档装载完成之后才能使用，否则将出错。</p>
+</li>
+<li><p>InsertAdjacentText只能插入普通文本，InsertAdjacentHTML插入html格式的文本</p>
+</li>
+<li><p>用InsertAdjacentHTML插入脚本，必须在script元素中使用defer属性，否则脚本执行将出现运行期错误</p>
+</li>
+<li><p>InsertAdjacentHTML插入html元素后，all以及其他可能的元素集合将自动更新以反应动态变化。如页面后续元素的sourceIndex 属性将改变。</p>
+</li>
+<li><p>当赋予InsertHTML/outerHTML属性无效的HTML标签，该方法可能出现运行时错。</p>
+</li>
+</ol>
+<p>6.只有文档BODY内显示的内容能被以上属性和方法动态改变，BODY对象的内容能被动态操作，但BODY对象本身无法被替换。</p>
+<p>7.以上属性和方式不能操作空标签(没有内容的html标签)，如input,img。</p>
+<p>8.对于table对象而言，只有td(innerHTML/innerText)和table(outerHMTL/outerText)对象可以用某些属性来替换或插入内容;而其他table对象，如tr、tbody不能用这些属性来改变内容。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/insertAdjacentHTML方法/">insertAdjacentHTML方法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/insertAdjacentText方法/">insertAdjacentText方法</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/日志/">日志</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-hexo初始" class="article article-type-post" itemscope itemprop="blogPost">
   
