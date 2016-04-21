@@ -7,23 +7,26 @@
   <title>Nodejs下的ES6兼容性与性能分析--《转载》 | pfan博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="ES6标准发布后，前端人员也开发渐渐了解到了es6，但是由于兼容性的问题，仍然没有得到广泛的推广，不过业界也用了一些折中性的方案来解决兼容性和开发体系问题，但大家仍很疑惑，使用ES6会有哪些兼容性问题。
-一、Nodejs下ES6兼容性现状随着iojs的引入，新版的Nodejs开始原生支持部分ES6的特性，既然ES6在浏览器端使用需要使用babel等编译，在Nodejs总可以放心使用了吧。然而事实并">
+目前，最新版Nodejs在严格模式下&amp;quot;use strict&amp;quot;;下就可以使用es6语法。
+一、Nodejs下ES6兼容性现状随着iojs的引入，新版的Nodejs开始原生支持部分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nodejs下的ES6兼容性与性能分析--《转载》">
 <meta property="og:url" content="http://pfan123.github.io/2016/04/21/Nodejs下的ES6兼容性与性能分析/index.html">
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="ES6标准发布后，前端人员也开发渐渐了解到了es6，但是由于兼容性的问题，仍然没有得到广泛的推广，不过业界也用了一些折中性的方案来解决兼容性和开发体系问题，但大家仍很疑惑，使用ES6会有哪些兼容性问题。
-一、Nodejs下ES6兼容性现状随着iojs的引入，新版的Nodejs开始原生支持部分ES6的特性，既然ES6在浏览器端使用需要使用babel等编译，在Nodejs总可以放心使用了吧。然而事实并">
+目前，最新版Nodejs在严格模式下&amp;quot;use strict&amp;quot;;下就可以使用es6语法。
+一、Nodejs下ES6兼容性现状随着iojs的引入，新版的Nodejs开始原生支持部分">
 <meta property="og:image" content="http://pfan123.github.io/img/hexo1/compact1.jpg">
 <meta property="og:image" content="http://pfan123.github.io/img/hexo1/compact5.jpg">
 <meta property="og:image" content="http://pfan123.github.io/img/hexo1/compact2.jpg">
 <meta property="og:image" content="http://pfan123.github.io/img/hexo1/compact3.jpg">
 <meta property="og:image" content="http://pfan123.github.io/img/hexo1/compact4.jpg">
-<meta property="og:updated_time" content="2016-04-21T02:44:30.000Z">
+<meta property="og:updated_time" content="2016-04-21T02:55:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nodejs下的ES6兼容性与性能分析--《转载》">
 <meta name="twitter:description" content="ES6标准发布后，前端人员也开发渐渐了解到了es6，但是由于兼容性的问题，仍然没有得到广泛的推广，不过业界也用了一些折中性的方案来解决兼容性和开发体系问题，但大家仍很疑惑，使用ES6会有哪些兼容性问题。
-一、Nodejs下ES6兼容性现状随着iojs的引入，新版的Nodejs开始原生支持部分ES6的特性，既然ES6在浏览器端使用需要使用babel等编译，在Nodejs总可以放心使用了吧。然而事实并">
+目前，最新版Nodejs在严格模式下&amp;quot;use strict&amp;quot;;下就可以使用es6语法。
+一、Nodejs下ES6兼容性现状随着iojs的引入，新版的Nodejs开始原生支持部分">
 <meta name="twitter:image" content="http://pfan123.github.io/img/hexo1/compact1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
@@ -89,7 +92,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -240,6 +243,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>ES6标准发布后，前端人员也开发渐渐了解到了es6，但是由于兼容性的问题，仍然没有得到广泛的推广，不过业界也用了一些折中性的方案来解决兼容性和开发体系问题，但大家仍很疑惑，使用ES6会有哪些兼容性问题。</p>
+<p>目前，最新版Nodejs在严格模式下<code>&quot;use strict&quot;;</code>下就可以使用es6语法。</p>
 <h2 id="一、Nodejs下ES6兼容性现状"><a href="#一、Nodejs下ES6兼容性现状" class="headerlink" title="一、Nodejs下ES6兼容性现状"></a>一、Nodejs下ES6兼容性现状</h2><p>随着iojs的引入，新版的Nodejs开始原生支持部分ES6的特性，既然ES6在浏览器端使用需要使用babel等编译，在Nodejs总可以放心使用了吧。然而事实并非如此，为此在nodejs端，我也做了特性兼容性研究：</p>
 <p>ES6新特性在Nodejs下的兼容性列表 这里罗列下nodejs支持的新特性，没列出的新特性均为不支持。</p>
 <p><a href="https://iojs.org/en/es6.html" target="_blank" rel="external">https://iojs.org/en/es6.html</a></p>
