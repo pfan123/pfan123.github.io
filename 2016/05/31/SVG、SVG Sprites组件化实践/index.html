@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>SVG、SVG Symbol组件化实践 | pfan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言随着移动互联网的到来，各种高清屏幕移动设备的层出不穷，导致H5应用在移动设备retina屏幕下经常会遇到图标不清晰的问题。
+为了解决屏幕分辨率对图标影响的问题，通常采用CSS Sprite，Icon Font，CSS Icon以及SVG以适应@x1屏、@2屏、@3屏，相对比较而言SVG矢量性、缩放无损等诸多优点，更应受前端设计师的青睐，可在许多公司的移动项目应用中却很鲜见，究其主因在于SVG开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVG、SVG Symbol组件化实践">
+<meta property="og:url" content="http://pfan123.github.io/2016/05/31/SVG、SVG Sprites组件化实践/index.html">
+<meta property="og:site_name" content="pfan博客">
+<meta property="og:description" content="前言随着移动互联网的到来，各种高清屏幕移动设备的层出不穷，导致H5应用在移动设备retina屏幕下经常会遇到图标不清晰的问题。
+为了解决屏幕分辨率对图标影响的问题，通常采用CSS Sprite，Icon Font，CSS Icon以及SVG以适应@x1屏、@2屏、@3屏，相对比较而言SVG矢量性、缩放无损等诸多优点，更应受前端设计师的青睐，可在许多公司的移动项目应用中却很鲜见，究其主因在于SVG开">
+<meta property="og:image" content="http://pfan123.github.io/img/hob/export.png">
+<meta property="og:image" content="http://pfan123.github.io/img/hob/export2.png">
+<meta property="og:image" content="http://pfan123.github.io/img/hob/export1.png">
+<meta property="og:image" content="http://pfan123.github.io/img/hob/process.png">
+<meta property="og:updated_time" content="2016-06-01T12:56:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVG、SVG Symbol组件化实践">
+<meta name="twitter:description" content="前言随着移动互联网的到来，各种高清屏幕移动设备的层出不穷，导致H5应用在移动设备retina屏幕下经常会遇到图标不清晰的问题。
+为了解决屏幕分辨率对图标影响的问题，通常采用CSS Sprite，Icon Font，CSS Icon以及SVG以适应@x1屏、@2屏、@3屏，相对比较而言SVG矢量性、缩放无损等诸多优点，更应受前端设计师的青睐，可在许多公司的移动项目应用中却很鲜见，究其主因在于SVG开">
+<meta name="twitter:image" content="http://pfan123.github.io/img/hob/export.png">
+  
+    <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">pfan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">新起点，新高度</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>		
+					
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+
+			</div>
+		
+
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+				        	<li class = "article_cate_tit"> 文章分类</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/技术杂谈/">技术杂谈</a>	</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/兴趣爱好/">兴趣爱好</a>		</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/日志/">日志</a></li>
+				        	<li class = "article_cate_a"> <a href = "/categories/JavaScript/">JavaScript</a>	</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/CSS3/">CSS3</a>	</li>
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+
+
+				<style type="text/css">
+					.article_cate_tit{
+						color:#ba8f6c;
+						margin-top:6px;
+					}
+					.article_cate_con a{
+						display:block;
+						font-size:12px;
+						text-align:center;
+						margin:4px 0;
+					}
+					#header .header-menu{
+						line-height:21px;
+					}
+					.article_cate_a{
+						line-height:18px !important;
+					}	
+					.article_cate_a a{
+						font-size:12px !important;
+					}				
+					#container .left-col .overlay{
+						height:130px;
+					}
+					.header-nav{
+						top:160px;
+					}
+				</style>	
+				<!-- E 新增模块-->
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/CMD/" style="font-size: 10px;">CMD</a> <a href="/tags/CSS动画篇/" style="font-size: 10px;">CSS动画篇</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Mac-命令-Terminal-osx/" style="font-size: 10px;">Mac 命令 Terminal osx</a> <a href="/tags/Nodejs学习实践-nodejs-ES6/" style="font-size: 10px;">Nodejs学习实践 nodejs  ES6</a> <a href="/tags/SVG-Sprites-Symbols/" style="font-size: 10px;">SVG Sprites Symbols</a> <a href="/tags/UMD/" style="font-size: 10px;">UMD</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo初始/" style="font-size: 10px;">hexo初始</a> <a href="/tags/hexo相关问题/" style="font-size: 10px;">hexo相关问题</a> <a href="/tags/insertAdjacentHTML方法/" style="font-size: 10px;">insertAdjacentHTML方法</a> <a href="/tags/insertAdjacentText方法/" style="font-size: 10px;">insertAdjacentText方法</a> <a href="/tags/node-版本管理-nvm-n/" style="font-size: 10px;">node 版本管理  nvm  n</a> <a href="/tags/node-读写excel-JS-XLSX-分析excel写入/" style="font-size: 10px;">node 读写excel JS-XLSX 分析excel写入</a> <a href="/tags/pm2学习实践-nodejs-pm2/" style="font-size: 10px;">pm2学习实践 nodejs pm2</a> <a href="/tags/react-flux-redux-ECMAScript6-Vue-Angular-Angular2-0-NuclearJS/" style="font-size: 10px;">react flux redux ECMAScript6 Vue Angular Angular2.0 NuclearJS</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/京东购物H5活动CP重构规范/" style="font-size: 10px;">京东购物H5活动CP重构规范</a> <a href="/tags/优化JavaScript的执行效率/" style="font-size: 10px;">优化JavaScript的执行效率</a> <a href="/tags/前端性能优化/" style="font-size: 10px;">前端性能优化</a> <a href="/tags/吉他/" style="font-size: 10px;">吉他</a> <a href="/tags/吉他知识/" style="font-size: 10px;">吉他知识</a> <a href="/tags/学吉他知识集锦/" style="font-size: 10px;">学吉他知识集锦</a> <a href="/tags/旅游-帝都畅游-相约北京/" style="font-size: 10px;">旅游 帝都畅游 相约北京</a> <a href="/tags/模块的写法/" style="font-size: 10px;">模块的写法</a> <a href="/tags/运营规范/" style="font-size: 10px;">运营规范</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/pingfan1990/">博客园博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cfuns.com/house.php">前端网博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pingfan1990.sinaapp.com/">pfan展示平台</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://doc.pfan123.com/">pfan前端开发导航平台</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">因上努力，果上随缘</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">pfan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">pfan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">新起点，新高度</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-SVG、SVG Sprites组件化实践" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/31/SVG、SVG Sprites组件化实践/" class="article-date">
+  	<time datetime="2016-05-31T15:40:43.000Z" itemprop="datePublished">2016-05-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SVG、SVG Symbol组件化实践
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVG-Sprites-Symbols/">SVG Sprites Symbols</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着移动互联网的到来，各种高清屏幕移动设备的层出不穷，导致H5应用在移动设备<code>retina</code>屏幕下经常会遇到图标不清晰的问题。</p>
+<p>为了解决屏幕分辨率对图标影响的问题，通常采用CSS Sprite，Icon Font，CSS Icon以及SVG以适应@x1屏、@2屏、@3屏，相对比较而言SVG矢量性、缩放无损等诸多优点，更应受前端设计师的青睐，可在许多公司的移动项目应用中却很鲜见，究其主因在于SVG开发学习成本比较高以及在绘制的性能上比PNG要差。此篇文章将从SVG快速导出到SVG、SVG Symbol组件化在项目中实战进行讲解，教你如何提交SVG开发效率减少成本。</p>
+<h2 id="SVG简介"><a href="#SVG简介" class="headerlink" title="SVG简介"></a>SVG简介</h2><p>SVG是一种开放标准的矢量图形语言，使用<code>svg</code>格式我们可以直接用代码来描绘图像，可以用任何文字处理工具打开<code>svg</code>图像，通过改变部分代码来使图像具有交互功能，并可以随时插入到HTML中通过浏览器来浏览。</p>
+<h3 id="SVG优缺点："><a href="#SVG优缺点：" class="headerlink" title="SVG优缺点："></a>SVG优缺点：</h3><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.缩放无损还原，显示清晰</td>
+<td>1.SVG在绘制的性能上比PNG要差</td>
+</tr>
+<tr>
+<td>2.语义性良好</td>
+<td>2.局限性，对应单色或普通渐变没什么问题，但对不规则的渐变以及特效叠加效果显示不全</td>
+</tr>
+<tr>
+<td>3.可用CSS控制图标样式以及动画</td>
+<td>3.兼容性稍差，android4.1才开始支持</td>
+</tr>
+<tr>
+<td>4.减少http请求</td>
+<td>4.学习应用成本较高</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Web应用中SVG的使用方式"><a href="#Web应用中SVG的使用方式" class="headerlink" title="Web应用中SVG的使用方式"></a>Web应用中SVG的使用方式</h2><p>1.使用img、object、embed 标签直接引用svg<br>此方法的缺点主要在于每个图标都需单独保存成一个 SVG 文件，使用时单独请求，增加了HTTP请求数量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;http://www.w3school.com.cn/svg/rect1.svg&quot;  width=&quot;300&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>2.Inline SVG，直接把SVG写入 HTML 中</p>
+<p>Inline SVG 作为HTML文档的一部分，不需要单独请求。临时需要修改某个图标的形状也比较方便。但是Inline SVG使用上比较繁琐，需要在页面中插入一大块SVG代码不适合手写，图标复用起来也比较麻烦。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;svg width=&quot;100%&quot; height=&quot;100%&quot;&gt;</span><br><span class="line">		&lt;rect x=&quot;20&quot; y=&quot;20&quot; width=&quot;250&quot; height=&quot;250&quot;</span><br><span class="line">style=&quot;fill:#fecdddd;&quot;/&gt;</span><br><span class="line">	&lt;/svg&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>3.SVG Sprite</p>
+<p>这里的Sprite技术，类似于CSS中的Sprite技术。图标图形整合在一起，实际呈现的时候准确显示特定图标。其实基础的SVG Sprite也只是将原来的位图改成了SVG而已，控制SVG大小、颜色需要重新合并SVG文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.icon-bg&#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    width: 30px;</span><br><span class="line">    height: 30px;</span><br><span class="line">    background: url(./res/svg-sprite-background.svg);</span><br><span class="line">    background-size:100% 100%;</span><br><span class="line">&#125;</span><br><span class="line">.icon-facebook-logo&#123;</span><br><span class="line">    background-position: 0 0;</span><br><span class="line">&#125;</span><br><span class="line">.icon-earth&#123;</span><br><span class="line">    background-position: 0 -30px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;span class=&quot;icon-bg icon-facebook-logo&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;span class=&quot;icon-bg icon-earth&quot;&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+<p>4.使用 SVG 中的 symbol，use 元素来制作SVG Sprite<br>SVG Symbols的使用，本质上是对Sprite的进一步优化，通过<code>&lt;symbol&gt;</code>元素来对单个svg元素进行分组，使用<code>&lt;use&gt;</code>元素引用并进行渲染。这种方法的解决了上述三种方式带来的弊端，少量的http请求，图标能被缓存方便复用，每个SVG图标可以更改大小颜色，整合、使用以及管理起来非常简单。</p>
+<p>①SVG Symbols作为body的第一个元素插入在HTML中使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;svg style=&quot;width:0; height:0; visibility:hidden;position:absolute;z-index:-1&quot;&gt;</span><br><span class="line">        &lt;symbol viewBox=&quot;0 0 24 24&quot; id=&quot;heart&quot;&gt;</span><br><span class="line">            &lt;path fill=&quot;#E86C60&quot; d=&quot;M17,0c-1.9,0-3.7,0.8-5,2.1C10.7,0.8,8.9,0,7,0C3.1,0,0,3.1,0,7c0,6.4,10.9,15.4,11.4,15.8 c0.2,0.2,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2C13.1,22.4,24,13.4,24,7C24,3.1,20.9,0,17,0z&quot;&gt;&lt;/path&gt;</span><br><span class="line">        &lt;/symbol&gt;</span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line"></span><br><span class="line">    &lt;svg&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;#heart&quot;/&gt; </span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>②使用完整路径引用Icon（此方法涉及到跨域问题）</p>
+<p>存在跨域问题，同域可以使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	//路径形式进行获取icon</span><br><span class="line">    &lt;svg&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;/asset/svg-symbols.svg#heart&quot;/&gt; </span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">     &lt;svg&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;/asset/svg-symbols.svg#heart&quot;/&gt; </span><br><span class="line">    &lt;/svg&gt; </span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>③js控制svg写入body进行引用</p>
+<p>推荐使用，有效分离结构和展现、解决缓存以及跨域问题。</p>
+<p>svg.js:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var symbols = &apos;&lt;svg style=&quot;width:0; height:0; visibility:hidden;position:absolute;z-index:-1&quot;&gt;</span><br><span class="line">        &lt;symbol viewBox=&quot;0 0 24 24&quot; id=&quot;heart&quot;&gt;</span><br><span class="line">            &lt;path fill=&quot;#E86C60&quot; d=&quot;M17,0c-1.9,0-3.7,0.8-5,2.1C10.7,0.8,8.9,0,7,0C3.1,0,0,3.1,0,7c0,6.4,10.9,15.4,11.4,15.8 c0.2,0.2,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2C13.1,22.4,24,13.4,24,7C24,3.1,20.9,0,17,0z&quot;&gt;&lt;/path&gt;</span><br><span class="line">        &lt;/symbol&gt;</span><br><span class="line">    &lt;/svg&gt;&apos;;</span><br><span class="line">document.body.insertAdjacentHTML(&quot;afterBegin&quot;,symbols)</span><br></pre></td></tr></table></figure></p>
+<p>svg.html:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	//脚本需在svg use引用之前引入</span><br><span class="line">	&lt;script src = &quot;/asset/svg.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;svg style=&quot;width:0; height:0; visibility:hidden;position:absolute;z-index:-1&quot;&gt;</span><br><span class="line">        &lt;symbol viewBox=&quot;0 0 24 24&quot; id=&quot;heart&quot;&gt;</span><br><span class="line">            &lt;path fill=&quot;#E86C60&quot; d=&quot;M17,0c-1.9,0-3.7,0.8-5,2.1C10.7,0.8,8.9,0,7,0C3.1,0,0,3.1,0,7c0,6.4,10.9,15.4,11.4,15.8 c0.2,0.2,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2C13.1,22.4,24,13.4,24,7C24,3.1,20.9,0,17,0z&quot;&gt;&lt;/path&gt;</span><br><span class="line">        &lt;/symbol&gt;</span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line"></span><br><span class="line">    &lt;svg&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;#heart&quot;/&gt; </span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="SVG快速导出"><a href="#SVG快速导出" class="headerlink" title="SVG快速导出"></a>SVG快速导出</h2><h3 id="SVG导出工具："><a href="#SVG导出工具：" class="headerlink" title="SVG导出工具："></a>SVG导出工具：</h3><ul>
+<li>Photoshop CC 2015 以上版本均支持导出svg功能</li>
+<li>Adobe Illustrator 导出</li>
+<li><a href="http://hackingui.com/design/export-photoshop-layer-to-svg/" target="_blank" rel="external">export-photoshop-layer-to-svg</a>基于photoshop的svg导出插件</li>
+<li><a href="http://firetuts.com/export-svg-with-fireworks/" target="_blank" rel="external">export-svg-with-fireworks</a>基于firework的svg导出插件</li>
+</ul>
+<h3 id="Photoshop-CC-2015-导出svg使用"><a href="#Photoshop-CC-2015-导出svg使用" class="headerlink" title="Photoshop CC 2015 导出svg使用"></a>Photoshop CC 2015 导出svg使用</h3><p>Ps可以对矢量图层进行导出，即通过矢量工具绘制所在图层或图层文件夹进行导出，若对不是矢量图形进行导出，可能会引起错误或者导出的文件是位图。</p>
+<p>SVG导出，建议图形一定要撑满整个画布，若存在间隙，网页使用时图标居中对齐就会比较麻烦。</p>
+<p>1.批量导出SVG<br>批量导出SVG，只需在矢量图层或失落图层文件夹名后添加相应格式后缀（如.svg)，依次点击菜单“文件-&gt;生成-&gt;图像资源”，确认该菜单项已被勾选。但是此方法会根据icon实际大小进行导出，若icon图标存在小数导出就不太适用，我们需要手动去调节。</p>
+<p><img src="/img/hob/export.png" alt="批量导出SVG"></p>
+<p>2.设置导出为单个导出<br>设置导出为单个导出，选中矢量图层单击右键，依次点击“导出为-&gt;设置参数-&gt;导出”，此方法可以设置svg的图像实际大小，以及画布大小。</p>
+<p>导出为：<br><img src="/img/hob/export2.png" alt="批量导出SVG"></p>
+<p>设置导出svg图像实际大小，以及画布大小：<br><img src="/img/hob/export1.png" alt="批量导出SVG"></p>
+<h2 id="SVG-Symbol自动化合并生成"><a href="#SVG-Symbol自动化合并生成" class="headerlink" title="SVG Symbol自动化合并生成"></a>SVG Symbol自动化合并生成</h2><p>Ps导出来的是单个svg文件，需要将这些单个svg文件进行合并生产<code>symbol</code>的SVG，这样才能通过<code>symbol＋use</code>进行引用。可以使用手工合并，推荐使用工具，安利给大家一个专门用于处理SVG Symbols用的glup插件<a href="https://github.com/Hiswe/gulp-svg-symbols" target="_blank" rel="external">gulp-svg-symbols</a>。</p>
+<p>下面我们就来以一个实例一步一步来使用下这个插件。</p>
+<p>首先新建一个文件夹，目录结构如下图所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">assets</span><br><span class="line">├── svg   //存放ps导出的大量svg文件</span><br><span class="line">	├── xxx.svg  </span><br><span class="line">	├── xxx.svg  </span><br><span class="line">	├── xxx.svg  </span><br><span class="line">├── out  </span><br><span class="line">├── gulpfile.js </span><br><span class="line">├── package.json </span><br><span class="line">├── index.html</span><br></pre></td></tr></table></figure>
+<p>安装gulp-svg-symbols插件,若没有预先安装gulp请先行安装:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i gulp-svg-symbols  --save</span><br></pre></td></tr></table></figure>
+<p><code>gulpfile.js</code>写入如下执行任务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strick&apos;;</span><br><span class="line">const gulp = require(&quot;gulp&quot;);</span><br><span class="line">const symbols = require(&quot;gulp-svg-symbols&quot;);</span><br><span class="line"></span><br><span class="line">//转换svg</span><br><span class="line">gulp.task(&apos;svg&apos;, () =&gt; &#123;</span><br><span class="line">  return gulp.src(&apos;./svg/**&apos;)</span><br><span class="line">    .pipe(symbols())</span><br><span class="line">    .pipe(gulp.dest(&apos;out/&apos;))  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>执行任务导出svg-symbols：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp svg  //out文件夹，生成svg-symbols.svg，svg-symbols.css（此文件对应svg样式，基本无用）</span><br></pre></td></tr></table></figure></p>
+<h2 id="SVG组件化实践"><a href="#SVG组件化实践" class="headerlink" title="SVG组件化实践"></a>SVG组件化实践</h2><p>鉴于移动端全站规范的统一性，页面之间会存在许多的图标复用，为了引入svg图标复用性问题，引入了SVG组件化，SVG组件化主要包含三部分：SVG展示平台、SVG自动化工具、SVG Git仓库。<br><img src="/img/hob/process.png" alt="流程"></p>
+<p>设计师出图标规范 —-&gt; Ps导出svg —-&gt; 工具自动化合并svg symbol  —-&gt; 上传Git仓库管理  —-&gt; SVG平台展示快速获取svg symbol</p>
+<p>工具生成部分已上传Github，<a href="https://github.com/pfan123/svgicon" target="_blank" rel="external">svgicon</a>，快速生成svg symbol，对生产svg大小带小数进行预警</p>
+<p><a href="http://jdc.jd.com/fd/svg/" target="_blank" rel="external">SVG展示平台</a>，提供预览快速查找svg，点击下载使用。</p>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://io-meter.com/2014/07/20/replace-icon-fonts-with-svg/" target="_blank" rel="external">Web 设计新趋势: 使用 SVG 代替 Web Icon Font</a></li>
+<li><a href="http://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=207863967&amp;idx=1&amp;sn=3d7b07d528f38e9f812e8df7df1e3322&amp;scene=4#wechat_redirect" target="_blank" rel="external">Android微信上的SVG</a></li>
+<li><a href="https://isux.tencent.com/16292.html" target="_blank" rel="external">使用SVG中的Symbol元素制作Icon</a></li>
+<li><a href="http://www.cnblogs.com/dxy1982/tag/svg/" target="_blank" rel="external">突袭HTML5之SVG 2D入门</a></li>
+<li><a href="http://css-tricks.com/icon-fonts-vs-svg/" target="_blank" rel="external">CSS Trick 中总结的 Icon Font使用缺陷</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/19/mac终端常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mac终端常用命令</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="SVG、SVG Sprites组件化实践" data-title="SVG、SVG Symbol组件化实践" data-url="http://pfan123.github.io/2016/05/31/SVG、SVG Sprites组件化实践/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 pfan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
