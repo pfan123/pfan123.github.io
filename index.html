@@ -308,8 +308,13 @@
 <p>如果能打开界面，说明映射成功.但是，这只限于本机访问web服务器，即只能remoteserver机器访问webserver。因为3000端口绑定的是remoteserver机器的127.0.0.1端口。可以编辑remoteserver机器上的/etc/ssh/sshd_config文件并添加如下内容：<br>添加 GatewayPorts yes  内容，把监听端口3000绑定到 0.0.0.0 地址上，这样外部的所有机器都能访问到这个监听端口，然后保存退出。并重启ssh服务。完成后其它机器就可以在浏览器中输入 <a href="http://remoteserver:3000来访问webserver了。" target="_blank" rel="external">http://remoteserver:3000来访问webserver了。</a></p>
 <p>参考资料：</p>
 <ul>
+<li><a href="https://segmentfault.com/a/1190000002797601" target="_blank" rel="external">nginx服务器安装及配置文件详解</a></li>
+<li><a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="external">Nginx 安装配置</a></li>
 <li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html" target="_blank" rel="external">SSH原理与运用（一）：远程登录</a></li>
 <li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html" target="_blank" rel="external">SSH原理与运用（二）：远程操作与端口转发</a></li>
+<li><a href="https://xujiwei.com/blog/2011/12/build-site-with-nodejs-and-nginx/" target="_blank" rel="external">使用 node.js + nginx 建设网站</a></li>
+<li><a href="http://blog.fens.me/nodejs-nginx-log4js/" target="_blank" rel="external">Nginx反向代理Nodejs – log4js日志IP显示错误</a></li>
+<li><a href="http://blog.csdn.net/m13666368773/article/details/8060481" target="_blank" rel="external">正向代理与反向代理的区别</a></li>
 </ul>
 
       
