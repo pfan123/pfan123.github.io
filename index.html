@@ -301,6 +301,7 @@
 <li><a href="https://gist.github.com/tuchangwei/87aa7b7c483e4c49967b" target="_blank" rel="external">Vim快捷键积累</a></li>
 <li><a href="http://www.dabu.info/vim-shortcut-key-operation.html" target="_blank" rel="external">vim快捷键操作</a></li>
 <li><a href="http://www.jianshu.com/p/c23136f68d2f" target="_blank" rel="external">Vim快捷键整理</a></li>
+<li><a href="http://blog.csdn.net/ljianhui/article/details/11100625" target="_blank" rel="external">初窥Linux 之 我最常用的20条命令</a></li>
 </ul>
 
       
@@ -311,6 +312,138 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim-vi/">Vim vi</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/12/Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境/" class="article-date">
+  	<time datetime="2016-06-12T01:40:43.000Z" itemprop="datePublished">2016-06-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境/">Mac使用brew安装Nginx、MySQL、PHP的LAMP开发环境</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>新版的 Mac OS 内置了Apache 和 PHP，我的系统版本是OS X 10.9.3，可以通过以下命令查看Apache和PHP的版本号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">httpd -v</span><br><span class="line"></span><br><span class="line">    Server version: Apache/2.2.26 (Unix)</span><br><span class="line">    Server built:   Dec 10 2013 22:09:38</span><br><span class="line"></span><br><span class="line">php --version</span><br><span class="line"></span><br><span class="line">    PHP 5.4.24 (cli) (built: Jan 19 2014 21:32:15)</span><br><span class="line">    Copyright (c) 1997-2013 The PHP Group</span><br><span class="line">    Zend Engine v2.4.0, Copyright (c) 1998-2013 Zend Technologies</span><br></pre></td></tr></table></figure>
+<p>因为我们要自己动手来安装 Nginx，因此首先来关闭系统自带的apache：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl stop  #关闭apache，如果事先没开启过，可以忽略报错信息</span><br></pre></td></tr></table></figure>
+<p>如果你的apache已经加入了launchctl，使用下面的命令来关闭：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist</span><br></pre></td></tr></table></figure>
+<p>为什么选择关闭apache？因为mac os x系统自带的apache是没有优雅的remove/uninstall 的方式的… 对于“洁癖”比较严重的童鞋，可以选择直接删除相关的文件！（千万不要手抖删错目录…）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /usr/sbin/apachectl</span><br><span class="line">sudo rm /usr/sbin/httpd</span><br><span class="line">sudo rm -r /etc/apache2/</span><br></pre></td></tr></table></figure>
+<p>删除自带的php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -r /usr/bin/php</span><br></pre></td></tr></table></figure>
+<p>如果没有安装brew，可以按照官网的步骤安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://brew.sh/</span><br></pre></td></tr></table></figure>
+<h2 id="nginx的安装与配置"><a href="#nginx的安装与配置" class="headerlink" title="nginx的安装与配置"></a>nginx的安装与配置</h2><p>安装nginx</p>
+<p>1、连接到远程主机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
+<p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/nginx/nginx.conf</span><br><span class="line">    #修改默认的8080端口为80,小于1024需要root权限</span><br></pre></td></tr></table></figure></p>
+<p>给予管理员权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown root:wheel /usr/local/opt/nginx/bin/nginx</span><br><span class="line">sudo chmod u+s /usr/local/opt/nginx/bin/nginx</span><br></pre></td></tr></table></figure>
+<p>加入launchctl启动控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents</span><br><span class="line">cp /usr/local/opt/nginx/homebrew.mxcl.nginx.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist</span><br></pre></td></tr></table></figure>
+<p>运行nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx #打开 nginx</span><br><span class="line">nginx -s reload|reopen|stop|quit  #重新加载配置|重启|停止|退出 nginx</span><br><span class="line">nginx -t   #测试配置是否有语法错误</span><br></pre></td></tr></table></figure>
+<p>用法详解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx [-?hvVtq] [-s signal] [-c filename] [-p prefix] [-g directives]</span><br></pre></td></tr></table></figure>
+<p>选项列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-?,-h           : 打开帮助信息</span><br><span class="line">-v              : 显示版本信息并退出</span><br><span class="line">-V              : 显示版本和配置选项信息，然后退出</span><br><span class="line">-t              : 检测配置文件是否有语法错误，然后退出</span><br><span class="line">-q              : 在检测配置文件期间屏蔽非错误信息</span><br><span class="line">-s signal       : 给一个 nginx 主进程发送信号：stop（停止）, quit（退出）, reopen（重启）, reload（重新加载配置文件）</span><br><span class="line">-p prefix       : 设置前缀路径（默认是：/usr/local/Cellar/nginx/1.2.6/）</span><br><span class="line">-c filename     : 设置配置文件（默认是：/usr/local/etc/nginx/nginx.conf）</span><br><span class="line">-g directives   : 设置配置文件外的全局指令</span><br></pre></td></tr></table></figure>
+<h2 id="mysql的安装与配置"><a href="#mysql的安装与配置" class="headerlink" title="mysql的安装与配置"></a>mysql的安装与配置</h2><p>安装mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br><span class="line">cd /usr/local/opt/mysql/</span><br></pre></td></tr></table></figure>
+<p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim my.cnf</span><br><span class="line">#如果出现无法启动mysql，rm my.cnf</span><br></pre></td></tr></table></figure></p>
+<p>加入launchctl启动控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents/</span><br><span class="line">cp /usr/local/opt/mysql/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist</span><br><span class="line">#取消启动</span><br><span class="line">#launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist</span><br></pre></td></tr></table></figure>
+<p>初始化 mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysql_install_db</span><br></pre></td></tr></table></figure>
+<p>执行安全设置脚本,设置root账号密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysql_secure_installation</span><br></pre></td></tr></table></figure>
+<p>命令行连接mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<p>php的安装与配置<br>brew 默认没有 php 安装包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew/dupes</span><br><span class="line">brew tap josegonzalez/homebrew-php</span><br></pre></td></tr></table></figure>
+<p>现在可以安装php了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install php54 --with-imap --with-tidy --with-debug --with-mysql --with-fpm</span><br></pre></td></tr></table></figure>
+<p>将php路径加入PATH</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.bash_profile    </span><br><span class="line">    export PATH=&quot;$(brew --prefix php54)/bin:$PATH&quot;</span><br><span class="line"></span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>加入launchctl启动控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents</span><br><span class="line">cp /usr/local/opt/php54/homebrew.mxcl.php54.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php54.plist</span><br></pre></td></tr></table></figure>
+<p>配置路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/etc/php/5.4/php.ini</span><br><span class="line">/usr/local/etc/php/5.4/php-fpm.conf</span><br></pre></td></tr></table></figure>
+<p>配置 Nginx 支持 PHP-FPM</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/nginx/nginx.conf    </span><br><span class="line"></span><br><span class="line">    # 添加默认首页 php</span><br><span class="line">    index  index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    # 取消以下内容的注释，并做修改</span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        fastcgi_intercept_errors on;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  /usr/local/Cellar/nginx/1.6.0_1/html$fastcgi_script_name;</span><br><span class="line">        include        /usr/local/etc/nginx/fastcgi_params;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>测试环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/Cellar/nginx/1.6.0_1/html/index.php</span><br><span class="line"></span><br><span class="line">    #添加测试代码</span><br><span class="line">    &lt;?php </span><br><span class="line">        phpinfo();</span><br></pre></td></tr></table></figure>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>到目前为止，我们的Nginx、MySQL、PHP-FPM三大软件已经安装好了，针对不同的系统版本和软件版本，可能会遇到一些问题，欢迎留言探讨。</p>
+<p>原文链接：<a href="https://segmentfault.com/a/1190000002963355" target="_blank" rel="external">Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境</a></p>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000002797601" target="_blank" rel="external">nginx服务器安装及配置文件详解</a></li>
+<li><a href="https://segmentfault.com/a/1190000004537991" target="_blank" rel="external">配置nginx静态文件代理和gzip</a></li>
+<li><a href="https://segmentfault.com/a/1190000003023558" target="_blank" rel="external">ngnix + node 的负载均衡</a></li>
+<li><a href="https://segmentfault.com/a/1190000004916646" target="_blank" rel="external">5个提高Node.js应用性能的技巧</a></li>
+<li><a href="https://www.zhihu.com/question/19887245" target="_blank" rel="external">如何在生产服务器上部署 Node.js 应用？</a></li>
+<li><a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="external">Nginx 安装配置</a></li>
+<li><a href="https://segmentfault.com/a/1190000000606752" target="_blank" rel="external">全新安装Mac OSX 开发者环境 同时使用homebrew搭建 PHP，Nginx ，MySQL(LNMP开发环境)</a></li>
+<li><a href="https://luolei.org/node-js-nginx-proxy/" target="_blank" rel="external">Nginx反向代理部署Node.js应用配置方法</a></li>
+<li><a href="http://blog.fens.me/nodejs-nginx-log4js/" target="_blank" rel="external">Nginx反向代理Nodejs – log4js日志IP显示错误</a></li>
+<li><a href="https://www.douban.com/note/265207425/" target="_blank" rel="external">node.js部署最佳实践</a></li>
+<li><a href="http://www.phpsong.com/2126.html" target="_blank" rel="external">服务器nginx+nodejs配置</a></li>
+<li><a href="http://www.codeceo.com/article/nginx-ssl-nodejs.html" target="_blank" rel="external">配置Nginx SSL Node.js环境详细指南</a></li>
+<li><a href="http://www.oschina.net/translate/optimising-nginx-node-js-and-networking-for-heavy-workloads" target="_blank" rel="external">为高负载网络优化 Nginx 和 Node.js</a></li>
+<li><a href="http://itbilu.com/other/relate/NJ2TJohl.html" target="_blank" rel="external">阿里云服务器配置Nodejs生产环境全过程</a></li>
+<li><a href="https://xujiwei.com/blog/2011/12/build-site-with-nodejs-and-nginx/" target="_blank" rel="external">使用 node.js + nginx 建设网站</a></li>
+<li><a href="http://01web.mobi/archives/95/" target="_blank" rel="external">01Web前端团队</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-MySQL-PHP-FPM-Mac-OS/">Nginx MySQL PHP-FPM Mac OS</a></li></ul>
 	</div>
 
       
@@ -410,138 +543,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-Mac-Node/">Nginx Mac Node</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/12/Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境/" class="article-date">
-  	<time datetime="2016-06-12T01:40:43.000Z" itemprop="datePublished">2016-06-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/12/Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境/">Mac使用brew安装Nginx、MySQL、PHP的LAMP开发环境</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>新版的 Mac OS 内置了Apache 和 PHP，我的系统版本是OS X 10.9.3，可以通过以下命令查看Apache和PHP的版本号：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">httpd -v</span><br><span class="line"></span><br><span class="line">    Server version: Apache/2.2.26 (Unix)</span><br><span class="line">    Server built:   Dec 10 2013 22:09:38</span><br><span class="line"></span><br><span class="line">php --version</span><br><span class="line"></span><br><span class="line">    PHP 5.4.24 (cli) (built: Jan 19 2014 21:32:15)</span><br><span class="line">    Copyright (c) 1997-2013 The PHP Group</span><br><span class="line">    Zend Engine v2.4.0, Copyright (c) 1998-2013 Zend Technologies</span><br></pre></td></tr></table></figure>
-<p>因为我们要自己动手来安装 Nginx，因此首先来关闭系统自带的apache：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl stop  #关闭apache，如果事先没开启过，可以忽略报错信息</span><br></pre></td></tr></table></figure>
-<p>如果你的apache已经加入了launchctl，使用下面的命令来关闭：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist</span><br></pre></td></tr></table></figure>
-<p>为什么选择关闭apache？因为mac os x系统自带的apache是没有优雅的remove/uninstall 的方式的… 对于“洁癖”比较严重的童鞋，可以选择直接删除相关的文件！（千万不要手抖删错目录…）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /usr/sbin/apachectl</span><br><span class="line">sudo rm /usr/sbin/httpd</span><br><span class="line">sudo rm -r /etc/apache2/</span><br></pre></td></tr></table></figure>
-<p>删除自带的php</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -r /usr/bin/php</span><br></pre></td></tr></table></figure>
-<p>如果没有安装brew，可以按照官网的步骤安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://brew.sh/</span><br></pre></td></tr></table></figure>
-<h2 id="nginx的安装与配置"><a href="#nginx的安装与配置" class="headerlink" title="nginx的安装与配置"></a>nginx的安装与配置</h2><p>安装nginx</p>
-<p>1、连接到远程主机：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
-<p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/nginx/nginx.conf</span><br><span class="line">    #修改默认的8080端口为80</span><br></pre></td></tr></table></figure></p>
-<p>给予管理员权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown root:wheel/usr/local/opt/nginx/bin/nginx</span><br><span class="line">sudo chmod u+s/usr/local/opt/nginx/bin/nginx</span><br></pre></td></tr></table></figure>
-<p>加入launchctl启动控制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents</span><br><span class="line">cp /usr/local/opt/nginx/homebrew.mxcl.nginx.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist</span><br></pre></td></tr></table></figure>
-<p>运行nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx #打开 nginx</span><br><span class="line">nginx -s reload|reopen|stop|quit  #重新加载配置|重启|停止|退出 nginx</span><br><span class="line">nginx -t   #测试配置是否有语法错误</span><br></pre></td></tr></table></figure>
-<p>用法详解</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx [-?hvVtq] [-s signal] [-c filename] [-p prefix] [-g directives]</span><br></pre></td></tr></table></figure>
-<p>选项列表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-?,-h           : 打开帮助信息</span><br><span class="line">-v              : 显示版本信息并退出</span><br><span class="line">-V              : 显示版本和配置选项信息，然后退出</span><br><span class="line">-t              : 检测配置文件是否有语法错误，然后退出</span><br><span class="line">-q              : 在检测配置文件期间屏蔽非错误信息</span><br><span class="line">-s signal       : 给一个 nginx 主进程发送信号：stop（停止）, quit（退出）, reopen（重启）, reload（重新加载配置文件）</span><br><span class="line">-p prefix       : 设置前缀路径（默认是：/usr/local/Cellar/nginx/1.2.6/）</span><br><span class="line">-c filename     : 设置配置文件（默认是：/usr/local/etc/nginx/nginx.conf）</span><br><span class="line">-g directives   : 设置配置文件外的全局指令</span><br></pre></td></tr></table></figure>
-<h2 id="mysql的安装与配置"><a href="#mysql的安装与配置" class="headerlink" title="mysql的安装与配置"></a>mysql的安装与配置</h2><p>安装mysql</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br><span class="line">cd /usr/local/opt/mysql/</span><br></pre></td></tr></table></figure>
-<p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim my.cnf</span><br><span class="line">#如果出现无法启动mysql，rm my.cnf</span><br></pre></td></tr></table></figure></p>
-<p>加入launchctl启动控制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents/</span><br><span class="line">cp /usr/local/opt/mysql/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist</span><br><span class="line">#取消启动</span><br><span class="line">#launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist</span><br></pre></td></tr></table></figure>
-<p>初始化 mysql</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysql_install_db</span><br></pre></td></tr></table></figure>
-<p>执行安全设置脚本,设置root账号密码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mysql_secure_installation</span><br></pre></td></tr></table></figure>
-<p>命令行连接mysql</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
-<p>php的安装与配置<br>brew 默认没有 php 安装包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew/dupes</span><br><span class="line">brew tap josegonzalez/homebrew-php</span><br></pre></td></tr></table></figure>
-<p>现在可以安装php了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install php54 --with-imap --with-tidy --with-debug --with-mysql --with-fpm</span><br></pre></td></tr></table></figure>
-<p>将php路径加入PATH</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.bash_profile    </span><br><span class="line">    export PATH=&quot;$(brew --prefix php54)/bin:$PATH&quot;</span><br><span class="line"></span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>加入launchctl启动控制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents</span><br><span class="line">cp /usr/local/opt/php54/homebrew.mxcl.php54.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php54.plist</span><br></pre></td></tr></table></figure>
-<p>配置路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/etc/php/5.4/php.ini</span><br><span class="line">/usr/local/etc/php/5.4/php-fpm.conf</span><br></pre></td></tr></table></figure>
-<p>配置 Nginx 支持 PHP-FPM</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/nginx/nginx.conf    </span><br><span class="line"></span><br><span class="line">    # 添加默认首页 php</span><br><span class="line">    index  index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    # 取消以下内容的注释，并做修改</span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        fastcgi_intercept_errors on;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  /usr/local/Cellar/nginx/1.6.0_1/html$fastcgi_script_name;</span><br><span class="line">        include        /usr/local/etc/nginx/fastcgi_params;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>测试环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/Cellar/nginx/1.6.0_1/html/index.php</span><br><span class="line"></span><br><span class="line">    #添加测试代码</span><br><span class="line">    &lt;?php </span><br><span class="line">        phpinfo();</span><br></pre></td></tr></table></figure>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>到目前为止，我们的Nginx、MySQL、PHP-FPM三大软件已经安装好了，针对不同的系统版本和软件版本，可能会遇到一些问题，欢迎留言探讨。</p>
-<p>原文链接：<a href="https://segmentfault.com/a/1190000002963355" target="_blank" rel="external">Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境</a></p>
-<p>参考资料：</p>
-<ul>
-<li><a href="https://segmentfault.com/a/1190000002797601" target="_blank" rel="external">nginx服务器安装及配置文件详解</a></li>
-<li><a href="https://segmentfault.com/a/1190000004537991" target="_blank" rel="external">配置nginx静态文件代理和gzip</a></li>
-<li><a href="https://segmentfault.com/a/1190000003023558" target="_blank" rel="external">ngnix + node 的负载均衡</a></li>
-<li><a href="https://segmentfault.com/a/1190000004916646" target="_blank" rel="external">5个提高Node.js应用性能的技巧</a></li>
-<li><a href="https://www.zhihu.com/question/19887245" target="_blank" rel="external">如何在生产服务器上部署 Node.js 应用？</a></li>
-<li><a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="external">Nginx 安装配置</a></li>
-<li><a href="https://segmentfault.com/a/1190000000606752" target="_blank" rel="external">全新安装Mac OSX 开发者环境 同时使用homebrew搭建 PHP，Nginx ，MySQL(LNMP开发环境)</a></li>
-<li><a href="https://luolei.org/node-js-nginx-proxy/" target="_blank" rel="external">Nginx反向代理部署Node.js应用配置方法</a></li>
-<li><a href="http://blog.fens.me/nodejs-nginx-log4js/" target="_blank" rel="external">Nginx反向代理Nodejs – log4js日志IP显示错误</a></li>
-<li><a href="https://www.douban.com/note/265207425/" target="_blank" rel="external">node.js部署最佳实践</a></li>
-<li><a href="http://www.phpsong.com/2126.html" target="_blank" rel="external">服务器nginx+nodejs配置</a></li>
-<li><a href="http://www.codeceo.com/article/nginx-ssl-nodejs.html" target="_blank" rel="external">配置Nginx SSL Node.js环境详细指南</a></li>
-<li><a href="http://www.oschina.net/translate/optimising-nginx-node-js-and-networking-for-heavy-workloads" target="_blank" rel="external">为高负载网络优化 Nginx 和 Node.js</a></li>
-<li><a href="http://itbilu.com/other/relate/NJ2TJohl.html" target="_blank" rel="external">阿里云服务器配置Nodejs生产环境全过程</a></li>
-<li><a href="https://xujiwei.com/blog/2011/12/build-site-with-nodejs-and-nginx/" target="_blank" rel="external">使用 node.js + nginx 建设网站</a></li>
-<li><a href="http://01web.mobi/archives/95/" target="_blank" rel="external">01Web前端团队</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-MySQL-PHP-FPM-Mac-OS/">Nginx MySQL PHP-FPM Mac OS</a></li></ul>
 	</div>
 
       

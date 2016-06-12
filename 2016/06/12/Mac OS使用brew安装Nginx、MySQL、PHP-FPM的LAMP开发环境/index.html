@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="准备工作新版的 Mac OS 内置了Apache 和 PHP，我的系统版本是OS X 10.9.3，可以通过以下命令查看Apache和PHP的版本号：
 12345678910httpd -v    Server version: Apache/2.2.26 (Unix)    Server built:   Dec 10 2013 22:09:38php --version    PHP 5.4.">
-<meta property="og:updated_time" content="2016-06-12T06:08:52.000Z">
+<meta property="og:updated_time" content="2016-06-12T07:12:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac使用brew安装Nginx、MySQL、PHP的LAMP开发环境">
 <meta name="twitter:description" content="准备工作新版的 Mac OS 内置了Apache 和 PHP，我的系统版本是OS X 10.9.3，可以通过以下命令查看Apache和PHP的版本号：
@@ -288,9 +288,9 @@
 <h2 id="nginx的安装与配置"><a href="#nginx的安装与配置" class="headerlink" title="nginx的安装与配置"></a>nginx的安装与配置</h2><p>安装nginx</p>
 <p>1、连接到远程主机：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
-<p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/nginx/nginx.conf</span><br><span class="line">    #修改默认的8080端口为80</span><br></pre></td></tr></table></figure></p>
+<p>修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/nginx/nginx.conf</span><br><span class="line">    #修改默认的8080端口为80,小于1024需要root权限</span><br></pre></td></tr></table></figure></p>
 <p>给予管理员权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown root:wheel/usr/local/opt/nginx/bin/nginx</span><br><span class="line">sudo chmod u+s/usr/local/opt/nginx/bin/nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown root:wheel /usr/local/opt/nginx/bin/nginx</span><br><span class="line">sudo chmod u+s /usr/local/opt/nginx/bin/nginx</span><br></pre></td></tr></table></figure>
 <p>加入launchctl启动控制</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents</span><br><span class="line">cp /usr/local/opt/nginx/homebrew.mxcl.nginx.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist</span><br></pre></td></tr></table></figure>
 <p>运行nginx</p>
@@ -354,18 +354,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/06/12/nginx反向代理处理静态页面/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/06/12/vim快捷操作整理/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          nginx反向代理处理静态页面(转载)
+          vim快捷操作整理
         
       </div>
     </a>
   
   
-    <a href="/2016/06/05/ssh常用命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ssh常用命令</div>
+    <a href="/2016/06/12/nginx反向代理处理静态页面/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nginx反向代理处理静态页面(转载)</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
