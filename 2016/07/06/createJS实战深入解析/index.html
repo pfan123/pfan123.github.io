@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>createJS实战深入解析 | pfan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CreateJS简介CreateJS 是一套可以构建丰富交互体验的 HTML5 游戏的开源工具包，旨在降低 HTML5 项目的开发难度和成本，让开发者以熟悉的方式打造更具现代感的网络交互体验。
+CreateJS中文Github:https://github.com/CreateJS/CreateJS英文版Api:http://www.createjs.com/CreateJS中文版Api:http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="createJS实战深入解析">
+<meta property="og:url" content="http://pfan123.github.io/2016/07/06/createJS实战深入解析/index.html">
+<meta property="og:site_name" content="pfan博客">
+<meta property="og:description" content="CreateJS简介CreateJS 是一套可以构建丰富交互体验的 HTML5 游戏的开源工具包，旨在降低 HTML5 项目的开发难度和成本，让开发者以熟悉的方式打造更具现代感的网络交互体验。
+CreateJS中文Github:https://github.com/CreateJS/CreateJS英文版Api:http://www.createjs.com/CreateJS中文版Api:http">
+<meta property="og:image" content="http://pfan123.github.io/img/create/create.png">
+<meta property="og:image" content="http://pfan123.github.io/img/create/1.jpg">
+<meta property="og:updated_time" content="2016-07-12T02:01:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="createJS实战深入解析">
+<meta name="twitter:description" content="CreateJS简介CreateJS 是一套可以构建丰富交互体验的 HTML5 游戏的开源工具包，旨在降低 HTML5 项目的开发难度和成本，让开发者以熟悉的方式打造更具现代感的网络交互体验。
+CreateJS中文Github:https://github.com/CreateJS/CreateJS英文版Api:http://www.createjs.com/CreateJS中文版Api:http">
+<meta name="twitter:image" content="http://pfan123.github.io/img/create/create.png">
+  
+    <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">pfan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">新起点，新高度</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>		
+					
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+
+			</div>
+		
+
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+				        	<li class = "article_cate_tit"> 文章分类</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/技术杂谈/">技术杂谈</a>	</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/兴趣爱好/">兴趣爱好</a>		</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/日志/">日志</a></li>
+				        	<li class = "article_cate_a"> <a href = "/categories/JavaScript/">JavaScript</a>	</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/CSS3/">CSS3</a>	</li>
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+
+
+				<style type="text/css">
+					.article_cate_tit{
+						color:#ba8f6c;
+						margin-top:6px;
+					}
+					.article_cate_con a{
+						display:block;
+						font-size:12px;
+						text-align:center;
+						margin:4px 0;
+					}
+					#header .header-menu{
+						line-height:21px;
+					}
+					.article_cate_a{
+						line-height:18px !important;
+					}	
+					.article_cate_a a{
+						font-size:12px !important;
+					}				
+					#container .left-col .overlay{
+						height:130px;
+					}
+					.header-nav{
+						top:160px;
+					}
+				</style>	
+				<!-- E 新增模块-->
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/CMD/" style="font-size: 10px;">CMD</a> <a href="/tags/CSS动画篇/" style="font-size: 10px;">CSS动画篇</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Mac-命令-Terminal-osx/" style="font-size: 10px;">Mac 命令 Terminal osx</a> <a href="/tags/Nginx-Mac-Node/" style="font-size: 10px;">Nginx Mac Node</a> <a href="/tags/Nginx-MySQL-PHP-FPM-Mac-OS/" style="font-size: 10px;">Nginx MySQL PHP-FPM Mac OS</a> <a href="/tags/Nodejs学习实践-nodejs-ES6/" style="font-size: 10px;">Nodejs学习实践 nodejs  ES6</a> <a href="/tags/PreloadJS-EaselJS-TweenJS-SoundJS/" style="font-size: 10px;">PreloadJS EaselJS TweenJS SoundJS</a> <a href="/tags/SVG-Sprites-Symbols/" style="font-size: 10px;">SVG Sprites Symbols</a> <a href="/tags/UMD/" style="font-size: 10px;">UMD</a> <a href="/tags/Vim-vi/" style="font-size: 10px;">Vim vi</a> <a href="/tags/createJS/" style="font-size: 10px;">createJS</a> <a href="/tags/css-modules-scope-模块化/" style="font-size: 10px;">css modules  scope  模块化</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo初始/" style="font-size: 10px;">hexo初始</a> <a href="/tags/hexo相关问题/" style="font-size: 10px;">hexo相关问题</a> <a href="/tags/insertAdjacentHTML方法/" style="font-size: 10px;">insertAdjacentHTML方法</a> <a href="/tags/insertAdjacentText方法/" style="font-size: 10px;">insertAdjacentText方法</a> <a href="/tags/mac-iphone-铃声/" style="font-size: 10px;">mac iphone 铃声</a> <a href="/tags/node-版本管理-nvm-n/" style="font-size: 10px;">node 版本管理  nvm  n</a> <a href="/tags/node-读写excel-JS-XLSX-分析excel写入/" style="font-size: 10px;">node 读写excel JS-XLSX 分析excel写入</a> <a href="/tags/pm2学习实践-nodejs-pm2/" style="font-size: 10px;">pm2学习实践 nodejs pm2</a> <a href="/tags/react-flux-redux-ECMAScript6-Vue-Angular-Angular2-0-NuclearJS/" style="font-size: 10px;">react flux redux ECMAScript6 Vue Angular Angular2.0 NuclearJS</a> <a href="/tags/ssh常用命令-SSH/" style="font-size: 10px;">ssh常用命令  SSH</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/京东购物H5活动CP重构规范/" style="font-size: 10px;">京东购物H5活动CP重构规范</a> <a href="/tags/优化JavaScript的执行效率/" style="font-size: 10px;">优化JavaScript的执行效率</a> <a href="/tags/前端性能优化/" style="font-size: 10px;">前端性能优化</a> <a href="/tags/吉他/" style="font-size: 10px;">吉他</a> <a href="/tags/吉他知识/" style="font-size: 10px;">吉他知识</a> <a href="/tags/学吉他知识集锦/" style="font-size: 10px;">学吉他知识集锦</a> <a href="/tags/旅游-帝都畅游-相约北京/" style="font-size: 10px;">旅游 帝都畅游 相约北京</a> <a href="/tags/模块的写法/" style="font-size: 10px;">模块的写法</a> <a href="/tags/运营规范/" style="font-size: 10px;">运营规范</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/pingfan1990/">博客园博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cfuns.com/house.php">前端网博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pingfan1990.sinaapp.com/">pfan展示平台</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://doc.pfan123.com/">pfan前端开发导航平台</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">因上努力，果上随缘</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">pfan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">pfan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">新起点，新高度</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-createJS实战深入解析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/06/createJS实战深入解析/" class="article-date">
+  	<time datetime="2016-07-06T15:51:43.000Z" itemprop="datePublished">2016-07-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      createJS实战深入解析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PreloadJS-EaselJS-TweenJS-SoundJS/">PreloadJS EaselJS TweenJS SoundJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/createJS/">createJS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CreateJS简介"><a href="#CreateJS简介" class="headerlink" title="CreateJS简介"></a>CreateJS简介</h2><p>CreateJS 是一套可以构建丰富交互体验的 HTML5 游戏的开源工具包，旨在降低 HTML5 项目的开发难度和成本，让开发者以熟悉的方式打造更具现代感的网络交互体验。</p>
+<p>CreateJS中文Github:<a href="https://github.com/CreateJS/" target="_blank" rel="external">https://github.com/CreateJS/</a><br>CreateJS英文版Api:<a href="http://www.createjs.com/" target="_blank" rel="external">http://www.createjs.com/</a><br>CreateJS中文版Api:<a href="http://www.createjs.cc/" target="_blank" rel="external">http://www.createjs.cc/</a></p>
+<p>CreateJS 中包含：</p>
+<ul>
+<li>EaselJS：用于 Sprites、动画、向量和位图的绘制，创建 HTML5 Canvas 上的交互体验（包含多点触控），同时提供 Flash 中的“显示列表”功能。</li>
+<li>TweenJS：一个简单的用于制作类似 Flash 中“补间动画”的引擎，可生成数字或非数字的连续变化效果。</li>
+<li>SoundJS：一个音频播放引擎，能够根据浏览器性能选择音频播放方式。将音频文件作为模块，可随时加载和卸载。</li>
+<li>PrloadJS：帮助你简化网站资源预加载工作，无论加载内容是图形、视频、声音、JS、数据……<br>以上的Createjs介绍来自百度，不过通过介绍可以知道，虽然CreateJS看起来复杂，不过四个部分各有作用，其中最主要的就是EaselJS，其余三项不过是为他服务。</li>
+</ul>
+<p>开发步骤：<br>1、下载类库，可以使用源代码，也可以使用压缩过的min.js，就好像平时写网页一样。<br>2、建立html和canvas标签，onload后再执行createjs相关逻辑。<br>3、编写createjs逻辑。这个非常简单，因为createjs只提供了最简单的基础功能，我们理解了基础功能后就可以叠积木了。</p>
+<p>关于createjs，最关键是要理解类结构</p>
+<p><img src="/img/create/create.png" alt="createjs类结构"></p>
+<p>上图列出了createjs的主要类结构，所有舞台上的内容都是元件，元件的基类是DisplayObject。Container可以包含子元件，舞台Stage本身也是Container。另外Sprite用于表现SpriteSheet帧动画人物、Bitmap用于展示纯静态的人物。 </p>
+<p><img src="/img/create/1.jpg" alt="createjs类结构"></p>
+<p> 而Filter和Shadow则是滤镜分支，可以针对任意元件实现颜色变换、模糊、阴影等效果。使用滤镜的方式跟Flash一致，需要新建Filter实例，添加到目标元件的FilterList中，Createjs框架在下一帧就会把该元件加上滤镜效果。</p>
+<h2 id="EaselJS部分"><a href="#EaselJS部分" class="headerlink" title="EaselJS部分"></a>EaselJS部分</h2><p>EaselJS所有的功能都是被一个全局类<code>createjs</code>所包含，将其打印大致包含如下（有删减）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">AlphaMapFilter</span><br><span class="line">AlphaMaskFilter</span><br><span class="line">Bitmap   			//位图，用于引入图片  位图类不需要缓存</span><br><span class="line">BitmapText			// 位图中绘制文字</span><br><span class="line">BlurFilter			//模糊滤镜</span><br><span class="line">ButtonHelper</span><br><span class="line">ColorFilter			// 颜色滤镜</span><br><span class="line">ColorMatrix</span><br><span class="line">ColorMatrixFilter</span><br><span class="line">Container</span><br><span class="line">DisplayObject</span><br><span class="line">DisplayProps</span><br><span class="line">DOMElement</span><br><span class="line">EaselJS				//版本信息</span><br><span class="line">Event</span><br><span class="line">EventDispatcher</span><br><span class="line">Filter				//滤镜</span><br><span class="line">Graphics			//绘制各种图形</span><br><span class="line">Matrix2D</span><br><span class="line">MouseEvent       //鼠标事件，用于与用户交互</span><br><span class="line">MovieClip		 //动画剪裁</span><br><span class="line">MovieClipPlugin</span><br><span class="line">Point			//绘制点</span><br><span class="line">Rectangle		//绘制矩形</span><br><span class="line">Shadow			//绘制阴影</span><br><span class="line">Shape			//新建图形图层</span><br><span class="line">Sprite			//帧或帧序列（即动画）</span><br><span class="line">SpriteContainer</span><br><span class="line">SpriteSheet</span><br><span class="line">SpriteSheetBuilder</span><br><span class="line">SpriteSheetUtils</span><br><span class="line">SpriteStage</span><br><span class="line">Stage			//新建舞台</span><br><span class="line">Text			//绘制文本图层</span><br><span class="line">Ticker</span><br><span class="line">Touch			//移动端交互  触摸事件 注册createjs.Touch.enable(stage)  pressup、pressmove</span><br><span class="line">UID				//用于生成序列唯一标识号的全局实用程序</span><br><span class="line">Utility Methods</span><br></pre></td></tr></table></figure>
+<p>使用EaselJS基本结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">var stage=new createjs.Stage(&quot;canvas&quot;);</span><br><span class="line">var canvas = new createjs.Stage(&quot;canvas&quot;).canvas;</span><br><span class="line">var container = new createjs.Container();</span><br><span class="line">var ctx = new createjs.Stage(&quot;canvas&quot;).canvas.getContext(&quot;2d&quot;);</span><br><span class="line"></span><br><span class="line">var circle=new createjs.Shape();</span><br><span class="line">circle.graphics.beginFill(&quot;red&quot;).drawCircle(0,0,50);</span><br><span class="line"></span><br><span class="line">//regX,regY向左，向上偏移两，旋转时设置可以让其沿坐标点旋转。</span><br><span class="line">circle.regX = -25;</span><br><span class="line">circle.regY = -25;</span><br><span class="line">circle.x=50;</span><br><span class="line">circle.y=50;</span><br><span class="line"></span><br><span class="line">//增加形状实例显示在舞台列表上</span><br><span class="line">stage.addChild(circle);</span><br><span class="line"></span><br><span class="line">//更新舞台渲染</span><br><span class="line">stage.update();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stage.addEventListener(&quot;stagemousedown&quot;,function()&#123;</span><br><span class="line">	//控制舞台点击</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">stage.addEventListener(&quot;click&quot;,function()&#123;</span><br><span class="line">	//只能点击舞台上的显示元素才能触发</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//多点触摸功能的设备 pressup,pressmove替换touchstart，touchmove</span><br><span class="line">createjs.Touch.enable(stage);</span><br><span class="line"></span><br><span class="line">//帧频率绘制模式</span><br><span class="line">createjs.Ticker.timingMode = createjs.Ticker.RAF;</span><br><span class="line"></span><br><span class="line">//createjs.Ticker.setFPS(60);</span><br><span class="line"></span><br><span class="line">//获取当前帧频率</span><br><span class="line">createjs.Ticker.getMeasuredFPS()</span><br><span class="line"></span><br><span class="line">stage.addEventListener(&quot;tick&quot;,tick);</span><br></pre></td></tr></table></figure>
+<p>1.stagemousedown,stagemouseup,stagemousemove与mousedown,mouseup,mousemove的区别</p>
+<blockquote>
+<p>(1) stagemousedown,stagemouseup,stagemousemove是针对stage的专属事件<br>(2) mousedown,mouseup,mousemove事件对stage、DisplayObject都可以触发，但针对stage只对舞台上DisplayObject才触发</p>
+</blockquote>
+<p>2.pressmove、pressup与touchmove,touchend</p>
+<blockquote>
+<p>(1) 要使用移动端交互，多点触控事件，需先注册createjs.Touch.enable(stage)，开启触摸事件<br>(2) pressmove代替touchmove, pressup代替touchend</p>
+</blockquote>
+<p>3.DisplayObject中<code>cache</code>提高stage渲染效率<br><code>cache</code>方法其实是把显示对象画到一个新的canvas中，从而每一次stage.update()重绘的时候不用重新渲染了，大大提高效率。<br>通常把一些不经常变化的复杂的显示对象进行<code>cache</code>（比如说有许多子对象的容器或者复杂的Shape），被缓存的显示对象可以移动、旋转、改变透明度。但是被缓存的显示对象的内容变化的话，就要重新调用cache()、updateCahce()、uncache()方法。 </p>
+<p>关于cache，<a href="http://createjs.com/#demos/easeljs/cache" target="_blank" rel="external">官网cache例子</a></p>
+<p>语法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cache ( x  y  width  height  [scale=1] )  //scale默认为1</span><br><span class="line"></span><br><span class="line">前四个参数指定了显示对象要缓存的区域，注意的事x和y的坐标都是根据当前这个显示对象本身的坐标系来计算。 </span><br><span class="line">最后一个参数scale表示在缓存时缩放的比例，比如 myShape.cache(0,0,100,100,2) 这样使用时，缓存出来的结果大小事200*200。</span><br></pre></td></tr></table></figure>
+<p>缓存一个圆型的Shape，例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var shape = new createjs.Shape();</span><br><span class="line">shape.graphics.beginFill(&quot;#ff0000&quot;).drawCircle(0, 0, 25);</span><br><span class="line">shape.cache(-25, -25, 50, 50);</span><br></pre></td></tr></table></figure>
+<p>使用<code>cache</code>注意关键点：</p>
+<blockquote>
+<p>1.在<code>displayObject</code>上使用<code>filter</code>，要在调用<code>cache</code>方法之前使用filter<br>2.<code>Bitmap</code>对象中使用<code>cache</code>，普通<code>bitmap</code>不要调用<code>cache</code>方法，如果bitmap要使用滤镜<code>filter</code>的话，一定要调用<code>cache</code><br>3.在<code>Sprite</code>对象中，<code>Sprite</code>已经是光栅格式，对于<code>Sprite</code>实例来说<code>cache</code>没有必要。不要为提高性能来调用<code>Sprite</code>的<code>cache</code></p>
+</blockquote>
+<p>4.DisplayObject中<code>scale</code>、<code>rotation</code>中心点，通过regX,regY偏移，定位到相对<code>DisplayObject</code>坐标点</p>
+<blockquote>
+<p>例如,让一个100 x100px位图旋转中心,您将设置regX regY 50</p>
+</blockquote>
+<p>5.Ticker处理帧频率</p>
+<p>Ticker类为游戏开发提供了一个主要的定时类,主要的目的就是把stage渲染的工作集中起来，也就是说定时调用stage.update()这个方法。Ticker设置的频率也就是游戏的帧数了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">createjs.Ticker.setFPS(60);</span><br><span class="line">createjs.Ticker.addEventListener(&quot;tick&quot;, handleTick);</span><br><span class="line">stage.addEventListener(&quot;stagemousedown&quot;, function(event)&#123;</span><br><span class="line">    createjs.Ticker.setPaused(!createjs.Ticker.getPaused());</span><br><span class="line">&#125;);</span><br><span class="line">function handleTick(event)&#123;</span><br><span class="line">	if(!event.paused)&#123;</span><br><span class="line">	  ……</span><br><span class="line">	&#125;</span><br><span class="line">	stage.update();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在侦听函数中event的数据 </span><br><span class="line">1.event.paused 表示ticker是否处于暂停状态 </span><br><span class="line">2.event.delta 在上一次tick事件之后到这次事件的时间间隔，以毫秒为单位。 </span><br><span class="line">3.event.time 在Ticker被初始化以后的时间总和，以毫秒为单位。 </span><br><span class="line">4.event.runTime 在Ticker被初始化以后没有暂停的时间总和，以毫秒为单位。</span><br></pre></td></tr></table></figure>
+<p>Ticker常用属性和方法：<br>1.paused 在ticker暂停时，所有的侦听器仍然会接受到tick事件，但是事件中的paused会是true（createjs.Ticker.paused = true）；<br>2.timingMode指定tick的timing模式。一共有三种模式，TIMEOUT、RAF和RAF_SYNCHEN。<br>（1）TIMEOUT，这种模式下使用的就是setTimeOut这个方法实现的。是timingMode的默认模式。<br>（2）RAF 在这个模式下使用requestAnimationFrame，完全忽略Ticker的帧频。如果requestAnimationFrame API不支持的话就用TIMEOUT模式。<br>（3）RAF_SYNCHEN 在这个模式下使用requestAnimationFrame，但是试图与ticker的帧频同步。如果requestAnimationFrame API不支持的话就用TIMEOUT模式。<br>3.getMeasuredFPS() 获得当前的实际帧频。<br>4.getMeasuredTickTime 获得平均一次tick所有的时间，大概就是在这一次tick所用的时间。</p>
+<h2 id="PrloadJS部分"><a href="#PrloadJS部分" class="headerlink" title="PrloadJS部分"></a>PrloadJS部分</h2><p>PreloadJS是一个用来管理和协调相关资源加载的类库，它可以方便的帮助你预先加载相关资源。当我们打印PreloadJS对象，发现主要提供以下类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">AbstractLoader</span><br><span class="line">AbstractMediaLoader</span><br><span class="line">AbstractRequest</span><br><span class="line">BinaryLoader  //二进制文件的加载</span><br><span class="line">CSSLoader	  //CSS文件的加载</span><br><span class="line">DataUtils</span><br><span class="line">DomUtils</span><br><span class="line">ImageLoader</span><br><span class="line">JavaScriptLoader</span><br><span class="line">JSONLoader   	//加载JSON</span><br><span class="line">JSONPLoader		//要加载JSON跨域，使用JSONP和 JSONPLoader 代替</span><br><span class="line">LoadItem</span><br><span class="line">LoadQueue   //加载管理器，可以预先加载一个文件或者一个文件队列</span><br><span class="line">ManifestLoader</span><br><span class="line">MediaTagRequest</span><br><span class="line">PreloadJS</span><br><span class="line">ProgressEvent</span><br><span class="line">RequestUtils</span><br><span class="line">SamplePlugin</span><br><span class="line">SoundLoader</span><br><span class="line">SpriteSheetLoader</span><br><span class="line">SVGLoader		//加载svg</span><br><span class="line">TagRequest</span><br><span class="line">TextLoader</span><br><span class="line">VideoLoader</span><br><span class="line">XHRRequest</span><br><span class="line">XMLLoader</span><br><span class="line">```	</span><br><span class="line">LoadQueue类，应该来说平时使用比较多，这里就主要聊聊LoadQueue。</span><br><span class="line"></span><br><span class="line">LoadQueue 类</span><br><span class="line">LoadQueue类是预加​​载内容的主要API。 LoadQueue是负载管理器，它可以预载是单个文件或文件的队列。</span><br><span class="line"></span><br><span class="line">LoadQueue包含了几个可以订阅的事件：</span><br><span class="line"></span><br><span class="line">- complete: 当队列完成加载所有文件时。</span><br><span class="line">- error: 当队列与任何文件遇到错误时。</span><br><span class="line">- progress: 对于整个队列进展已经改变。</span><br><span class="line">- fileload: 单个文件已完成加载。</span><br><span class="line">- fileprogress: 单个文件进度变化。注意,只有文件装载XHR(或可能通过插件)将 file 事件进展除了0或100%。</span><br><span class="line"></span><br><span class="line">LoadQueue支持相关文件类型如下：</span><br><span class="line"></span><br><span class="line">- BINARY: XHR调用的二进制文件</span><br><span class="line">- CSS: CSS文件</span><br><span class="line">- IMAGE: 一般图片文件格式</span><br><span class="line">- JAVASCRIPT: JavaScript文件</span><br><span class="line">- JSON: JSON数据</span><br><span class="line">- JSONP: 跨域JSON文件</span><br><span class="line">- MANIFEST: JSON格式的文件列表</span><br><span class="line">- SOUND: 音频文件</span><br><span class="line">- SVG: SVG文件</span><br><span class="line">- TEXT: 文本文件 - 仅支持XHR</span><br><span class="line">- XML: XML数据</span><br></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var queue = new createjs.LoadQueue(true); //LoadQueue ( [preferXHR=true]  [basePath=&quot;&quot;]  [crossOrigin=&quot;&quot;] )</span><br><span class="line"></span><br><span class="line">queue.loadManifest([&#123;</span><br><span class="line">    id: &quot;guide&quot;,</span><br><span class="line">    src: &quot;images/guide.png&quot;</span><br><span class="line">  &#125;&#125;]);</span><br><span class="line"></span><br><span class="line">queue.on(&quot;fileload&quot;, handleFileLoad, this);</span><br><span class="line">queue.on(&quot;complete&quot;, handleComplete, this);</span><br><span class="line">queue.on(&quot;progress&quot;, handleProgress, this);</span><br><span class="line"></span><br><span class="line">function handleComplete()&#123;</span><br><span class="line">	queue.getResult(‘id’);</span><br><span class="line">&#125;</span><br><span class="line">function handleProgress(event) &#123;</span><br><span class="line">  console.log(event.progress * 100)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>LoadQueue支持相关文件类型如下：</p>
+<ul>
+<li><p>预加载音频文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//初始化插件</span><br><span class="line"> queue.installPlugin(createjs.Sound);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置加载路径<br>注意，第一个参数为true，代表通过xhr形式加载，但是通常，我们可能需要http加载，所以建议设置为false，以免造成重复加载。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var queue = new createjs.LoadQueue(false,&quot;./base/src/&quot;); //LoadQueue ( [preferXHR=true]  [basePath=&quot;&quot;]  [crossOrigin=&quot;&quot;] )</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取加载进度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.progress</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取预加载资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preload.getResult(‘id’);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="TweenJS部分"><a href="#TweenJS部分" class="headerlink" title="TweenJS部分"></a>TweenJS部分</h2><p>TweenJS Javascript库提供了一个简单但强大的渐变界面。它支持渐变的数字对象属性&amp;CSS样式属性,并允许您链接补间动画和行动结合起来,创造出复杂的序列。其中主要包含如下类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CSSPlugin   //用css的方式写动画，但是它采用的形式是html，效率低下</span><br><span class="line">Ease		//提供支持贝塞尔动画</span><br><span class="line">MotionGuidePlugin   //轨迹动画插件</span><br><span class="line">SamplePlugin</span><br><span class="line">Timeline</span><br><span class="line">Tween  </span><br><span class="line">TweenJS</span><br></pre></td></tr></table></figure>
+<p>Tween构造函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tween ( target  [props]  [pluginData] )</span><br></pre></td></tr></table></figure></p>
+<p>参数</p>
+<ul>
+<li>target对象: 将其属性渐变的目标对象</li>
+<li><p>[props] 对象: 适用于这个渐变实例的配置属性(ex. {loop:true, paused:true}. 所有属性默认为false. 被支持的小道具是:<br>(1)loop: 设置循环属性渐变，true为循环，false为不循环.<br>(2)useTicks: 使用嘀嗒走针是因为持续时间而不是毫秒.<br>(3)ignoreGlobalPause: 设置在渐变动画上 ignoreGlobalPause 属性.<br>(4)override:如果设置为true,Tween.removeTweens(target) 将被称为移除相同目标的所有别的渐变动画.<br>(5)paused: 指示是否开始停止渐变动画.<br>(6)position: 表明这个渐变的初始位置.<br>(7)onChange: 指定一个“change”事件侦听器.</p>
+</li>
+<li><p>[pluginData] 对象(可选的):一个对象包含的数据供安装使用插件。有关详细信息,请参阅个别插件的文档.</p>
+</li>
+</ul>
+<p>Tween实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">target.alpha = 1;</span><br><span class="line">   createjs.Tween.get(target, &#123;override:true&#125;) //多个渐变动画可以指向相同的实例,然而如果他们影响相同的属性可能会有意外行为. 需要停止所有的渐变动画, 使用 removeTweens 或者通过 override:true</span><br><span class="line">   .to(&#123;alpha:0.5,x:10,y:20&#125;, 1000, createjs.Ease.linear)</span><br><span class="line">   .wait(500)</span><br><span class="line">   .call(handleComplete)</span><br><span class="line">   .to(&#123;alpha:0, visible:false&#125;, 1000, createjs.Ease.bounceInOut)</span><br><span class="line">   .addEventListener(&quot;change&quot;,handleChange)</span><br><span class="line"></span><br><span class="line">   function handleComplete() &#123;</span><br><span class="line">   //Tween complete</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>get 获取目标元素</li>
+<li>to 执行动画</li>
+<li>wait 队列等待</li>
+<li>call 执行回调函数</li>
+<li>createjs.Ease.bounceInOut 缓动效果</li>
+<li>change  订阅 change 事件以便当目标的属性改变时获得通知</li>
+</ul>
+<p>使用Ease可以控制运动的轨迹，实现曲线的运动，还可以控制运动过程，比如先加速再减速等，在Tweenjs官方示例中有两个可以用来观察Ease提供的各个参数对运动过程产生的影响，<br><a href="http://andysaia.com/blog/tweenjs/" target="_blank" rel="external">http://andysaia.com/blog/tweenjs/</a><br><a href="http://www.createjs.com/demos/tweenjs/tween_sparktable" target="_blank" rel="external">http://www.createjs.com/demos/tweenjs/tween_sparktable</a></p>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://www.createjs.cc/" target="_blank" rel="external">createjs中文api</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47261225" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（一）EaselJS简介</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47282073" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（二）使用EaselJS处理图片</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47302309" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（三）使用EaselJS中的制作Sprite类制作</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47323573" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（四）TweenJS和Tick动画</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47326093" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（五）PreloadJS和SoundJS</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47357747" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（六）完成一个简单的打飞机游戏（上）</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47382401" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（七）完成一个简单的打飞机游戏（下）</a></li>
+<li><a href="http://blog.csdn.net/lanix516/article/details/47402499" target="_blank" rel="external">如何使用Createjs来编写HTML5游戏（八） 通过继承扩展EaselJS中的基础元素</a></li>
+<li><a href="http://blog.csdn.net/k_shl_2011/article/category/5666125" target="_blank" rel="external">createjs教程</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/27/CSS模块化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CSS模块化</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="createJS实战深入解析" data-title="createJS实战深入解析" data-url="http://pfan123.github.io/2016/07/06/createJS实战深入解析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 pfan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
