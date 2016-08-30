@@ -6,17 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>模拟jdc部署环境，为node项目部署提供解决方案 | pfan博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production，">
+  <meta name="description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。
+为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模拟jdc部署环境，为node项目部署提供解决方案">
 <meta property="og:url" content="http://pfan123.github.io/2016/08/29/jdc线上部署问题解决方案/index.html">
 <meta property="og:site_name" content="pfan博客">
-<meta property="og:description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production，">
+<meta property="og:description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。
+为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production">
 <meta property="og:image" content="http://7xrig5.com1.z0.glb.clouddn.com/pic.jpg">
-<meta property="og:updated_time" content="2016-08-30T02:58:25.000Z">
+<meta property="og:updated_time" content="2016-08-30T02:59:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模拟jdc部署环境，为node项目部署提供解决方案">
-<meta name="twitter:description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production，">
+<meta name="twitter:description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。
+为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production">
 <meta name="twitter:image" content="http://7xrig5.com1.z0.glb.clouddn.com/pic.jpg">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
@@ -83,7 +86,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -272,7 +275,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production，传入不同的指向路径，让静态资源路径与开发环境一致，但这一点还不够，切换到production改变静态资源路径，会导致本地无法正常预览，那么我们还需要配置nginx+node与线上保持一致的发布预览环境，从而达到发布及稳定，减少发布过程中浪费时间，难调试的问题。</p>
+        <p>有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。</p>
+<p>为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production，传入不同的指向路径，让静态资源路径与开发环境一致，但这一点还不够，切换到production改变静态资源路径，会导致本地无法正常预览，那么我们还需要配置nginx+node与线上保持一致的发布预览环境，从而达到发布及稳定，减少发布过程中浪费时间，难调试的问题。</p>
 <p>以下是大概的解决方案，构建图：</p>
 <p><img src="http://7xrig5.com1.z0.glb.clouddn.com/pic.jpg" alt="Alt text"></p>
 <h3 id="mac下配置Nginx"><a href="#mac下配置Nginx" class="headerlink" title="mac下配置Nginx"></a>mac下配置Nginx</h3><p><a href="http://blog.pfan123.com/2016/06/12/Mac%20OS%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85Nginx%E3%80%81MySQL%E3%80%81PHP-FPM%E7%9A%84LAMP%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" target="_blank" rel="external">Mac使用brew安装Nginx、MySQL、PHP的LAMP开发环境</a></p>
