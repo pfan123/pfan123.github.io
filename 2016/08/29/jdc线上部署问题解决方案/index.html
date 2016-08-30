@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production，">
 <meta property="og:image" content="http://7xrig5.com1.z0.glb.clouddn.com/pic.jpg">
-<meta property="og:updated_time" content="2016-08-30T02:56:25.000Z">
+<meta property="og:updated_time" content="2016-08-30T02:58:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模拟jdc部署环境，为node项目部署提供解决方案">
 <meta name="twitter:description" content="有部署node项目操作过jdc服务器的童鞋们，可能都会遇到线上静态资源与本地静态资源不一致的问题，主要是由于我们部署的node项目的域名是二级目录，例jdc.jd.com/svg/，这样就导致相对路径指向jdc.jd.com，而不是目标jdc.jd.com/svg。为了解决这个问题，我们通常是通过配置process.env.NODE_ENV的值，分开发环境dev，以及发布环境production，">
@@ -276,7 +276,7 @@
 <p>以下是大概的解决方案，构建图：</p>
 <p><img src="http://7xrig5.com1.z0.glb.clouddn.com/pic.jpg" alt="Alt text"></p>
 <h3 id="mac下配置Nginx"><a href="#mac下配置Nginx" class="headerlink" title="mac下配置Nginx"></a>mac下配置Nginx</h3><p><a href="http://blog.pfan123.com/2016/06/12/Mac%20OS%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85Nginx%E3%80%81MySQL%E3%80%81PHP-FPM%E7%9A%84LAMP%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" target="_blank" rel="external">Mac使用brew安装Nginx、MySQL、PHP的LAMP开发环境</a></p>
-<h3 id="Nginx配置文件详解"><a href="#Nginx配置文件详解" class="headerlink" title="Nginx配置文件详解"></a>Nginx配置文件详解</h3><p><a href="http://blog.pfan123.com/2016/06/12/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%A4%84%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/" target="_blank" rel="external">Nginx配置文件详解</a></p>
+<h3 id="Nginx配置文件详解"><a href="#Nginx配置文件详解" class="headerlink" title="Nginx配置文件详解"></a>Nginx配置文件详解</h3><p><a href="http://blog.pfan123.com/2016/08/28/Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E/" target="_blank" rel="external">Nginx配置文件详解</a></p>
 <h3 id="Nginx反向代理处理静态页面"><a href="#Nginx反向代理处理静态页面" class="headerlink" title="Nginx反向代理处理静态页面"></a>Nginx反向代理处理静态页面</h3><p><a href="http://blog.pfan123.com/2016/06/12/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%A4%84%E7%90%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/" target="_blank" rel="external">nginx反向代理处理静态页面</a></p>
 <h3 id="Nginx-Node常见问题"><a href="#Nginx-Node常见问题" class="headerlink" title="Nginx+Node常见问题"></a>Nginx+Node常见问题</h3><p>1.Mac 启动 nginx 失败，提示地址已被占用 （48: Address already in use）</p>
 <p>启动Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx</span><br></pre></td></tr></table></figure></p>
