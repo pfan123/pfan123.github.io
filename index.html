@@ -256,7 +256,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/img/hls/banner.jpg" alt="直播起航"></p>
+        <p><img src="/img/hls/banner.png" alt="直播起航"></p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前不久抽空对目前比较火的视频直播，做了下研究与探索，了解其整体实现流程，以及探讨移动端HTML5直播可行性方案。</p>
 <p>发现目前 WEB 上主流的视频直播方案有 HLS 和 RTMP，移动 WEB 端目以HLS为主（HLS存在延迟性问题，也可以借助 <a href="https://github.com/videojs/video.js" target="_blank" rel="external">video.js</a>  采用RTMP），PC端则以RTMP为主实时性较好，接下来将围绕这两种视频流协议来展开H5直播主题分享。</p>
 <h2 id="一、视频流协议HLS与RTMP"><a href="#一、视频流协议HLS与RTMP" class="headerlink" title="一、视频流协议HLS与RTMP"></a>一、视频流协议HLS与RTMP</h2><h3 id="1）HTTP-Live-Streaming"><a href="#1）HTTP-Live-Streaming" class="headerlink" title="1）HTTP Live Streaming"></a>1）HTTP Live Streaming</h3><p>HTTP Live Streaming（简称 HLS）是一个基于 HTTP 的视频流协议，由 Apple 公司实现，Mac OS 上的 QuickTime、Safari 以及 iOS 上的 Safari 都能很好的支持 HLS，高版本 Android 也增加了对 HLS 的支持。一些常见的客户端如：MPlayerX、VLC 也都支持 HLS 协议。</p>
@@ -364,7 +364,7 @@
 <p>更多命令，请参考：<br><a href="http://blog.csdn.net/leixiaohua1020/article/details/12029543" target="_blank" rel="external">ffmpeg处理RTMP流媒体的命令大全</a><br><a href="http://www.jianshu.com/p/d541b317f71c" target="_blank" rel="external"> FFmpeg常用推流命令</a></p>
 <h2 id="七、H5-直播视频播放"><a href="#七、H5-直播视频播放" class="headerlink" title="七、H5 直播视频播放"></a>七、H5 直播视频播放</h2><p>移动端iOS和 Android 都天然支持HLS协议，做好视频采集端、视频流推流服务之后，便可以直接在H5页面配置 video 标签播放直播视频。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls preload=&quot;auto&quot;  autoplay=&quot;autoplay&quot; loop=&quot;loop&quot; webkit-playsinline&gt;    </span><br><span class="line">    &lt;source src=&quot;http://10.14.221.8/hls/test.m3u8&quot; type=&quot;application/vnd.apple.mpegurl&quot; /&gt;  </span><br><span class="line">    &lt;p class=&quot;warning&quot;&gt;Your browser does not support HTML5 video.&lt;/p&gt;  </span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-<p><code>ps</code>：① video标签添加<code>webkit-playsinline</code>属性是保证视频在网页中内嵌播放。<br>② 针对微信浏览器，video标签层级最高的问题，需要申请添加白名单，请参照 <a href="http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。" target="_blank" rel="external">http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。</a></p>
+<p><code>ps</code>：① video标签添加<code>webkit-playsinline</code>属性(iOS支持)是保证视频在网页中内嵌播放。<br>② 针对微信浏览器，video标签层级最高的问题，需要申请添加白名单，请参照 <a href="http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。" target="_blank" rel="external">http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。</a></p>
 <h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>本文从视频采集上传，服务器处理视频推流，以及H5页面播放直播视频一整套流程,具体阐述了直播实现原理，实现过程中会遇到很多性能优化问题。</p>
 <p>① H5 HLS 限制必须是H264+AAC编码</p>
 <p>② H5 HLS 播放 卡顿问题，前端与 server 端优化处理</p>
@@ -796,6 +796,74 @@
 
 
   
+    <article id="post-Docker-从入门到实践" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/25/Docker-从入门到实践/" class="article-date">
+  	<time datetime="2016-07-25T11:17:43.000Z" itemprop="datePublished">2016-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/25/Docker-从入门到实践/">Docker — 从入门到实践</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>买车文章大纲：</p>
+<p>准备资料：</p>
+<ul>
+<li><a href="https://docs.docker.com/" target="_blank" rel="external">docker官方文档</a></li>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/content/" target="_blank" rel="external">Docker —— 从入门到实践</a></li>
+<li><a href="http://www.runoob.com/docker/docker-tutorial.html" target="_blank" rel="external">Docker 教程</a></li>
+<li><a href="http://www.docker.org.cn/book/docker/what-is-docker-16.html" target="_blank" rel="external">docker中文</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-gitignore 文件使用说明" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -842,74 +910,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitignore-git/">.gitignore git</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Docker-从入门到实践" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/25/Docker-从入门到实践/" class="article-date">
-  	<time datetime="2016-07-25T11:17:43.000Z" itemprop="datePublished">2016-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/Docker-从入门到实践/">Docker — 从入门到实践</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>买车文章大纲：</p>
-<p>准备资料：</p>
-<ul>
-<li><a href="https://docs.docker.com/" target="_blank" rel="external">docker官方文档</a></li>
-<li><a href="https://yeasy.gitbooks.io/docker_practice/content/" target="_blank" rel="external">Docker —— 从入门到实践</a></li>
-<li><a href="http://www.runoob.com/docker/docker-tutorial.html" target="_blank" rel="external">Docker 教程</a></li>
-<li><a href="http://www.docker.org.cn/book/docker/what-is-docker-16.html" target="_blank" rel="external">docker中文</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
 	</div>
 
       
