@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://pfan123.github.io/img/hls/2.png">
 <meta property="og:image" content="http://pfan123.github.io/img/hls/3.png">
 <meta property="og:image" content="http://pfan123.github.io/img/hls/4.png">
-<meta property="og:updated_time" content="2016-10-09T06:20:44.000Z">
+<meta property="og:updated_time" content="2016-10-09T07:38:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H5直播起航">
 <meta name="twitter:description" content="前言前不久抽空对目前比较火的视频直播，做了下研究与探索，了解其整体实现流程，以及探讨移动端HTML5直播可行性方案。
@@ -391,7 +391,7 @@
 <h2 id="七、H5-直播视频播放"><a href="#七、H5-直播视频播放" class="headerlink" title="七、H5 直播视频播放"></a>七、H5 直播视频播放</h2><p>移动端iOS和 Android 都天然支持HLS协议，做好视频采集端、视频流推流服务之后，便可以直接在H5页面配置 video 标签播放直播视频。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls preload=&quot;auto&quot;  autoplay=&quot;autoplay&quot; loop=&quot;loop&quot; webkit-playsinline&gt;    </span><br><span class="line">    &lt;source src=&quot;http://10.14.221.8/hls/test.m3u8&quot; type=&quot;application/vnd.apple.mpegurl&quot; /&gt;  </span><br><span class="line">    &lt;p class=&quot;warning&quot;&gt;Your browser does not support HTML5 video.&lt;/p&gt;  </span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
 <p><code>ps</code>：① video标签添加<code>webkit-playsinline</code>属性是保证视频在网页中内嵌播放。<br>② 针对微信浏览器，video标签层级最高的问题，需要申请添加白名单，请参照 <a href="http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。" target="_blank" rel="external">http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。</a></p>
-<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><p>本文从视频采集上传，服务器处理视频推流，以及H5页面播放直播视频一整套流程,具体阐述了直播实现原理，实现过程中会遇到很多性能优化问题。</p>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>本文从视频采集上传，服务器处理视频推流，以及H5页面播放直播视频一整套流程,具体阐述了直播实现原理，实现过程中会遇到很多性能优化问题。</p>
 <p>① H5 HLS 限制必须是H264+AAC编码</p>
 <p>② H5 HLS 播放 卡顿问题，前端与 server 端优化处理</p>
 <p>server 端需要做好分片策略，将 ts 文件放在 CDN 上，前端可尽量做到 DNS 缓存等。</p>
