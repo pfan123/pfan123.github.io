@@ -326,7 +326,7 @@
 </ul>
 <p><img src="/img/hls/2.png" alt="直播整体流程"></p>
 <h2 id="四、H5-录制视频"><a href="#四、H5-录制视频" class="headerlink" title="四、H5 录制视频"></a>四、H5 录制视频</h2><p>对于H5视频录制，可以使用强大的 webRTC （Web Real-Time Communication）是一个支持网页浏览器进行实时语音对话或视频对话的技术，缺点是只在 PC 的 Chrome 上支持较好，移动端支持不太理想。</p>
-<h3 id="1-使用-webRTC-录制视频基本流程"><a href="#1-使用-webRTC-录制视频基本流程" class="headerlink" title="1. 使用 webRTC 录制视频基本流程"></a>1. 使用 webRTC 录制视频基本流程</h3><p>① 调用 <code>window.navigator.webkitGetUserMedia()</code> 获取用户的PC摄像头视频数据。<br>② 将获取到视频流数据转换成 <code>window.webkitRTCPeerConnection</code> (一种视频流数据格式)。<br>③ 利用 <code>webscoket</code> 将视频流数据传输到服务端。</p>
+<h3 id="1-使用-webRTC-录制视频基本流程"><a href="#1-使用-webRTC-录制视频基本流程" class="headerlink" title="1. 使用 webRTC 录制视频基本流程"></a>1. 使用 webRTC 录制视频基本流程</h3><p>① 调用 <code>window.navigator.webkitGetUserMedia()</code> 获取用户的PC摄像头视频数据。<br>② 将获取到视频流数据转换成 <code>window.webkitRTCPeerConnection</code> (一种视频流数据格式)。<br>③ 利用 <code>WebScoket</code> 将视频流数据传输到服务端。</p>
 <p><code>注意</code>：虽然Google一直在推WebRTC，目前已有不少成型的产品出现，但是大部分移动端的浏览器还不支持 webRTC（最新iOS 10.0也不支持），所以真正的视频录制还是要靠客户端（iOS,Android）来实现,效果会好一些。</p>
 <p><img src="/img/hls/3.png" alt="WebRTC支持度"></p>
 <h3 id="2-iOS原生应用调用摄像头录制视频流程"><a href="#2-iOS原生应用调用摄像头录制视频流程" class="headerlink" title="2. iOS原生应用调用摄像头录制视频流程"></a>2. iOS原生应用调用摄像头录制视频流程</h3><p>① 音视频的采集，利用AVCaptureSession和AVCaptureDevice可以采集到原始的音视频数据流。<br>② 对视频进行H264编码，对音频进行AAC编码，在iOS中分别有已经封装好的编码库（<a href="https://github.com/kewlbear/x264-ios" target="_blank" rel="external">x264编码</a>、<a href="https://github.com/fflydev/faac-ios-build" target="_blank" rel="external">faac编码</a>、<a href="https://github.com/kewlbear/FFmpeg-iOS-build-script" target="_blank" rel="external">ffmpeg编码</a>）来实现对音视频的编码。<br>③ 对编码后的音、视频数据进行组装封包。<br>④ 建立RTMP连接并上推到服务端。</p>
@@ -345,7 +345,7 @@
 </ol>
 <p>重启nginx服务，浏览器中输入 <a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>，是否出现欢迎界面确定nginx重启成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure></p>
 <h2 id="六、直播流转换格式、编码推流"><a href="#六、直播流转换格式、编码推流" class="headerlink" title="六、直播流转换格式、编码推流"></a>六、直播流转换格式、编码推流</h2><p>当服务器端接收到采集视频录制端传输过来的视频流时，需要对其进行解析编码，推送RTMP/HLS格式视频流至视频播放端。通常使用的常见编码库方案，如<a href="https://github.com/kewlbear/x264-ios" target="_blank" rel="external">x264编码</a>、<a href="https://github.com/fflydev/faac-ios-build" target="_blank" rel="external">faac编码</a>、<a href="https://github.com/kewlbear/FFmpeg-iOS-build-script" target="_blank" rel="external">ffmpeg编码</a>等。</p>
-<p>鉴于FFmpeg集合了多种音频、视频格式编码，我们可以优先选用FFmpeg进行转换格式、编码推流。</p>
+<p>鉴于 FFmpeg 集合了多种音频、视频格式编码，我们可以优先选用FFmpeg进行转换格式、编码推流。</p>
 <p>1.安装 FFmpeg 工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ffmpeg</span><br></pre></td></tr></table></figure></p>
 <p>2.推流MP4文件</p>
 <p>视频文件地址：/Users/gao/Desktop/video/test.mp4<br>推流拉流地址：rtmp://localhost:1935/rtmplive/home，rtmp://localhost:1935/rtmplive/home</p>
@@ -356,13 +356,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i /Users/gao/Desktop/video/test.mp4 -vcodec libx264 -vprofile baseline -acodec aac -ar 44100 -strict -2 -ac 1 -f flv  -q 10 rtmp://192.168.1.101:1935/hls/test</span><br><span class="line">ffmpeg -re -i /Users/gao/Desktop/video/test.mp4 -vcodec libx264 -vprofile baseline -acodec aac -ar 44100 -strict -2 -ac 1 -f flv  -q 10 rtmp://10.14.221.17:1935/hls/test</span><br></pre></td></tr></table></figure>
 <p>② 推流摄像头＋桌面+麦克风录制进行直播</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -f avfoundation -framerate 30 -i &quot;1:0&quot; \-f avfoundation -framerate 30 -video_size 640x480 -i &quot;0&quot; \-c:v libx264 -preset ultrafast \-filter_complex &apos;overlay=main_w-overlay_w-10:main_h-overlay_h-10&apos; -acodec libmp3lame -ar 44100 -ac 1  -f flv rtmp://192.168.1.101:1935/hls/test</span><br></pre></td></tr></table></figure>
-<p>更多命令，请参考：<br><a href="http://blog.csdn.net/leixiaohua1020/article/details/12029543" target="_blank" rel="external">ffmpeg处理RTMP流媒体的命令大全</a><br><a href="http://www.jianshu.com/p/d541b317f71c" target="_blank" rel="external"> FFmpeg常用推流命令</a></p>
+<p>更多命令，请参考：<br><a href="http://blog.csdn.net/leixiaohua1020/article/details/12029543" target="_blank" rel="external">FFmpeg处理RTMP流媒体的命令大全</a><br><a href="http://www.jianshu.com/p/d541b317f71c" target="_blank" rel="external"> FFmpeg常用推流命令</a></p>
 <h2 id="七、H5-直播视频播放"><a href="#七、H5-直播视频播放" class="headerlink" title="七、H5 直播视频播放"></a>七、H5 直播视频播放</h2><p>移动端iOS和 Android 都天然支持HLS协议，做好视频采集端、视频流推流服务之后，便可以直接在H5页面配置 video 标签播放直播视频。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls preload=&quot;auto&quot;  autoplay=&quot;autoplay&quot; loop=&quot;loop&quot; webkit-playsinline&gt;    </span><br><span class="line">    &lt;source src=&quot;http://10.14.221.8/hls/test.m3u8&quot; type=&quot;application/vnd.apple.mpegurl&quot; /&gt;  </span><br><span class="line">    &lt;p class=&quot;warning&quot;&gt;Your browser does not support HTML5 video.&lt;/p&gt;  </span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
 <p><code>ps</code>：① video标签添加<code>webkit-playsinline</code>属性（iOS支持）是保证视频在网页中内嵌播放。<br>② 针对微信浏览器，video标签层级最高的问题，需要申请添加白名单，请参照 <a href="http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。" target="_blank" rel="external">http://bbs.mb.qq.com/thread-1242581-1-1.html?ptlang=2052。</a></p>
 <h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>本文从视频采集上传，服务器处理视频推流，以及H5页面播放直播视频一整套流程,具体阐述了直播实现原理，实现过程中会遇到很多性能优化问题。</p>
 <p>① H5 HLS 限制必须是H264+AAC编码。</p>
-<p>② H5 HLS 播放 卡顿问题，server 端可以做好分片策略，将 ts 文件放在 CDN 上，前端可尽量做到 DNS 缓存等。</p>
+<p>② H5 HLS 播放卡顿问题，server 端可以做好分片策略，将 ts 文件放在 CDN 上，前端可尽量做到 DNS 缓存等。</p>
 <p>③ H5 直播为了达到更好的实时互动，也可以采用RTMP协议，通过<code>video.js</code>实现播放。</p>
 <p>参考资料：</p>
 <ul>
