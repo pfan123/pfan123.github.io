@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="准备工作新版的 Mac OS 内置了Apache 和 PHP，我的系统版本是OS X 10.9.3，可以通过以下命令查看Apache和PHP的版本号：
 12345678910httpd -v    Server version: Apache/2.2.26 (Unix)    Server built:   Dec 10 2013 22:09:38php --version    PHP 5.4.">
-<meta property="og:updated_time" content="2016-06-12T07:52:56.000Z">
+<meta property="og:updated_time" content="2016-10-11T10:52:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac使用brew安装Nginx、MySQL、PHP的LAMP开发环境">
 <meta name="twitter:description" content="准备工作新版的 Mac OS 内置了Apache 和 PHP，我的系统版本是OS X 10.9.3，可以通过以下命令查看Apache和PHP的版本号：
@@ -295,6 +295,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/Library/LaunchAgents</span><br><span class="line">cp /usr/local/opt/nginx/homebrew.mxcl.nginx.plist ~/Library/LaunchAgents/</span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist</span><br></pre></td></tr></table></figure>
 <p>运行nginx</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx #打开 nginx</span><br><span class="line">nginx -s reload|reopen|stop|quit  #重新加载配置|重启|停止|退出 nginx</span><br><span class="line">nginx -t   #测试配置是否有语法错误</span><br></pre></td></tr></table></figure>
+<p><code>注意</code>：出现Nginx操作错误，可以参照<a href="http://www.jianshu.com/p/918eb337a206" target="_blank" rel="external">Mac Nginx 安装(源文件安装)</a></p>
 <p>用法详解</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx [-?hvVtq] [-s signal] [-c filename] [-p prefix] [-g directives]</span><br></pre></td></tr></table></figure>
 <p>选项列表</p>
@@ -355,18 +356,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/06/12/Nginx配置文件详解/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/06/12/vim快捷操作整理/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          nginx反向代理处理静态页面(转载)
+          vim快捷操作整理
         
       </div>
     </a>
   
   
-    <a href="/2016/06/05/ssh常用命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ssh常用命令</div>
+    <a href="/2016/06/12/Nginx配置文件详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nginx反向代理处理静态页面(转载)</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
