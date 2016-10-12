@@ -119,7 +119,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -411,6 +411,13 @@
 </nav>
 
   
+  <div class="flipper_wp">
+    <div class="flipper">
+      <img src="http://7xrig5.com1.z0.glb.clouddn.com/pay2.png" alt="" style="opacity:0">
+      <div class="front"><img src="http://7xrig5.com1.z0.glb.clouddn.com/pay2.png" alt=""></div>
+      <div class="back"><img src="http://7xrig5.com1.z0.glb.clouddn.com/pay1.png" alt=""></div>
+    </div>
+  </div>
 </article>
 
 
@@ -459,6 +466,67 @@
 
 
 
+
+<style>
+  .flipper_wp{
+    padding: 10px 40px 34px;
+    margin: 20px auto;
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;  
+  }
+  .flipper{
+    -webkit-transition: .6s;
+    -moz-transition: .6s;
+    -o-transition: .6s;
+    -ms-transition: .6s;
+    transition: .6s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    width: 100%; 
+    position: relative;  
+  }
+  .flipper img{
+    display: block;
+    height: auto;
+    margin:0 auto;
+    max-width: 600px;
+  }
+  .flipper_wp .flipper .front {
+    position:absolute;  
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index: 2;
+  }
+  .flipper_wp .flipper .back {
+      position:absolute;
+      top:0;
+      left:0;
+      bottom:0;
+      right:0;    
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      transform: rotateY(180deg);   
+  }
+
+  .flipper_wp .flipper:hover{
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      transform: rotateY(180deg)  
+  }
+
+
+</style>
 </div>
       <footer id="footer">
   <div class="outer">
