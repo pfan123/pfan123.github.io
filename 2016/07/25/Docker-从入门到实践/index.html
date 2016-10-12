@@ -99,7 +99,7 @@ docker中文">
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -299,37 +299,42 @@ docker中文">
 
       
     </div>
+
+    <!-- S 打赏模块 -->
+    <div class="flipper_wp">
+      <div class="flipper">
+        <img src="http://7xrig5.com1.z0.glb.clouddn.com/pay2.png" alt="" style="opacity:0">
+        <div class="front"><img src="http://7xrig5.com1.z0.glb.clouddn.com/pay2.png" alt=""></div>
+        <div class="back"><img src="http://7xrig5.com1.z0.glb.clouddn.com/pay1.png" alt=""></div>
+      </div>
+    </div>
+    <!-- E 打赏模块 -->
+
     
   </div>
+
   
     
 <nav id="article-nav">
   
-    <a href="/2016/08/01/Mongoose 参考手册/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/07/25/gitignore 文件使用说明/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Mongoose 参考手册 -- 转载
+          .gitignore 文件使用说明
         
       </div>
     </a>
   
   
-    <a href="/2016/07/25/gitignore 文件使用说明/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">.gitignore 文件使用说明</div>
+    <a href="/2016/07/24/买房前必备知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">买房前必备知识</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
 </nav>
 
-  
-  <div class="flipper_wp">
-    <div class="flipper">
-      <img src="http://7xrig5.com1.z0.glb.clouddn.com/pay2.png" alt="" style="opacity:0">
-      <div class="front"><img src="http://7xrig5.com1.z0.glb.clouddn.com/pay2.png" alt=""></div>
-      <div class="back"><img src="http://7xrig5.com1.z0.glb.clouddn.com/pay1.png" alt=""></div>
-    </div>
-  </div>
+    
 </article>
 
 
@@ -381,8 +386,8 @@ docker中文">
 
 <style>
   .flipper_wp{
-    padding: 10px 40px 34px;
-    margin: 20px auto;
+    padding: 20px 40px 20px;
+    margin: 20px auto 0;
     -webkit-perspective: 1000;
     -moz-perspective: 1000;
     -ms-perspective: 1000;
@@ -408,20 +413,18 @@ docker中文">
     margin:0 auto;
     max-width: 600px;
   }
-  .flipper_wp .flipper .front {
+  .flipper_wp .flipper .front, .flipper_wp .flipper .back{
     position:absolute;  
     top:0;
     left:0;
     bottom:0;
     right:0;
-    z-index: 2;
+    transform-origin: 50% 50%;
   }
-  .flipper_wp .flipper .back {
-      position:absolute;
-      top:0;
-      left:0;
-      bottom:0;
-      right:0;    
+  .flipper_wp .flipper .front{
+      z-index: 2;
+  }
+  .flipper_wp .flipper .back {   
       -webkit-transform: rotateY(180deg);
       -moz-transform: rotateY(180deg);
       -o-transform: rotateY(180deg);
