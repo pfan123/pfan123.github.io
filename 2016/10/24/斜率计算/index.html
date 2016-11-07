@@ -4,17 +4,24 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives | pfan博客</title>
+  <title>斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别 | pfan博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="pfan博客 新起点，新高度">
-<meta property="og:type" content="website">
-<meta property="og:title" content="pfan博客">
-<meta property="og:url" content="http://pfan123.github.io/archives/page/2/index.html">
+  <meta name="description" content="我们可以使用正切Math.tan()操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。Math.atan()和Math.atan2()两个函数可以计算反正切，接下来分析一下具体用法：
+一、Math.atan()Math.atan()接受一个参数:用法如下: 
+12angel = Math.atan(slope)  //slope值计算为y/x （斜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别">
+<meta property="og:url" content="http://pfan123.github.io/2016/10/24/斜率计算/index.html">
 <meta property="og:site_name" content="pfan博客">
-<meta property="og:description" content="pfan博客 新起点，新高度">
+<meta property="og:description" content="我们可以使用正切Math.tan()操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。Math.atan()和Math.atan2()两个函数可以计算反正切，接下来分析一下具体用法：
+一、Math.atan()Math.atan()接受一个参数:用法如下: 
+12angel = Math.atan(slope)  //slope值计算为y/x （斜">
+<meta property="og:updated_time" content="2016-11-07T03:05:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pfan博客">
-<meta name="twitter:description" content="pfan博客 新起点，新高度">
+<meta name="twitter:title" content="斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别">
+<meta name="twitter:description" content="我们可以使用正切Math.tan()操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。Math.atan()和Math.atan2()两个函数可以计算反正切，接下来分析一下具体用法：
+一、Math.atan()Math.atan()接受一个参数:用法如下: 
+12angel = Math.atan(slope)  //slope值计算为y/x （斜">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
   
@@ -228,376 +235,174 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-斜率计算" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/10/24/斜率计算/" class="article-date">
+  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math-atan-、Math-atan2-斜率/">Math.atan()、Math.atan2() 斜率</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/01/Mongoose 参考手册/" class="archive-article-date">
-  	<time datetime="2016-08-01T11:17:43.000Z" itemprop="datePublished">Aug 1</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/01/Mongoose 参考手册/">Mongoose 参考手册 -- 转载</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们可以使用正切<code>Math.tan()</code>操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。<code>Math.atan()</code>和<code>Math.atan2()</code>两个函数可以计算反正切，接下来分析一下具体用法：</p>
+<h3 id="一、Math-atan"><a href="#一、Math-atan" class="headerlink" title="一、Math.atan()"></a>一、Math.atan()</h3><p>Math.atan()接受一个参数:用法如下: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angel = Math.atan(slope)  //slope值计算为y/x （斜率比值无法判断 y、x方向，如－1/－1， 1/－1等情况）</span><br><span class="line">//angel为一个角度的弧度值，`slope`为直线的斜率，是一个数字，这个数字可以是负的无穷大到正无穷大之间的任何一个值(tan的取值范围)</span><br></pre></td></tr></table></figure>
+<p>不过，利用它进行计算比较复杂。因为它的周期性，一个数字的反正切值不止一个。例如atan(-1)的值可能是45度，也可能是225度。这样就是它的周期性，对于正切函数来说，它的周期是180度，所以两个相差180度的角具有相同的正切和斜率:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tanθ=tan(θ+180)</span><br></pre></td></tr></table></figure></p>
+<p>然而，<code>Math.atan()</code>只能返回一个角度值，因此确定它的角度非常的复杂，而且，90度和270度的正切是无穷大，因为除数为零，我们也是比较难以处理的，因此我们更多的会采用第二个函数<code>Math.atan2()</code>进行处理。</p>
+<h3 id="二、Math-atan2"><a href="#二、Math-atan2" class="headerlink" title="二、Math.atan2()"></a>二、Math.atan2()</h3><p>Math.atan2()接受两个参数x和y，方法如下: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angel=Math.atan2(y,x) </span><br><span class="line"></span><br><span class="line">// x 指定点的 x 坐标的数字。 </span><br><span class="line">// y 指定点的 y 坐标的数字。</span><br></pre></td></tr></table></figure>
+<p>计算出来的结果angel是一个弧度值，也可以表示相对直角三角形对角的角，其中 x 是临边边长，而 y 是对边边长。</p>
+<h3 id="三、-对比Math-atan-与-Math-atan2-输出测试"><a href="#三、-对比Math-atan-与-Math-atan2-输出测试" class="headerlink" title="三、 对比Math.atan() 与 Math.atan2()输出测试"></a>三、 对比Math.atan() 与 Math.atan2()输出测试</h3><pre><code>//输入弧度值，return 角度值
+function trace(x){
+  //弧度=角度*Math.PI/180
+  return 180*x/Math.PI
+}
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mongoose参考手册-MongoDB-数据库-node/">Mongoose参考手册  MongoDB  数据库 node</a></li></ul>
-	</div>
+测试如下：
+①对比一
+x=Math.atan(1)//计算正切值为1的数字对应的弧度值，输出弧度值0.785398163397448 （当斜率值为－7/－7或7/7）
+trace(x) //输出45 
 
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
+x=Math.atan2(7,7) //输出弧度值 0.785398163397448  
+
+trace(x)   //输出45 
+
+②对比二
+x=Math.atan2(7,-7) //输出弧度值 2.35619449019234 
+trace(x)   //转换为角度值 135  
+
+x=Math.atan2(-7,7) //输出弧度值 -0.785398163397448
+trace(x)  //转换为角度值输出-45
+
+x=Math.atan2(-7,-7)   //输出弧度值 -2.35619449019234
+trace(x)  //转换为角度值输出-135
+</code></pre><p>从这些测试可以看出，通过坐标系的自动调整，可以很自由的计算出处于不同象限的位置相对应的角度. </p>
+<h3 id="四、-计算两点间连线的倾斜角"><a href="#四、-计算两点间连线的倾斜角" class="headerlink" title="四、 计算两点间连线的倾斜角"></a>四、 计算两点间连线的倾斜角</h3><p><code>Math.atan2()</code>函数返回点(x,y)和原点(0,0)之间直线的倾斜角，那么如何计算任意两点间直线的倾斜角呢？</p>
+<p>其实只需要将两点x、y坐标分别相减得到一个新的点(x2-x1,y2-y1)，然后利用它求出角度就可以了。使用下面的一个转换可以实现计算出两点间连线的夹角：</p>
+<pre><code>//输入弧度值，return 角度值
+function trace(x){
+  //弧度=角度*Math.PI/180
+  return 180*x/Math.PI
+}
+var x = Math.atan2(y2-y1,x2-x1);  //得到弧度值
+trace(x)  //获取角度值
+</code></pre><p>具体实例例子：</p>
+<pre><code>//测试,计算点(3,3)和(5,5)构成的连线的夹角 
+x=Math.atan2(5-3,5-3) //输出弧度值 0.785398163397448
+trace(x)  //输出角度值 45
+</code></pre><p>参考资料:<br><a href="http://www.w3school.com.cn/jsref/jsref_atan.asp" target="_blank" rel="external">JavaScript atan() 方法</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/24/几个 CSS 方法论/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          几个 CSS 方法论
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/24/H5全景－CSS3D篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">H5全景－CSS3d篇</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+    
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/25/Docker-从入门到实践/" class="archive-article-date">
-  	<time datetime="2016-07-25T11:17:43.000Z" itemprop="datePublished">Jul 25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/25/Docker-从入门到实践/">Docker — 从入门到实践</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/25/gitignore 文件使用说明/" class="archive-article-date">
-  	<time datetime="2016-07-25T11:17:43.000Z" itemprop="datePublished">Jul 25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/25/gitignore 文件使用说明/">.gitignore 文件使用说明</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitignore-git/">.gitignore git</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/24/买车前必备知识/" class="archive-article-date">
-  	<time datetime="2016-07-24T11:17:43.000Z" itemprop="datePublished">Jul 24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/24/买车前必备知识/">买车前必备知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/买车前必备知识-car/">买车前必备知识  car</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/兴趣爱好/">兴趣爱好</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/24/买房前必备知识/" class="archive-article-date">
-  	<time datetime="2016-07-24T11:17:43.000Z" itemprop="datePublished">Jul 24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/24/买房前必备知识/">买房前必备知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/买房前必备知识-house-home/">买房前必备知识  house home</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/兴趣爱好/">兴趣爱好</a>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="斜率计算" data-title="斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别" data-url="http://pfan123.github.io/2016/10/24/斜率计算/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/24/通过.htaccess文件将二级域名绑定到子目录/" class="archive-article-date">
-  	<time datetime="2016-07-24T10:51:43.000Z" itemprop="datePublished">Jul 24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/24/通过.htaccess文件将二级域名绑定到子目录/">通过.htaccess文件配置二级域名绑定子目录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/htaccess-配置二级域名-绑定子目录/">.htaccess  配置二级域名  绑定子目录</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/19/webp实践/" class="archive-article-date">
-  	<time datetime="2016-07-19T03:51:43.000Z" itemprop="datePublished">Jul 19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/19/webp实践/">webp实践探究</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webp/">webp</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/18/Canvas实时处理Video预研/" class="archive-article-date">
-  	<time datetime="2016-07-18T03:51:43.000Z" itemprop="datePublished">Jul 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/18/Canvas实时处理Video预研/">Canvas实时处理Video预研</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/video-canvas/">video canvas</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/12/HTML5 视频直播/" class="archive-article-date">
-  	<time datetime="2016-07-12T03:51:43.000Z" itemprop="datePublished">Jul 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/12/HTML5 视频直播/">HTML5 视频直播</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5-视频直播-video-canvas/">HTML5 视频直播 video canvas</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/06/createJS实战深入解析/" class="archive-article-date">
-  	<time datetime="2016-07-06T15:51:43.000Z" itemprop="datePublished">Jul 6</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/06/createJS实战深入解析/">createJS实战深入解析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PreloadJS-EaselJS-TweenJS-SoundJS/">PreloadJS EaselJS TweenJS SoundJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/createJS/">createJS</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
-    </nav>
-  
 
 </div>
       <footer id="footer">
@@ -623,8 +428,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
