@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -830,6 +830,87 @@
 
 
   
+    <article id="post-gitignore 文件使用说明" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/25/gitignore 文件使用说明/" class="article-date">
+  	<time datetime="2016-07-25T11:17:43.000Z" itemprop="datePublished">2016-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/25/gitignore 文件使用说明/">.gitignore 文件使用说明</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们在使用 Git 进行版本控制的时候，有些文件是无需纳入 Git 管理的，通常都是些自动生成的文件，像日志或者编译过程中创建的文件。我们可以创建一个名为 .gitignore的文件，列出要忽略的文件来解决这个问题。</p>
+<p>来看一个简单的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cat .gitignore</span><br><span class="line">*.[oa]</span><br><span class="line">*~</span><br></pre></td></tr></table></figure>
+<p>第一行告诉 Git 忽略所有以 .o 或 .a结尾的文件。一般这类对象文件和存档文件都是编译过程中出现的，我们用不着跟踪它们的版本。<br>第二行告诉 Git 忽略所有以波浪符（~）结尾的文件，许多文本编辑软件（比如 Emacs）都用这样的文件名保存副本。此外，你可能还需要忽略 log，tmp 或者 pid 目录，以及自动生成的文档等等。要养成一开始就设置好 .gitignore 文件的习惯，以免将来误提交这类无用的文件。</p>
+<p>文件 .gitignore 的格式规范如下：<br>所有空行或者以注释符号 ＃ 开头的行都会被 Git 忽略。<br>可以使用标准的 glob 模式匹配。<br>匹配模式最后跟反斜杠（/）说明要忽略的是目录。<br>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。</p>
+<p>所谓的 glob 模式是指 shell 所使用的简化了的正则表达式。<br>星号（*）匹配零个或多个任意字符；<br>[abc] 匹配任何一个列在方括号中的字符（这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）；<br>问号（?）只匹配一个任意字符；<br>如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）。</p>
+<p>我们再看一个 .gitignore 文件的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 忽略所有 .a 结尾的文件</span><br><span class="line">*.a</span><br><span class="line"></span><br><span class="line"># 但 lib.a 除外</span><br><span class="line">!lib.a</span><br><span class="line"></span><br><span class="line"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span><br><span class="line">/TODO</span><br><span class="line"></span><br><span class="line"># 忽略 build/ 目录下的所有文件</span><br><span class="line">build/</span><br><span class="line"></span><br><span class="line"># 会忽略 doc/notes.txt 但不包括 doc/server/notes.txt</span><br><span class="line">doc/notes.txt</span><br></pre></td></tr></table></figure>
+<p>其他信息可以直接 man gitignore 查看。</p>
+<p>此外推荐一个自动生成 .gitignore 文件的网址：<a href="http://www.gitignore.io/" target="_blank" rel="external">http://www.gitignore.io/</a></p>
+<p>对于iOS开发者，推荐一个 gist ：<a href="https://gist.github.com/mmorey/6931793" target="_blank" rel="external">https://gist.github.com/mmorey/6931793</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitignore-git/">.gitignore git</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Docker-从入门到实践" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -908,11 +989,11 @@
 
 
   
-    <article id="post-gitignore 文件使用说明" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-买房前必备知识" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/25/gitignore 文件使用说明/" class="article-date">
-  	<time datetime="2016-07-25T11:17:43.000Z" itemprop="datePublished">2016-07-25</time>
+      <a href="/2016/07/24/买房前必备知识/" class="article-date">
+  	<time datetime="2016-07-24T11:17:43.000Z" itemprop="datePublished">2016-07-24</time>
 </a>
     </div>
   
@@ -925,7 +1006,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/gitignore 文件使用说明/">.gitignore 文件使用说明</a>
+      <a class="article-title" href="/2016/07/24/买房前必备知识/">买房前必备知识</a>
     </h1>
   
 
@@ -934,17 +1015,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我们在使用 Git 进行版本控制的时候，有些文件是无需纳入 Git 管理的，通常都是些自动生成的文件，像日志或者编译过程中创建的文件。我们可以创建一个名为 .gitignore的文件，列出要忽略的文件来解决这个问题。</p>
-<p>来看一个简单的例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cat .gitignore</span><br><span class="line">*.[oa]</span><br><span class="line">*~</span><br></pre></td></tr></table></figure>
-<p>第一行告诉 Git 忽略所有以 .o 或 .a结尾的文件。一般这类对象文件和存档文件都是编译过程中出现的，我们用不着跟踪它们的版本。<br>第二行告诉 Git 忽略所有以波浪符（~）结尾的文件，许多文本编辑软件（比如 Emacs）都用这样的文件名保存副本。此外，你可能还需要忽略 log，tmp 或者 pid 目录，以及自动生成的文档等等。要养成一开始就设置好 .gitignore 文件的习惯，以免将来误提交这类无用的文件。</p>
-<p>文件 .gitignore 的格式规范如下：<br>所有空行或者以注释符号 ＃ 开头的行都会被 Git 忽略。<br>可以使用标准的 glob 模式匹配。<br>匹配模式最后跟反斜杠（/）说明要忽略的是目录。<br>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。</p>
-<p>所谓的 glob 模式是指 shell 所使用的简化了的正则表达式。<br>星号（*）匹配零个或多个任意字符；<br>[abc] 匹配任何一个列在方括号中的字符（这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）；<br>问号（?）只匹配一个任意字符；<br>如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）。</p>
-<p>我们再看一个 .gitignore 文件的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 忽略所有 .a 结尾的文件</span><br><span class="line">*.a</span><br><span class="line"></span><br><span class="line"># 但 lib.a 除外</span><br><span class="line">!lib.a</span><br><span class="line"></span><br><span class="line"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span><br><span class="line">/TODO</span><br><span class="line"></span><br><span class="line"># 忽略 build/ 目录下的所有文件</span><br><span class="line">build/</span><br><span class="line"></span><br><span class="line"># 会忽略 doc/notes.txt 但不包括 doc/server/notes.txt</span><br><span class="line">doc/notes.txt</span><br></pre></td></tr></table></figure>
-<p>其他信息可以直接 man gitignore 查看。</p>
-<p>此外推荐一个自动生成 .gitignore 文件的网址：<a href="http://www.gitignore.io/" target="_blank" rel="external">http://www.gitignore.io/</a></p>
-<p>对于iOS开发者，推荐一个 gist ：<a href="https://gist.github.com/mmorey/6931793" target="_blank" rel="external">https://gist.github.com/mmorey/6931793</a></p>
+        <p>买车文章大纲：</p>
+<p>准备资料：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/28086367" target="_blank" rel="external">买房前要学习哪些知识（常识），有哪些获取的途径推荐？</a></li>
+<li><a href="https://www.zhihu.com/question/20216680" target="_blank" rel="external">普通人购房前需要了解的知识有哪些？</a></li>
+<li><a href="https://www.zhihu.com/question/21879342" target="_blank" rel="external">对于买房，有哪些理财的知识和好的方法？</a></li>
+<li><a href="https://www.zhihu.com/question/24464072" target="_blank" rel="external">买房看房时需要注意哪些？</a></li>
+</ul>
 
       
     </div>
@@ -961,12 +1039,12 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitignore-git/">.gitignore git</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/买房前必备知识-house-home/">买房前必备知识  house home</a></li></ul>
 	</div>
 
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
+	<a class="article-category-link" href="/categories/兴趣爱好/">兴趣爱好</a>
 	</div>
 
 
@@ -1050,84 +1128,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/买车前必备知识-car/">买车前必备知识  car</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/兴趣爱好/">兴趣爱好</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-买房前必备知识" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/24/买房前必备知识/" class="article-date">
-  	<time datetime="2016-07-24T11:17:43.000Z" itemprop="datePublished">2016-07-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/24/买房前必备知识/">买房前必备知识</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>买车文章大纲：</p>
-<p>准备资料：</p>
-<ul>
-<li><a href="https://www.zhihu.com/question/28086367" target="_blank" rel="external">买房前要学习哪些知识（常识），有哪些获取的途径推荐？</a></li>
-<li><a href="https://www.zhihu.com/question/20216680" target="_blank" rel="external">普通人购房前需要了解的知识有哪些？</a></li>
-<li><a href="https://www.zhihu.com/question/21879342" target="_blank" rel="external">对于买房，有哪些理财的知识和好的方法？</a></li>
-<li><a href="https://www.zhihu.com/question/24464072" target="_blank" rel="external">买房看房时需要注意哪些？</a></li>
-</ul>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/买房前必备知识-house-home/">买房前必备知识  house home</a></li></ul>
 	</div>
 
       
