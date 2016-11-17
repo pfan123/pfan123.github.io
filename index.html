@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -267,7 +267,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show 3f54135d7ae20f26bbd41b105dcb6d14b2222a3a</span><br></pre></td></tr></table></figure>
 <p>结果就会展现改动记录以及具体代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">commit 3f54135d7ae20f26bbd41b105dcb6d14b2222a3a</span><br><span class="line">Author: pfan &lt;768065158@qq.com&gt;</span><br><span class="line">Date:   Fri Oct 28 15:18:55 2016 +0800</span><br><span class="line"></span><br><span class="line">    modify content.vue</span><br><span class="line"></span><br><span class="line">diff --git a/dist/index.html b/dist/index.html</span><br><span class="line">index 1f54ffa..0416d15 100644</span><br><span class="line">--- a/dist/index.html</span><br><span class="line">+++ b/dist/index.html</span><br></pre></td></tr></table></figure></p>
 <h2 id="四、扩展删除缓存，重新按gitignore走"><a href="#四、扩展删除缓存，重新按gitignore走" class="headerlink" title="四、扩展删除缓存，重新按gitignore走"></a>四、扩展删除缓存，重新按gitignore走</h2><p>请保证，所有分支已经提交成功。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line">git add .</span><br><span class="line">git commit -m &apos;update .gitignore&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .   //删除缓存文件，但不删除文件</span><br><span class="line">git add .</span><br><span class="line">git commit -m &apos;update .gitignore&apos;</span><br></pre></td></tr></table></figure>
 <p>参考资料:<br><a href="http://www.cnblogs.com/flyme/archive/2011/11/28/2265899.html" target="_blank" rel="external">git查看某个文件的修改历史</a><br><a href="https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2" target="_blank" rel="external">Git 基础 - 查看提交历史</a></p>
 
       
@@ -826,81 +826,6 @@
 
 
   
-    <article id="post-H5全景－CSS3D篇" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/24/H5全景－CSS3D篇/" class="article-date">
-  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/H5全景－CSS3D篇/">H5全景－CSS3d篇</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>perspective 属性定义 3D 元素距视图的距离，以像素计。该属性允许您改变 3D 元素查看 3D 元素的视图。</p>
-<p>现在说全景会不会有点迟=。=  <a href="https://zhuanlan.zhihu.com/p/22761057#!" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/22761057#!</a></p>
-<p>CSS 3D应该注意的事项  <a href="http://www.w3cplus.com/css3/things-watch-working-css-3d.html" target="_blank" rel="external">http://www.w3cplus.com/css3/things-watch-working-css-3d.html</a></p>
-<p>天猫HTML5互动技术实践 <a href="https://yq.aliyun.com/articles/59052" target="_blank" rel="external">https://yq.aliyun.com/articles/59052</a></p>
-<p>H5打造3d场景不完全攻略（一）: H5 3d表现形式  <a href="https://segmentfault.com/a/1190000006188118" target="_blank" rel="external">https://segmentfault.com/a/1190000006188118</a></p>
-<p>H5打造3d场景不完全攻略（二）: Amazing CSS3D  <a href="https://segmentfault.com/a/1190000007262754" target="_blank" rel="external">https://segmentfault.com/a/1190000007262754</a></p>
-<p>前端黑科技——纯clip-path打造的3D模型渲染器 <a href="http://www.tuicool.com/articles/ZfQzy2v" target="_blank" rel="external">http://www.tuicool.com/articles/ZfQzy2v</a></p>
-<p>CSS3 3D transforms系列教程-3D旋转木马  <a href="http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201502061338.html" target="_blank" rel="external">http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201502061338.html</a></p>
-<p>参考资料:<br><a href="http://sixrevisions.com/css/css-methodologies" target="_blank" rel="external">A Look at Some CSS Methodologies</a><br><a href="http://sixrevisions.com/css/standardized-methods-for-css/" target="_blank" rel="external">5 Standardized Methods for Writing CSS</a><br><a href="http://sixrevisions.com/css/using-css3-appropriately/" target="_blank" rel="external">Are You Using CSS3 Appropriately?</a><br><a href="http://sixrevisions.com/css/css-style-guides/" target="_blank" rel="external">A List of CSS Styles Guides for Inspiration</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5全景、CSS3d、perspective/">H5全景、CSS3d、perspective</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-几个 CSS 方法论" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1322,6 +1247,81 @@ trace(x)  //输出角度值 45
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math-atan-、Math-atan2-斜率/">Math.atan()、Math.atan2() 斜率</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-H5全景－CSS3D篇" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/24/H5全景－CSS3D篇/" class="article-date">
+  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/H5全景－CSS3D篇/">H5全景－CSS3d篇</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>perspective 属性定义 3D 元素距视图的距离，以像素计。该属性允许您改变 3D 元素查看 3D 元素的视图。</p>
+<p>现在说全景会不会有点迟=。=  <a href="https://zhuanlan.zhihu.com/p/22761057#!" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/22761057#!</a></p>
+<p>CSS 3D应该注意的事项  <a href="http://www.w3cplus.com/css3/things-watch-working-css-3d.html" target="_blank" rel="external">http://www.w3cplus.com/css3/things-watch-working-css-3d.html</a></p>
+<p>天猫HTML5互动技术实践 <a href="https://yq.aliyun.com/articles/59052" target="_blank" rel="external">https://yq.aliyun.com/articles/59052</a></p>
+<p>H5打造3d场景不完全攻略（一）: H5 3d表现形式  <a href="https://segmentfault.com/a/1190000006188118" target="_blank" rel="external">https://segmentfault.com/a/1190000006188118</a></p>
+<p>H5打造3d场景不完全攻略（二）: Amazing CSS3D  <a href="https://segmentfault.com/a/1190000007262754" target="_blank" rel="external">https://segmentfault.com/a/1190000007262754</a></p>
+<p>前端黑科技——纯clip-path打造的3D模型渲染器 <a href="http://www.tuicool.com/articles/ZfQzy2v" target="_blank" rel="external">http://www.tuicool.com/articles/ZfQzy2v</a></p>
+<p>CSS3 3D transforms系列教程-3D旋转木马  <a href="http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201502061338.html" target="_blank" rel="external">http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201502061338.html</a></p>
+<p>参考资料:<br><a href="http://sixrevisions.com/css/css-methodologies" target="_blank" rel="external">A Look at Some CSS Methodologies</a><br><a href="http://sixrevisions.com/css/standardized-methods-for-css/" target="_blank" rel="external">5 Standardized Methods for Writing CSS</a><br><a href="http://sixrevisions.com/css/using-css3-appropriately/" target="_blank" rel="external">Are You Using CSS3 Appropriately?</a><br><a href="http://sixrevisions.com/css/css-style-guides/" target="_blank" rel="external">A List of CSS Styles Guides for Inspiration</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5全景、CSS3d、perspective/">H5全景、CSS3d、perspective</a></li></ul>
 	</div>
 
       
