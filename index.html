@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -745,198 +745,6 @@
 
 
   
-    <article id="post-斜率计算" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/24/斜率计算/" class="article-date">
-  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/斜率计算/">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们可以使用正切<code>Math.tan()</code>操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。<code>Math.atan()</code>和<code>Math.atan2()</code>两个函数可以计算反正切，接下来分析一下具体用法：</p>
-<h3 id="一、Math-atan"><a href="#一、Math-atan" class="headerlink" title="一、Math.atan()"></a>一、Math.atan()</h3><p>Math.atan()接受一个参数:用法如下: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angel = Math.atan(slope)  //slope值计算为y/x （斜率比值无法判断 y、x方向，如－1/－1， 1/－1等情况）</span><br><span class="line">//angel为一个角度的弧度值，`slope`为直线的斜率，是一个数字，这个数字可以是负的无穷大到正无穷大之间的任何一个值(tan的取值范围)</span><br></pre></td></tr></table></figure>
-<p>不过，利用它进行计算比较复杂。因为它的周期性，一个数字的反正切值不止一个。例如atan(-1)的值可能是45度，也可能是225度。这样就是它的周期性，对于正切函数来说，它的周期是180度，所以两个相差180度的角具有相同的正切和斜率:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tanθ=tan(θ+180)</span><br></pre></td></tr></table></figure></p>
-<p>然而，<code>Math.atan()</code>只能返回一个角度值，因此确定它的角度非常的复杂，而且，90度和270度的正切是无穷大，因为除数为零，我们也是比较难以处理的，因此我们更多的会采用第二个函数<code>Math.atan2()</code>进行处理。</p>
-<h3 id="二、Math-atan2"><a href="#二、Math-atan2" class="headerlink" title="二、Math.atan2()"></a>二、Math.atan2()</h3><p>Math.atan2()接受两个参数x和y，方法如下: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angel=Math.atan2(y,x) </span><br><span class="line"></span><br><span class="line">// x 指定点的 x 坐标的数字。 </span><br><span class="line">// y 指定点的 y 坐标的数字。</span><br></pre></td></tr></table></figure>
-<p>计算出来的结果angel是一个弧度值，也可以表示相对直角三角形对角的角，其中 x 是临边边长，而 y 是对边边长。</p>
-<h3 id="三、-对比Math-atan-与-Math-atan2-输出测试"><a href="#三、-对比Math-atan-与-Math-atan2-输出测试" class="headerlink" title="三、 对比Math.atan() 与 Math.atan2()输出测试"></a>三、 对比Math.atan() 与 Math.atan2()输出测试</h3><pre><code>//输入弧度值，return 角度值
-function trace(x){
-  //弧度=角度*Math.PI/180
-  return 180*x/Math.PI
-}
-
-测试如下：
-①对比一
-x=Math.atan(1)//计算正切值为1的数字对应的弧度值，输出弧度值0.785398163397448 （当斜率值为－7/－7或7/7）
-trace(x) //输出45 
-
-x=Math.atan2(7,7) //输出弧度值 0.785398163397448  
-
-trace(x)   //输出45 
-
-②对比二
-x=Math.atan2(7,-7) //输出弧度值 2.35619449019234 
-trace(x)   //转换为角度值 135  
-
-x=Math.atan2(-7,7) //输出弧度值 -0.785398163397448
-trace(x)  //转换为角度值输出-45
-
-x=Math.atan2(-7,-7)   //输出弧度值 -2.35619449019234
-trace(x)  //转换为角度值输出-135
-</code></pre><p>从这些测试可以看出，通过坐标系的自动调整，可以很自由的计算出处于不同象限的位置相对应的角度. </p>
-<h3 id="四、-计算两点间连线的倾斜角"><a href="#四、-计算两点间连线的倾斜角" class="headerlink" title="四、 计算两点间连线的倾斜角"></a>四、 计算两点间连线的倾斜角</h3><p><code>Math.atan2()</code>函数返回点(x,y)和原点(0,0)之间直线的倾斜角，那么如何计算任意两点间直线的倾斜角呢？</p>
-<p>其实只需要将两点x、y坐标分别相减得到一个新的点(x2-x1,y2-y1)，然后利用它求出角度就可以了。使用下面的一个转换可以实现计算出两点间连线的夹角：</p>
-<pre><code>//输入弧度值，return 角度值
-function trace(x){
-  //弧度=角度*Math.PI/180
-  return 180*x/Math.PI
-}
-var x = Math.atan2(y2-y1,x2-x1);  //得到弧度值
-trace(x)  //获取角度值
-</code></pre><p>具体实例例子：</p>
-<pre><code>//测试,计算点(3,3)和(5,5)构成的连线的夹角 
-x=Math.atan2(5-3,5-3) //输出弧度值 0.785398163397448
-trace(x)  //输出角度值 45
-</code></pre><p>参考资料:<br><a href="http://www.w3school.com.cn/jsref/jsref_atan.asp" target="_blank" rel="external">JavaScript atan() 方法</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a><br><a href="http://blog.pfan123.com/2016/10/24/%E8%A7%92%E5%BA%A6%E4%B8%8E%E5%BC%A7%E5%BA%A6%E7%9A%84%E8%BD%AC%E6%8D%A2/" target="_blank" rel="external">角度与弧度的转换</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math-atan-、Math-atan2-斜率/">Math.atan()、Math.atan2() 斜率</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-角度与弧度的转换" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/24/角度与弧度的转换/" class="article-date">
-  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/角度与弧度的转换/">角度与弧度的转换</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="常用角度与弧度的转换"><a href="#常用角度与弧度的转换" class="headerlink" title="常用角度与弧度的转换"></a>常用角度与弧度的转换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度*Math.PI/180 </span><br><span class="line">角度 = 弧度*180/Math.PI</span><br></pre></td></tr></table></figure>
-<p>以下内容以弧度与角度的相互转换为基础： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">圆周率: PI  3.1416(弧度) </span><br><span class="line">圆:2Pi   6.2832(弧度)</span><br></pre></td></tr></table></figure>
-<p>弧度是角的度量单位, 弧长等于圆半径长的弧所对的圆心角为1弧度。 </p>
-<p>由上面这条推导出 <code>2PI*R</code>, 周长就是 <code>3.14*2(圆弧度) * 半径</code> ,就是这样来的 </p>
-<p>同理 <code>PI*d</code> 也是一样   <code>3.14*2*半径 = 直径*3.14</code></p>
-<p>角度与弧度的转化就是等比公式的运算<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">角度 / 360   = 弧度 / 6.28 (请自行理解成分式)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">角度 =   弧度*360/6.28(2PI)   = 弧度/2PI*360   &gt;&gt;(除2) 弧度/3.14*180 &gt;&gt; 弧度*180/Math.PI </span><br><span class="line">弧度 = 角度*6.28(2PI) /360   = 角度/360*2PI   &gt;&gt;(除2) 角度/180*3.14 &gt;&gt; 角度*Math.PI/180</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度 * Math.PI / 180 </span><br><span class="line">角度 = 弧度 * 180 / Math.PI</span><br></pre></td></tr></table></figure>
-<p>就系咁样推导出来的<del>~</del>~~ </p>
-<p>脑袋夹门了<del>~</del>~~ </p>
-<p>貌似是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1度 / 180度 = x弧度 / 3.14 ( 自行理解成分式) </span><br><span class="line">推成 1角度 =   180x = 3.14   &gt;&gt;   x = 3.14 / 180  </span><br><span class="line"></span><br><span class="line">&gt;&gt; 弧度 = 角度 *   (Math.PI / 180) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 / 3.14 = x角度 / 180度 ( 自行理解成分式) </span><br><span class="line">推成 1弧度 = 3.14x = 180   &gt;&gt;   x = 180 / 3.14 </span><br><span class="line"></span><br><span class="line">&gt;&gt; 角度 = 弧度 *   (180 / Math.PI) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 约等于 57.2958角度</span><br></pre></td></tr></table></figure></p>
-<p>参考资料:<br><a href="http://blog.pfan123.com/2016/10/24/%E6%96%9C%E7%8E%87%E8%AE%A1%E7%AE%97/" target="_blank" rel="external">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三角学、弧度、角度/">三角学、弧度、角度</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-几个 CSS 方法论" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1320,6 +1128,198 @@ a {
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5全景、CSS3d、perspective/">H5全景、CSS3d、perspective</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-斜率计算" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/24/斜率计算/" class="article-date">
+  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/斜率计算/">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们可以使用正切<code>Math.tan()</code>操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。<code>Math.atan()</code>和<code>Math.atan2()</code>两个函数可以计算反正切，接下来分析一下具体用法：</p>
+<h3 id="一、Math-atan"><a href="#一、Math-atan" class="headerlink" title="一、Math.atan()"></a>一、Math.atan()</h3><p>Math.atan()接受一个参数:用法如下: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angel = Math.atan(slope)  //slope值计算为y/x （斜率比值无法判断 y、x方向，如－1/－1， 1/－1等情况）</span><br><span class="line">//angel为一个角度的弧度值，`slope`为直线的斜率，是一个数字，这个数字可以是负的无穷大到正无穷大之间的任何一个值(tan的取值范围)</span><br></pre></td></tr></table></figure>
+<p>不过，利用它进行计算比较复杂。因为它的周期性，一个数字的反正切值不止一个。例如atan(-1)的值可能是45度，也可能是225度。这样就是它的周期性，对于正切函数来说，它的周期是180度，所以两个相差180度的角具有相同的正切和斜率:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tanθ=tan(θ+180)</span><br></pre></td></tr></table></figure></p>
+<p>然而，<code>Math.atan()</code>只能返回一个角度值，因此确定它的角度非常的复杂，而且，90度和270度的正切是无穷大，因为除数为零，我们也是比较难以处理的，因此我们更多的会采用第二个函数<code>Math.atan2()</code>进行处理。</p>
+<h3 id="二、Math-atan2"><a href="#二、Math-atan2" class="headerlink" title="二、Math.atan2()"></a>二、Math.atan2()</h3><p>Math.atan2()接受两个参数x和y，方法如下: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angel=Math.atan2(y,x) </span><br><span class="line"></span><br><span class="line">// x 指定点的 x 坐标的数字。 </span><br><span class="line">// y 指定点的 y 坐标的数字。</span><br></pre></td></tr></table></figure>
+<p>计算出来的结果angel是一个弧度值，也可以表示相对直角三角形对角的角，其中 x 是临边边长，而 y 是对边边长。</p>
+<h3 id="三、-对比Math-atan-与-Math-atan2-输出测试"><a href="#三、-对比Math-atan-与-Math-atan2-输出测试" class="headerlink" title="三、 对比Math.atan() 与 Math.atan2()输出测试"></a>三、 对比Math.atan() 与 Math.atan2()输出测试</h3><pre><code>//输入弧度值，return 角度值
+function trace(x){
+  //弧度=角度*Math.PI/180
+  return 180*x/Math.PI
+}
+
+测试如下：
+①对比一
+x=Math.atan(1)//计算正切值为1的数字对应的弧度值，输出弧度值0.785398163397448 （当斜率值为－7/－7或7/7）
+trace(x) //输出45 
+
+x=Math.atan2(7,7) //输出弧度值 0.785398163397448  
+
+trace(x)   //输出45 
+
+②对比二
+x=Math.atan2(7,-7) //输出弧度值 2.35619449019234 
+trace(x)   //转换为角度值 135  
+
+x=Math.atan2(-7,7) //输出弧度值 -0.785398163397448
+trace(x)  //转换为角度值输出-45
+
+x=Math.atan2(-7,-7)   //输出弧度值 -2.35619449019234
+trace(x)  //转换为角度值输出-135
+</code></pre><p>从这些测试可以看出，通过坐标系的自动调整，可以很自由的计算出处于不同象限的位置相对应的角度. </p>
+<h3 id="四、-计算两点间连线的倾斜角"><a href="#四、-计算两点间连线的倾斜角" class="headerlink" title="四、 计算两点间连线的倾斜角"></a>四、 计算两点间连线的倾斜角</h3><p><code>Math.atan2()</code>函数返回点(x,y)和原点(0,0)之间直线的倾斜角，那么如何计算任意两点间直线的倾斜角呢？</p>
+<p>其实只需要将两点x、y坐标分别相减得到一个新的点(x2-x1,y2-y1)，然后利用它求出角度就可以了。使用下面的一个转换可以实现计算出两点间连线的夹角：</p>
+<pre><code>//输入弧度值，return 角度值
+function trace(x){
+  //弧度=角度*Math.PI/180
+  return 180*x/Math.PI
+}
+var x = Math.atan2(y2-y1,x2-x1);  //得到弧度值
+trace(x)  //获取角度值
+</code></pre><p>具体实例例子：</p>
+<pre><code>//测试,计算点(3,3)和(5,5)构成的连线的夹角 
+x=Math.atan2(5-3,5-3) //输出弧度值 0.785398163397448
+trace(x)  //输出角度值 45
+</code></pre><p>参考资料:<br><a href="http://www.w3school.com.cn/jsref/jsref_atan.asp" target="_blank" rel="external">JavaScript atan() 方法</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a><br><a href="http://blog.pfan123.com/2016/10/24/%E8%A7%92%E5%BA%A6%E4%B8%8E%E5%BC%A7%E5%BA%A6%E7%9A%84%E8%BD%AC%E6%8D%A2/" target="_blank" rel="external">角度与弧度的转换</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math-atan-、Math-atan2-斜率/">Math.atan()、Math.atan2() 斜率</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-角度与弧度的转换" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/24/角度与弧度的转换/" class="article-date">
+  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/角度与弧度的转换/">角度与弧度的转换</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="常用角度与弧度的转换"><a href="#常用角度与弧度的转换" class="headerlink" title="常用角度与弧度的转换"></a>常用角度与弧度的转换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度*Math.PI/180 </span><br><span class="line">角度 = 弧度*180/Math.PI</span><br></pre></td></tr></table></figure>
+<p>以下内容以弧度与角度的相互转换为基础： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">圆周率: PI  3.1416(弧度) </span><br><span class="line">圆:2Pi   6.2832(弧度)</span><br></pre></td></tr></table></figure>
+<p>弧度是角的度量单位, 弧长等于圆半径长的弧所对的圆心角为1弧度。 </p>
+<p>由上面这条推导出 <code>2PI*R</code>, 周长就是 <code>3.14*2(圆弧度) * 半径</code> ,就是这样来的 </p>
+<p>同理 <code>PI*d</code> 也是一样   <code>3.14*2*半径 = 直径*3.14</code></p>
+<p>角度与弧度的转化就是等比公式的运算<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">角度 / 360   = 弧度 / 6.28 (请自行理解成分式)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">角度 =   弧度*360/6.28(2PI)   = 弧度/2PI*360   &gt;&gt;(除2) 弧度/3.14*180 &gt;&gt; 弧度*180/Math.PI </span><br><span class="line">弧度 = 角度*6.28(2PI) /360   = 角度/360*2PI   &gt;&gt;(除2) 角度/180*3.14 &gt;&gt; 角度*Math.PI/180</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度 * Math.PI / 180 </span><br><span class="line">角度 = 弧度 * 180 / Math.PI</span><br></pre></td></tr></table></figure>
+<p>就系咁样推导出来的<del>~</del>~~ </p>
+<p>脑袋夹门了<del>~</del>~~ </p>
+<p>貌似是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1度 / 180度 = x弧度 / 3.14 ( 自行理解成分式) </span><br><span class="line">推成 1角度 =   180x = 3.14   &gt;&gt;   x = 3.14 / 180  </span><br><span class="line"></span><br><span class="line">&gt;&gt; 弧度 = 角度 *   (Math.PI / 180) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 / 3.14 = x角度 / 180度 ( 自行理解成分式) </span><br><span class="line">推成 1弧度 = 3.14x = 180   &gt;&gt;   x = 180 / 3.14 </span><br><span class="line"></span><br><span class="line">&gt;&gt; 角度 = 弧度 *   (180 / Math.PI) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 约等于 57.2958角度</span><br></pre></td></tr></table></figure></p>
+<p>参考资料:<br><a href="http://blog.pfan123.com/2016/10/24/%E6%96%9C%E7%8E%87%E8%AE%A1%E7%AE%97/" target="_blank" rel="external">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三角学、弧度、角度/">三角学、弧度、角度</a></li></ul>
 	</div>
 
       
