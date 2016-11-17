@@ -18,7 +18,7 @@
 一、git log查看历史记录当我们切换到Git库项目文件，使用git log 命令查看，查看每次commit历史记录：
 1git log
 会出现类似如下结果，记录每次commit的md5值、时间说明：123456789101112131415comm">
-<meta property="og:updated_time" content="2016-11-17T01:40:41.000Z">
+<meta property="og:updated_time" content="2016-11-17T08:33:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git查看历史记录">
 <meta name="twitter:description" content="在项目工作中经常有遇到反复改动的情况，由此需要查看提交历史记录，来分析具体问题，使用git log 命令查看，可以很方便查到每次commit记录。
@@ -285,6 +285,8 @@
 <h2 id="三、git-show查看具体改动"><a href="#三、git-show查看具体改动" class="headerlink" title="三、git show查看具体改动"></a>三、git show查看具体改动</h2><p>当我们拿到改动的commit md5哈希值时，可使用<code>git show</code>即可显示具体的某次的改动的修改，如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show 3f54135d7ae20f26bbd41b105dcb6d14b2222a3a</span><br></pre></td></tr></table></figure>
 <p>结果就会展现改动记录以及具体代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">commit 3f54135d7ae20f26bbd41b105dcb6d14b2222a3a</span><br><span class="line">Author: pfan &lt;768065158@qq.com&gt;</span><br><span class="line">Date:   Fri Oct 28 15:18:55 2016 +0800</span><br><span class="line"></span><br><span class="line">    modify content.vue</span><br><span class="line"></span><br><span class="line">diff --git a/dist/index.html b/dist/index.html</span><br><span class="line">index 1f54ffa..0416d15 100644</span><br><span class="line">--- a/dist/index.html</span><br><span class="line">+++ b/dist/index.html</span><br></pre></td></tr></table></figure></p>
+<h2 id="四、扩展删除缓存，重新按gitignore走"><a href="#四、扩展删除缓存，重新按gitignore走" class="headerlink" title="四、扩展删除缓存，重新按gitignore走"></a>四、扩展删除缓存，重新按gitignore走</h2><p>请保证，所有分支已经提交成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line">git add .</span><br><span class="line">git commit -m &apos;update .gitignore&apos;</span><br></pre></td></tr></table></figure>
 <p>参考资料:<br><a href="http://www.cnblogs.com/flyme/archive/2011/11/28/2265899.html" target="_blank" rel="external">git查看某个文件的修改历史</a><br><a href="https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2" target="_blank" rel="external">Git 基础 - 查看提交历史</a></p>
 
       
