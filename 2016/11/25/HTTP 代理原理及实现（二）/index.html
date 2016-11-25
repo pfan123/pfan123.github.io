@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="在上篇《HTTP 代理原理及实现（一）》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。
 上篇文章中实现的代理，是一个标准的 HTTP 服务，针对浏览器的普通请求">
-<meta property="og:updated_time" content="2016-11-25T06:14:07.000Z">
+<meta property="og:updated_time" content="2016-11-25T06:15:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP 代理原理及实现（二）转载">
 <meta name="twitter:description" content="在上篇《HTTP 代理原理及实现（一）》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。
@@ -84,7 +84,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -269,7 +269,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在上篇《HTTP 代理原理及实现（一）》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。</p>
+        <p>在上篇《<a href="http://blog.pfan123.com/2016/11/25/HTTP%20%E4%BB%A3%E7%90%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" rel="external">HTTP 代理原理及实现（一）</a>》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。</p>
 <p>上篇文章中实现的代理，是一个标准的 HTTP 服务，针对浏览器的普通请求和 CONNECT 请求，进行不同的处理。Node.js 为创建 HTTP 或 HTTPS Server 提供了高度一致的接口，要将 HTTP 服务升级为 HTTPS 特别方便，只有一点点准备工作要做。</p>
 <p>我们知道 TLS 有三大功能：内容加密、身份认证和数据完整性。其中内容加密依赖于密钥协商机制；数据完整性依赖于 MAC（Message authentication code）校验机制；而身份认证则依赖于证书认证机制。一般操作系统或浏览器会维护一个受信任根证书列表，包含在列表之中的证书，或者由列表中的证书签发的证书都会被客户端信任。</p>
 <p>提供 HTTPS 服务的证书可以自己生成，然后手动加入到系统根证书列表中。但是对外提供服务的 HTTPS 网站，不可能要求每个用户都手动导入你的证书，所以更常见的做法是向 CA（Certificate Authority，证书颁发机构）申请。根据证书的不同级别，CA 会进行不同级别的验证，验证通过后 CA 会用他们的证书签发网站证书，这个过程通常是收费的（有免费的证书，最近免费的 Let’s Encrypt 也很火，这里不多介绍）。由于 CA 使用的证书都是由广泛内置在各系统中的根证书签发，所以从 CA 获得的网站证书会被绝大部分客户端信任。</p>
