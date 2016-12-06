@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>HTTP 代理原理及实现（二）转载 | pfan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在上篇《HTTP 代理原理及实现（一）》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。
+上篇文章中实现的代理，是一个标准的 HTTP 服务，针对浏览器的普通请求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 代理原理及实现（二）转载">
+<meta property="og:url" content="http://pfan123.github.io/2016/11/25/移动端H5音频解决方案/index.html">
+<meta property="og:site_name" content="pfan博客">
+<meta property="og:description" content="在上篇《HTTP 代理原理及实现（一）》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。
+上篇文章中实现的代理，是一个标准的 HTTP 服务，针对浏览器的普通请求">
+<meta property="og:updated_time" content="2016-11-25T06:15:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP 代理原理及实现（二）转载">
+<meta name="twitter:description" content="在上篇《HTTP 代理原理及实现（一）》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。
+上篇文章中实现的代理，是一个标准的 HTTP 服务，针对浏览器的普通请求">
+  
+    <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">pfan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">新起点，新高度</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>		
+					
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+
+			</div>
+		
+
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+				        	<li class = "article_cate_tit"> 文章分类</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/技术杂谈/">技术杂谈</a>	</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/兴趣爱好/">兴趣爱好</a>		</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/日志/">日志</a></li>
+				        	<li class = "article_cate_a"> <a href = "/categories/JavaScript/">JavaScript</a>	</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/CSS3/">CSS3</a>	</li>
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+
+
+				<style type="text/css">
+					.article_cate_tit{
+						color:#ba8f6c;
+						margin-top:6px;
+					}
+					.article_cate_con a{
+						display:block;
+						font-size:12px;
+						text-align:center;
+						margin:4px 0;
+					}
+					#header .header-menu{
+						line-height:21px;
+					}
+					.article_cate_a{
+						line-height:18px !important;
+					}	
+					.article_cate_a a{
+						font-size:12px !important;
+					}				
+					#container .left-col .overlay{
+						height:130px;
+					}
+					.header-nav{
+						top:160px;
+					}
+				</style>	
+				<!-- E 新增模块-->
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/gitignore-git/" style="font-size: 10px;">.gitignore git</a> <a href="/tags/htaccess-配置二级域名-绑定子目录/" style="font-size: 10px;">.htaccess  配置二级域名  绑定子目录</a> <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/CMD/" style="font-size: 10px;">CMD</a> <a href="/tags/CSS-BEM-OOCSS/" style="font-size: 10px;">CSS BEM OOCSS</a> <a href="/tags/CSS动画篇/" style="font-size: 10px;">CSS动画篇</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Git，Git查看历史记录/" style="font-size: 10px;">Git，Git查看历史记录</a> <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/H5-视频直播-video/" style="font-size: 10px;">H5 视频直播 video</a> <a href="/tags/H5全景、CSS3d、perspective/" style="font-size: 15px;">H5全景、CSS3d、perspective</a> <a href="/tags/HLS、RTMP协议/" style="font-size: 10px;">HLS、RTMP协议</a> <a href="/tags/HTML5/" style="font-size: 15px;">HTML5</a> <a href="/tags/HTML5-视频直播-video-canvas/" style="font-size: 10px;">HTML5 视频直播 video canvas</a> <a href="/tags/HTTP、-node-http-proxy、-nginx、-proxy/" style="font-size: 20px;">HTTP、 node-http-proxy、 nginx、 proxy</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Mac-命令-Terminal-osx/" style="font-size: 10px;">Mac 命令 Terminal osx</a> <a href="/tags/Mac、root/" style="font-size: 10px;">Mac、root</a> <a href="/tags/Math-atan-、Math-atan2-斜率/" style="font-size: 10px;">Math.atan()、Math.atan2() 斜率</a> <a href="/tags/Mongoose参考手册-MongoDB-数据库-node/" style="font-size: 10px;">Mongoose参考手册  MongoDB  数据库 node</a> <a href="/tags/Nginx-负载均衡/" style="font-size: 10px;">Nginx  负载均衡</a> <a href="/tags/Nginx-负载均衡-node-jdc-解决方案-host/" style="font-size: 10px;">Nginx  负载均衡 node  jdc 解决方案 host</a> <a href="/tags/Nginx-Mac-Node/" style="font-size: 10px;">Nginx Mac Node</a> <a href="/tags/Nginx-MySQL-PHP-FPM-Mac-OS/" style="font-size: 10px;">Nginx MySQL PHP-FPM Mac OS</a> <a href="/tags/Nodejs学习实践-nodejs-ES6/" style="font-size: 10px;">Nodejs学习实践 nodejs  ES6</a> <a href="/tags/PreloadJS-EaselJS-TweenJS-SoundJS/" style="font-size: 10px;">PreloadJS EaselJS TweenJS SoundJS</a> <a href="/tags/SVG-Sprites-Symbols/" style="font-size: 10px;">SVG Sprites Symbols</a> <a href="/tags/SVG-icon、-导出优化/" style="font-size: 10px;">SVG icon、 导出优化</a> <a href="/tags/UMD/" style="font-size: 10px;">UMD</a> <a href="/tags/Vim-vi/" style="font-size: 10px;">Vim vi</a> <a href="/tags/createJS/" style="font-size: 10px;">createJS</a> <a href="/tags/css-modules-scope-模块化/" style="font-size: 10px;">css modules  scope  模块化</a> <a href="/tags/deviceorientation、orientationchange-重力感应/" style="font-size: 10px;">deviceorientation、orientationchange 重力感应</a> <a href="/tags/deviceorientation、orientationchange-重力感应-CSS3D/" style="font-size: 10px;">deviceorientation、orientationchange 重力感应 CSS3D</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo初始/" style="font-size: 10px;">hexo初始</a> <a href="/tags/hexo相关问题/" style="font-size: 10px;">hexo相关问题</a> <a href="/tags/howler-js、-video-js/" style="font-size: 10px;">howler.js、 video.js</a> <a href="/tags/insertAdjacentHTML方法/" style="font-size: 10px;">insertAdjacentHTML方法</a> <a href="/tags/insertAdjacentText方法/" style="font-size: 10px;">insertAdjacentText方法</a> <a href="/tags/javascript、canvas、toDataURL/" style="font-size: 10px;">javascript、canvas、toDataURL()</a> <a href="/tags/mac-iphone-铃声/" style="font-size: 10px;">mac iphone 铃声</a> <a href="/tags/node-版本管理-nvm-n/" style="font-size: 10px;">node 版本管理  nvm  n</a> <a href="/tags/node-读写excel-JS-XLSX-分析excel写入/" style="font-size: 10px;">node 读写excel JS-XLSX 分析excel写入</a> <a href="/tags/pm2学习实践-nodejs-pm2/" style="font-size: 10px;">pm2学习实践 nodejs pm2</a> <a href="/tags/react-flux-redux-ECMAScript6-Vue-Angular-Angular2-0-NuclearJS/" style="font-size: 10px;">react flux redux ECMAScript6 Vue Angular Angular2.0 NuclearJS</a> <a href="/tags/ssh常用命令-SSH/" style="font-size: 10px;">ssh常用命令  SSH</a> <a href="/tags/video-canvas/" style="font-size: 10px;">video canvas</a> <a href="/tags/vue-router-vue/" style="font-size: 10px;">vue-router, vue</a> <a href="/tags/webp/" style="font-size: 10px;">webp</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/三角学、弧度、角度/" style="font-size: 10px;">三角学、弧度、角度</a> <a href="/tags/买房前必备知识-house-home/" style="font-size: 10px;">买房前必备知识  house home</a> <a href="/tags/买车前必备知识-car/" style="font-size: 10px;">买车前必备知识  car</a> <a href="/tags/京东购物H5活动CP重构规范/" style="font-size: 10px;">京东购物H5活动CP重构规范</a> <a href="/tags/优化JavaScript的执行效率/" style="font-size: 10px;">优化JavaScript的执行效率</a> <a href="/tags/前端性能优化/" style="font-size: 10px;">前端性能优化</a> <a href="/tags/吉他/" style="font-size: 10px;">吉他</a> <a href="/tags/吉他知识/" style="font-size: 10px;">吉他知识</a> <a href="/tags/学吉他知识集锦/" style="font-size: 10px;">学吉他知识集锦</a> <a href="/tags/旅游-帝都畅游-相约北京/" style="font-size: 10px;">旅游 帝都畅游 相约北京</a> <a href="/tags/模块的写法/" style="font-size: 10px;">模块的写法</a> <a href="/tags/运营规范/" style="font-size: 10px;">运营规范</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/pingfan1990/">博客园博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cfuns.com/house.php">前端网博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pingfan1990.sinaapp.com/">pfan展示平台</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://doc.pfan123.com/">pfan前端开发导航平台</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">因上努力，果上随缘</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">pfan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">pfan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">新起点，新高度</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-移动端H5音频解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/11/25/移动端H5音频解决方案/" class="article-date">
+  	<time datetime="2016-11-25T08:56:21.000Z" itemprop="datePublished">2016-11-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP 代理原理及实现（二）转载
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP、-node-http-proxy、-nginx、-proxy/">HTTP、 node-http-proxy、 nginx、 proxy</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在上篇《<a href="http://blog.pfan123.com/2016/11/25/HTTP%20%E4%BB%A3%E7%90%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" rel="external">HTTP 代理原理及实现（一）</a>》里，我介绍了 HTTP 代理的两种形式，并用 Node.js 实现了一个可用的普通 / 隧道代理。普通代理可以用来承载 HTTP 流量；隧道代理可以用来承载任何 TCP 流量，包括 HTTP 和 HTTPS。今天这篇文章介绍剩余部分：如何将浏览器与代理之间的流量传输升级为 HTTPS。</p>
+<p>上篇文章中实现的代理，是一个标准的 HTTP 服务，针对浏览器的普通请求和 CONNECT 请求，进行不同的处理。Node.js 为创建 HTTP 或 HTTPS Server 提供了高度一致的接口，要将 HTTP 服务升级为 HTTPS 特别方便，只有一点点准备工作要做。</p>
+<p>我们知道 TLS 有三大功能：内容加密、身份认证和数据完整性。其中内容加密依赖于密钥协商机制；数据完整性依赖于 MAC（Message authentication code）校验机制；而身份认证则依赖于证书认证机制。一般操作系统或浏览器会维护一个受信任根证书列表，包含在列表之中的证书，或者由列表中的证书签发的证书都会被客户端信任。</p>
+<p>提供 HTTPS 服务的证书可以自己生成，然后手动加入到系统根证书列表中。但是对外提供服务的 HTTPS 网站，不可能要求每个用户都手动导入你的证书，所以更常见的做法是向 CA（Certificate Authority，证书颁发机构）申请。根据证书的不同级别，CA 会进行不同级别的验证，验证通过后 CA 会用他们的证书签发网站证书，这个过程通常是收费的（有免费的证书，最近免费的 Let’s Encrypt 也很火，这里不多介绍）。由于 CA 使用的证书都是由广泛内置在各系统中的根证书签发，所以从 CA 获得的网站证书会被绝大部分客户端信任。</p>
+<p>通过 CA 申请证书很简单，本文为了方便演示，采用自己签发证书的偷懒办法。现在广泛使用的证书是 x509.v3 格式，使用以下命令可以创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private.pem 2048</span><br><span class="line">openssl req -new -x509 -key private.pem -out public.crt -days 99999</span><br></pre></td></tr></table></figure>
+<p>第二行命令运行后，需要填写一些证书信息。需要注意的是<code>Common Name</code> 一定要填写后续提供<code>HTTPS</code>服务的域名或 IP。例如你打算在本地测试，<code>Common Name</code>可以填写<code>127.0.0.1</code>。证书创建好之后，再将<code>public.crt</code> 添加到系统受信任根证书列表中。为了确保添加成功，可以用浏览器验证一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![HTTP 代理](//st.imququ.com/i/webp/static/uploads/2015/11/fake_certificate.png.webp)</span><br></pre></td></tr></table></figure>
+<p>接着，可以改造之前的 Node.js 代码了，需要改动的地方不多：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&apos;http&apos;);</span><br><span class="line">var https = require(&apos;https&apos;);</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">var net = require(&apos;net&apos;);</span><br><span class="line">var url = require(&apos;url&apos;);</span><br><span class="line"></span><br><span class="line">function request(cReq, cRes) &#123;</span><br><span class="line">    var u = url.parse(cReq.url);</span><br><span class="line"></span><br><span class="line">    var options = &#123;</span><br><span class="line">        hostname : u.hostname, </span><br><span class="line">        port     : u.port || 80,</span><br><span class="line">        path     : u.path,       </span><br><span class="line">        method     : cReq.method,</span><br><span class="line">        headers     : cReq.headers</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    var pReq = http.request(options, function(pRes) &#123;</span><br><span class="line">        cRes.writeHead(pRes.statusCode, pRes.headers);</span><br><span class="line">        pRes.pipe(cRes);</span><br><span class="line">    &#125;).on(&apos;error&apos;, function(e) &#123;</span><br><span class="line">        cRes.end();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    cReq.pipe(pReq);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function connect(cReq, cSock) &#123;</span><br><span class="line">    var u = url.parse(&apos;http://&apos; + cReq.url);</span><br><span class="line"></span><br><span class="line">    var pSock = net.connect(u.port, u.hostname, function() &#123;</span><br><span class="line">        cSock.write(&apos;HTTP/1.1 200 Connection Established\r\n\r\n&apos;);</span><br><span class="line">        pSock.pipe(cSock);</span><br><span class="line">    &#125;).on(&apos;error&apos;, function(e) &#123;</span><br><span class="line">        cSock.end();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    cSock.pipe(pSock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var options = &#123;</span><br><span class="line">    key: fs.readFileSync(&apos;./private.pem&apos;),</span><br><span class="line">    cert: fs.readFileSync(&apos;./public.crt&apos;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">https.createServer(options)</span><br><span class="line">    .on(&apos;request&apos;, request)</span><br><span class="line">    .on(&apos;connect&apos;, connect)</span><br><span class="line">    .listen(8888, &apos;0.0.0.0&apos;);</span><br></pre></td></tr></table></figure>
+<p>可以看到，除了将<code>http.createServer</code>换成 <code>https.createServer</code>，增加证书相关配置之外，这段代码没有任何改变。这也是引入 TLS 层的妙处，应用层不需要任何改动，就能获得诸多安全特性。</p>
+<p>运行服务后，只需要将浏览器的代理设置为<code>HTTPS 127.0.0.1:8888</code>即可，功能照旧。这样改造，只是将浏览器到代理之间的流量升级为了 HTTPS，代理自身逻辑、与服务端的通讯方式，都没有任何变化。</p>
+<p>最后，还是写段 Node.js 代码验证下这个 HTTPS 代理服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">var https = require(&apos;https&apos;);</span><br><span class="line"></span><br><span class="line">var options = &#123;</span><br><span class="line">    hostname : &apos;127.0.0.1&apos;,</span><br><span class="line">    port     : 8888,</span><br><span class="line">    path     : &apos;imququ.com:80&apos;,</span><br><span class="line">    method     : &apos;CONNECT&apos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//禁用证书验证，不然自签名的证书无法建立 TLS 连接</span><br><span class="line">process.env.NODE_TLS_REJECT_UNAUTHORIZED = &quot;0&quot;;</span><br><span class="line"></span><br><span class="line">var req = https.request(options);</span><br><span class="line"></span><br><span class="line">req.on(&apos;connect&apos;, function(res, socket) &#123;</span><br><span class="line">    socket.write(&apos;GET / HTTP/1.1\r\n&apos; +</span><br><span class="line">                 &apos;Host: imququ.com\r\n&apos; +</span><br><span class="line">                 &apos;Connection: Close\r\n&apos; +</span><br><span class="line">                 &apos;\r\n&apos;);</span><br><span class="line"></span><br><span class="line">    socket.on(&apos;data&apos;, function(chunk) &#123;</span><br><span class="line">        console.log(chunk.toString());</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    socket.on(&apos;end&apos;, function() &#123;</span><br><span class="line">        console.log(&apos;socket end.&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">req.end();</span><br></pre></td></tr></table></figure></p>
+<p>这段代码和上篇文章最后那段的区别只是<code>http.request</code>换成了<code>https.request</code>，运行结果完全一样，这里就不贴了。本文所有代码可以从这个仓库获得：<a href="https://github.com/qgy18/proxy-demo" target="_blank" rel="external">proxy-demo</a>。</p>
+<p>参考资料:<br><a href="https://github.com/nodejitsu/node-http-proxy" target="_blank" rel="external">node-http-proxy</a><br><a href="https://segmentfault.com/q/1010000004652320" target="_blank" rel="external">node http-proxy和nginx代理性能对比?</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/01/移动端音频解决方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          移动端H5音频解决方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/25/HTTP 代理原理及实现（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTTP 代理原理及实现（二）转载</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+    
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="移动端H5音频解决方案" data-title="HTTP 代理原理及实现（二）转载" data-url="http://pfan123.github.io/2016/11/25/移动端H5音频解决方案/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 pfan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
