@@ -7,24 +7,21 @@
   <title>解析HTML/XML生成文档对象模型 | pfan博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前段时间研究svg压缩处理优化，针对文本html、xml文件解析成DOM文档对象，一直困扰着我。那么，今天讲讲借助htmlparser2、sax-js、xmldom 解析HTML/XML。
-htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。
-安装使用htmlparser2线上解析演示：
-1npm install htm">
+htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。cheerio底层就是用此原理。
+安装使用htmlparser2线上解析演示：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解析HTML/XML生成文档对象模型">
 <meta property="og:url" content="http://pfan123.github.io/2016/12/08/解析HTML:XML生成文档对象模型/index.html">
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="前段时间研究svg压缩处理优化，针对文本html、xml文件解析成DOM文档对象，一直困扰着我。那么，今天讲讲借助htmlparser2、sax-js、xmldom 解析HTML/XML。
-htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。
-安装使用htmlparser2线上解析演示：
-1npm install htm">
-<meta property="og:updated_time" content="2016-12-08T09:37:09.000Z">
+htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。cheerio底层就是用此原理。
+安装使用htmlparser2线上解析演示：">
+<meta property="og:updated_time" content="2016-12-08T09:44:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解析HTML/XML生成文档对象模型">
 <meta name="twitter:description" content="前段时间研究svg压缩处理优化，针对文本html、xml文件解析成DOM文档对象，一直困扰着我。那么，今天讲讲借助htmlparser2、sax-js、xmldom 解析HTML/XML。
-htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。
-安装使用htmlparser2线上解析演示：
-1npm install htm">
+htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。cheerio底层就是用此原理。
+安装使用htmlparser2线上解析演示：">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
   
@@ -90,7 +87,7 @@ htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -275,8 +272,8 @@ htmlparser2htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前段时间研究svg压缩处理优化，针对文本html、xml文件解析成DOM文档对象，一直困扰着我。那么，今天讲讲借助<a href="">htmlparser2</a>、<a href="https://github.com/isaacs/sax-js" target="_blank" rel="external">sax-js</a>、<a href="https://github.com/jindw/xmldom" target="_blank" rel="external">xmldom</a> 解析HTML/XML。</p>
-<h2 id="htmlparser2"><a href="#htmlparser2" class="headerlink" title="htmlparser2"></a>htmlparser2</h2><p>htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。</p>
+        <p>前段时间研究svg压缩处理优化，针对文本html、xml文件解析成DOM文档对象，一直困扰着我。那么，今天讲讲借助<a href="https://github.com/fb55/htmlparser2" target="_blank" rel="external">htmlparser2</a>、<a href="https://github.com/isaacs/sax-js" target="_blank" rel="external">sax-js</a>、<a href="https://github.com/jindw/xmldom" target="_blank" rel="external">xmldom</a> 解析HTML/XML。</p>
+<h2 id="htmlparser2"><a href="#htmlparser2" class="headerlink" title="htmlparser2"></a>htmlparser2</h2><p>htmlparser2可以用来处理HTML / XML / RSS的解析器，可以接收流文件，并提供回调接口。<a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="external">cheerio</a>底层就是用此原理。</p>
 <h3 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h3><p><a href="http://demos.forbeslindesay.co.uk/htmlparser2/" target="_blank" rel="external">htmlparser2线上解析演示</a>：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install htmlparser2</span><br></pre></td></tr></table></figure>
 <h3 id="使用todo"><a href="#使用todo" class="headerlink" title="使用todo"></a>使用todo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//解析</span><br><span class="line">var htmlparser = require(&quot;htmlparser2&quot;);</span><br><span class="line">var parser = new htmlparser.Parser(&#123;</span><br><span class="line">    onopentag: function(name, attribs)&#123;</span><br><span class="line">        if(name === &quot;script&quot; &amp;&amp; attribs.type === &quot;text/javascript&quot;)&#123;</span><br><span class="line">            console.log(&quot;JS! Hooray!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    ontext: function(text)&#123;</span><br><span class="line">        console.log(&quot;--&gt;&quot;, text);</span><br><span class="line">    &#125;,</span><br><span class="line">    onclosetag: function(tagname)&#123;</span><br><span class="line">        if(tagname === &quot;script&quot;)&#123;</span><br><span class="line">            console.log(&quot;That&apos;s it?!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, &#123;decodeEntities: true&#125;);</span><br><span class="line">parser.write(&quot;Xyz &lt;script type=&apos;text/javascript&apos;&gt;var foo = &apos;&lt;&lt;bar&gt;&gt;&apos;;&lt;/ script&gt;&quot;);</span><br><span class="line">parser.end();</span><br><span class="line"></span><br><span class="line">//生成简单的文档对象</span><br><span class="line">var htmlparser = require(&quot;htmlparser2&quot;);</span><br><span class="line">var rawHtml = &quot;Xyz &lt;script language= javascript&gt;var foo = &apos;&lt;&lt;bar&gt;&gt;&apos;;&lt; /  script&gt;&lt;!--&lt;!-- Waah! -- --&gt;&quot;;</span><br><span class="line">var handler = new htmlparser.DomHandler(function (error, dom) &#123;</span><br><span class="line">    if (error)&#123;</span><br><span class="line">    	throw new error()</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">    	console.log(dom);</span><br><span class="line">    &#125;</span><br><span class="line">       </span><br><span class="line">&#125;);</span><br><span class="line">var parser = new htmlparser.Parser(handler);</span><br><span class="line">parser.write(rawHtml);</span><br><span class="line">parser.done();</span><br></pre></td></tr></table></figure>
