@@ -426,6 +426,85 @@
 
 
   
+    <article id="post-角度与弧度的转换" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/24/角度与弧度的转换/" class="article-date">
+  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/角度与弧度的转换/">角度与弧度的转换</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="常用角度与弧度的转换"><a href="#常用角度与弧度的转换" class="headerlink" title="常用角度与弧度的转换"></a>常用角度与弧度的转换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度*Math.PI/180 </span><br><span class="line">角度 = 弧度*180/Math.PI</span><br></pre></td></tr></table></figure>
+<p>以下内容以弧度与角度的相互转换为基础： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">圆周率: PI  3.1416(弧度) </span><br><span class="line">圆:2Pi   6.2832(弧度)</span><br></pre></td></tr></table></figure>
+<p>弧度是角的度量单位, 弧长等于圆半径长的弧所对的圆心角为1弧度。 </p>
+<p>由上面这条推导出 <code>2PI*R</code>, 周长就是 <code>3.14*2(圆弧度) * 半径</code> ,就是这样来的 </p>
+<p>同理 <code>PI*d</code> 也是一样   <code>3.14*2*半径 = 直径*3.14</code></p>
+<p>角度与弧度的转化就是等比公式的运算<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">角度 / 360   = 弧度 / 6.28 (请自行理解成分式)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">角度 =   弧度*360/6.28(2PI)   = 弧度/2PI*360   &gt;&gt;(除2) 弧度/3.14*180 &gt;&gt; 弧度*180/Math.PI </span><br><span class="line">弧度 = 角度*6.28(2PI) /360   = 角度/360*2PI   &gt;&gt;(除2) 角度/180*3.14 &gt;&gt; 角度*Math.PI/180</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度 * Math.PI / 180 </span><br><span class="line">角度 = 弧度 * 180 / Math.PI</span><br></pre></td></tr></table></figure>
+<p>就系咁样推导出来的<del>~</del>~~ </p>
+<p>脑袋夹门了<del>~</del>~~ </p>
+<p>貌似是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1度 / 180度 = x弧度 / 3.14 ( 自行理解成分式) </span><br><span class="line">推成 1角度 =   180x = 3.14   &gt;&gt;   x = 3.14 / 180  </span><br><span class="line"></span><br><span class="line">&gt;&gt; 弧度 = 角度 *   (Math.PI / 180) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 / 3.14 = x角度 / 180度 ( 自行理解成分式) </span><br><span class="line">推成 1弧度 = 3.14x = 180   &gt;&gt;   x = 180 / 3.14 </span><br><span class="line"></span><br><span class="line">&gt;&gt; 角度 = 弧度 *   (180 / Math.PI) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 约等于 57.2958角度</span><br></pre></td></tr></table></figure></p>
+<p>参考资料:<br><a href="http://blog.pfan123.com/2016/10/24/%E6%96%9C%E7%8E%87%E8%AE%A1%E7%AE%97/" target="_blank" rel="external">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三角学、弧度、角度/">三角学、弧度、角度</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-斜率计算" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -516,85 +595,6 @@ trace(x)  //输出角度值 45
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math-atan-、Math-atan2-斜率/">Math.atan()、Math.atan2() 斜率</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-角度与弧度的转换" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/24/角度与弧度的转换/" class="article-date">
-  	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/角度与弧度的转换/">角度与弧度的转换</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="常用角度与弧度的转换"><a href="#常用角度与弧度的转换" class="headerlink" title="常用角度与弧度的转换"></a>常用角度与弧度的转换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度*Math.PI/180 </span><br><span class="line">角度 = 弧度*180/Math.PI</span><br></pre></td></tr></table></figure>
-<p>以下内容以弧度与角度的相互转换为基础： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">圆周率: PI  3.1416(弧度) </span><br><span class="line">圆:2Pi   6.2832(弧度)</span><br></pre></td></tr></table></figure>
-<p>弧度是角的度量单位, 弧长等于圆半径长的弧所对的圆心角为1弧度。 </p>
-<p>由上面这条推导出 <code>2PI*R</code>, 周长就是 <code>3.14*2(圆弧度) * 半径</code> ,就是这样来的 </p>
-<p>同理 <code>PI*d</code> 也是一样   <code>3.14*2*半径 = 直径*3.14</code></p>
-<p>角度与弧度的转化就是等比公式的运算<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">角度 / 360   = 弧度 / 6.28 (请自行理解成分式)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">角度 =   弧度*360/6.28(2PI)   = 弧度/2PI*360   &gt;&gt;(除2) 弧度/3.14*180 &gt;&gt; 弧度*180/Math.PI </span><br><span class="line">弧度 = 角度*6.28(2PI) /360   = 角度/360*2PI   &gt;&gt;(除2) 角度/180*3.14 &gt;&gt; 角度*Math.PI/180</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">弧度 = 角度 * Math.PI / 180 </span><br><span class="line">角度 = 弧度 * 180 / Math.PI</span><br></pre></td></tr></table></figure>
-<p>就系咁样推导出来的<del>~</del>~~ </p>
-<p>脑袋夹门了<del>~</del>~~ </p>
-<p>貌似是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1度 / 180度 = x弧度 / 3.14 ( 自行理解成分式) </span><br><span class="line">推成 1角度 =   180x = 3.14   &gt;&gt;   x = 3.14 / 180  </span><br><span class="line"></span><br><span class="line">&gt;&gt; 弧度 = 角度 *   (Math.PI / 180) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 / 3.14 = x角度 / 180度 ( 自行理解成分式) </span><br><span class="line">推成 1弧度 = 3.14x = 180   &gt;&gt;   x = 180 / 3.14 </span><br><span class="line"></span><br><span class="line">&gt;&gt; 角度 = 弧度 *   (180 / Math.PI) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1弧度 约等于 57.2958角度</span><br></pre></td></tr></table></figure></p>
-<p>参考资料:<br><a href="http://blog.pfan123.com/2016/10/24/%E6%96%9C%E7%8E%87%E8%AE%A1%E7%AE%97/" target="_blank" rel="external">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三角学、弧度、角度/">三角学、弧度、角度</a></li></ul>
 	</div>
 
       
@@ -1106,74 +1106,6 @@ a {
 
 
   
-    <article id="post-vue-router心得" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/11/vue-router心得/" class="article-date">
-  	<time datetime="2016-10-11T15:56:21.000Z" itemprop="datePublished">2016-10-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/11/vue-router心得/">vue-router进阶指南</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>“vue-router”: “^0.7.13”</p>
-<p>参考资料:<br><a href="https://github.com/vuejs/vue-router/tree/master/docs/zh-cn" target="_blank" rel="external">vue-router文档</a><br><a href="http://www.cnblogs.com/keepfool/p/5690366.html" target="_blank" rel="external">Vue.js——vue-router 60分钟快速入门</a><br><a href="https://github.com/vuejs/vue-router/blob/master/docs/zh-cn/pipeline/data.md" target="_blank" rel="external">相同路由调转data(transition) [-&gt; Promise]</a><br><a href="https://github.com/vuejs/vue-router/issues/201" target="_blank" rel="external">相同路径下跳转怎么处理</a><br><a href="https://segmentfault.com/a/1190000004669403" target="_blank" rel="external">关于Vue生命周期的思考[zzky]</a><br><a href="https://cnodejs.org/topic/57e0d5ba3af3942a3aa3b8e9" target="_blank" rel="external">vue中使用路由跳转时，如果跳转的页面是当前页面，如何实现刷新当前页</a><br><a href="http://y.dobit.top/Detail/295.html" target="_blank" rel="external">vue.js 1.0的一些总结</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-router-vue/">vue-router, vue</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-mac终端切换root用户" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1252,6 +1184,74 @@ a {
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac、root/">Mac、root</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vue-router心得" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/11/vue-router心得/" class="article-date">
+  	<time datetime="2016-10-11T15:56:21.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/vue-router心得/">vue-router进阶指南</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>“vue-router”: “^0.7.13”</p>
+<p>参考资料:<br><a href="https://github.com/vuejs/vue-router/tree/master/docs/zh-cn" target="_blank" rel="external">vue-router文档</a><br><a href="http://www.cnblogs.com/keepfool/p/5690366.html" target="_blank" rel="external">Vue.js——vue-router 60分钟快速入门</a><br><a href="https://github.com/vuejs/vue-router/blob/master/docs/zh-cn/pipeline/data.md" target="_blank" rel="external">相同路由调转data(transition) [-&gt; Promise]</a><br><a href="https://github.com/vuejs/vue-router/issues/201" target="_blank" rel="external">相同路径下跳转怎么处理</a><br><a href="https://segmentfault.com/a/1190000004669403" target="_blank" rel="external">关于Vue生命周期的思考[zzky]</a><br><a href="https://cnodejs.org/topic/57e0d5ba3af3942a3aa3b8e9" target="_blank" rel="external">vue中使用路由跳转时，如果跳转的页面是当前页面，如何实现刷新当前页</a><br><a href="http://y.dobit.top/Detail/295.html" target="_blank" rel="external">vue.js 1.0的一些总结</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-router-vue/">vue-router, vue</a></li></ul>
 	</div>
 
       
