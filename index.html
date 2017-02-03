@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -301,6 +301,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="linux-yum-命令"><a href="#linux-yum-命令" class="headerlink" title="linux yum 命令"></a>linux yum 命令</h2><p>yum（ Yellow dog Updater, Modified）是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器。<br>基於RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。<br>yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</p>
+<p>yum 语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum [options] [command] [package ...]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>options：可选，选项包括-h（帮助），-y（当安装过程提示选择全部为”yes”），-q（不显示安装的过程）等等。</li>
+<li>command：要进行的操作。</li>
+<li>package操作的对象。</li>
+</ul>
+<h2 id="yum常用命令"><a href="#yum常用命令" class="headerlink" title="yum常用命令"></a>yum常用命令</h2><p>1.列出所有可更新的软件清单命令：yum check-update<br>2.更新所有软件命令：yum update<br>3.仅安装指定的软件命令：yum install <package_name><br>4.仅更新指定的软件命令：yum update <package_name><br>5.列出所有可安裝的软件清单命令：yum list<br>6.删除软件包命令：yum remove <package_name><br>7.查找软件包 命令：yum search <keyword><br>8.清除缓存命令:</keyword></package_name></package_name></package_name></p>
+<ul>
+<li>yum clean packages: 清除缓存目录下的软件包</li>
+<li>yum clean headers: 清除缓存目录下的 headers</li>
+<li>yum clean oldheaders: 清除缓存目录下旧的 headers</li>
+<li>yum clean, yum clean all (= yum clean packages; yum clean oldheaders) :清除缓存目录下的软件包及旧的headers</li>
+</ul>
 <p>参考资料：</p>
 <p><a href="https://zh.wikipedia.org/wiki/UNIX" target="_blank" rel="external">UNIX</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/CentOS" target="_blank" rel="external">CentOS</a></p>
