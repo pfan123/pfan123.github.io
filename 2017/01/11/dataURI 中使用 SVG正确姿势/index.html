@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="为了减少首页的请求数量，按照以往的思路，会直接将 SVG 转换为 base64 后插入了 CSS 文件中。代码可能是这样的：
 123.svg &amp;#123;    background-image: url(&amp;apos;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc">
-<meta property="og:updated_time" content="2017-01-12T08:30:44.000Z">
+<meta property="og:updated_time" content="2017-03-07T05:56:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探究 dataURI 中使用 SVG 正确姿势">
 <meta name="twitter:description" content="为了减少首页的请求数量，按照以往的思路，会直接将 SVG 转换为 base64 后插入了 CSS 文件中。代码可能是这样的：
@@ -284,7 +284,7 @@
 </blockquote>
 <p>换句话说，根据标准，只有如下两种编码 data URI 的方法是有效的：</p>
 <ul>
-<li>1.<code>data:mime/type;base64,[actual data]</code>：base64 编码，更适合于二进制数据（PNG，fonts，SVGZ 等等）</li>
+<li>1.<code>data:mime/type;base64,[actual data]</code>：base64 编码，更适合于二进制数据（PNG，fonts，SVG 等等）</li>
 <li>2.<code>data:mime/type;charset=[charset],[actual data]</code>：URL 编码的普通文本，更适合与文本标记语言（SVG，HTML等）</li>
 </ul>
 <p>所以，把一个 SVG 文件编码为 data URL 的正确方式为 <code>data:image/svg+xml;charset=utf8,[actual data]</code>。我猜大部分浏览器对是否存在<code>charset=</code>字符串比较宽容，但是在 IE 浏览器里是必须的。为了代码的最大兼容性（例如一些小众浏览器，邮件客户端，等等），它应该被包含在内。</p>

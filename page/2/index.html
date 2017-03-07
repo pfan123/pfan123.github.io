@@ -271,7 +271,7 @@
 </blockquote>
 <p>换句话说，根据标准，只有如下两种编码 data URI 的方法是有效的：</p>
 <ul>
-<li>1.<code>data:mime/type;base64,[actual data]</code>：base64 编码，更适合于二进制数据（PNG，fonts，SVGZ 等等）</li>
+<li>1.<code>data:mime/type;base64,[actual data]</code>：base64 编码，更适合于二进制数据（PNG，fonts，SVG 等等）</li>
 <li>2.<code>data:mime/type;charset=[charset],[actual data]</code>：URL 编码的普通文本，更适合与文本标记语言（SVG，HTML等）</li>
 </ul>
 <p>所以，把一个 SVG 文件编码为 data URL 的正确方式为 <code>data:image/svg+xml;charset=utf8,[actual data]</code>。我猜大部分浏览器对是否存在<code>charset=</code>字符串比较宽容，但是在 IE 浏览器里是必须的。为了代码的最大兼容性（例如一些小众浏览器，邮件客户端，等等），它应该被包含在内。</p>
