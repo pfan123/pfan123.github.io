@@ -20,7 +20,7 @@
 1vim /etc/init.d/nginx
 在脚本中添加如下命令：
 123456789101112131415">
-<meta property="og:updated_time" content="2017-03-06T07:24:45.000Z">
+<meta property="og:updated_time" content="2017-03-08T09:10:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux(CentOS)下设置nginx开机自动启动和chkconfig管理--转载">
 <meta name="twitter:description" content="Nginx 是一个很强大的高性能Web和反向代理服务器。虽然使用命令行可以对nginx进行各种操作，比如启动等，但是还是根据不太方便。下面介绍在linux下安装后，如何设置开机自启动。
@@ -290,6 +290,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
 <p>然后，就可以通过该脚本对nginx服务进行管理了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nginx start</span><br><span class="line">/etc/init.d/nginx stop</span><br></pre></td></tr></table></figure>
+<p>检查 <code>nginx conf</code> 配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./webserver/nginx/sbin/nginx -t</span><br></pre></td></tr></table></figure>
 <h2 id="使用chkconfig进行管理"><a href="#使用chkconfig进行管理" class="headerlink" title="使用chkconfig进行管理"></a>使用chkconfig进行管理</h2><p>上面的方法完成了用脚本管理nginx服务的功能，但是还是不太方便，比如要设置nginx开机启动等。这时可以使用chkconfig来设置。</p>
 <p>先将nginx服务加入chkconfig管理列表：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
