@@ -24,7 +24,7 @@
 2、连接到远程主机指定的端口：
 命令格式：
 12ssh name@remoteserver -p 2222 或者ssh remoteserver -l nam">
-<meta property="og:updated_time" content="2017-02-22T04:28:11.000Z">
+<meta property="og:updated_time" content="2017-03-09T11:12:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh常用命令">
 <meta name="twitter:description" content="1、连接到远程主机：
@@ -338,6 +338,8 @@
 <p>命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R 3000:localhost:80 remoteserver</span><br></pre></td></tr></table></figure></p>
 <p>执行完成后，在remoteserver机器上，执行netstat -an | grep 3000，查看有没有开通3000端口。并执行以下命令观察是否可以打开webserver上的网页<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ w3m http://127.0.0.1:3000</span><br></pre></td></tr></table></figure></p>
 <p>如果能打开界面，说明映射成功.但是，这只限于本机访问web服务器，即只能remoteserver机器访问webserver。因为3000端口绑定的是remoteserver机器的127.0.0.1端口。可以编辑remoteserver机器上的/etc/ssh/sshd_config文件并添加如下内容：<br>添加 GatewayPorts yes  内容，把监听端口3000绑定到 0.0.0.0 地址上，这样外部的所有机器都能访问到这个监听端口，然后保存退出。并重启ssh服务。完成后其它机器就可以在浏览器中输入 <a href="http://remoteserver:3000来访问webserver了。" target="_blank" rel="external">http://remoteserver:3000来访问webserver了。</a></p>
+<h2 id="SSH-简易登录"><a href="#SSH-简易登录" class="headerlink" title="SSH 简易登录"></a>SSH 简易登录</h2><p>查看 cat ~/.ssh/config 文件（如果不存在则 touch ~/.ssh/config 创建一下），添加以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Host HOST_ALIAS                       # 用于 SSH 连接的别名，最好与 HostName 保持一致</span><br><span class="line">  HostName SERVER_DOMAIN              # 服务器的域名或 IP 地址</span><br><span class="line">  Port SERVER_PORT                    # 服务器的端口号，默认为 22，可选</span><br><span class="line">  User SERVER_USER                    # 服务器的用户名</span><br><span class="line"></span><br><span class="line">  #密钥对应正确下面两行可以不要</span><br><span class="line">  PreferredAuthentications publickey</span><br><span class="line">  IdentityFile ~/.ssh/PRIVATE_KEY     # 本机上存放的私钥路径</span><br></pre></td></tr></table></figure>
 <p>参考资料：</p>
 <ul>
 <li><a href="https://zh.wikipedia.org/wiki/Secure_Shell" target="_blank" rel="external">Secure Shell</a></li>
