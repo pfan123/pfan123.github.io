@@ -4,51 +4,26 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>前端性能优化（CSS动画篇）(转载) | pfan博客</title>
+  <title>使用 letsencrypt 生成 SSL 证书开启 HTTPS | pfan博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原理现代浏览器在使用CSS3动画时，以下四种情形绘制的效率较高，分别是：
-
-改变位置
-改变大小
-旋转
-改变透明度
-
-层？重绘？回流和重布局？图层重组？浏览器在渲染一个页面时，会将页面分为很多个图层，图层有大有小，每个图层上有一个或多个节点。在渲染DOM的时候，浏览器所做的工作实际上是：
-
-获取DOM后分割为多个图层
-对每个图层的节点计算样式结果（Recalculate style–样式重计算）
-为">
+  <meta name="description" content="HTTP 和 HTTPS 是什么？　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 http://yun.pfan123.com，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。
+HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端性能优化（CSS动画篇）(转载)">
-<meta property="og:url" content="http://pfan123.github.io/2016/05/02/前端性能优化（CSS动画篇/index.html">
+<meta property="og:title" content="使用 letsencrypt 生成 SSL 证书开启 HTTPS">
+<meta property="og:url" content="http://pfan123.github.io/2017/03/10/使用 letsencrypt 生成SSL证书开启https/index.html">
 <meta property="og:site_name" content="pfan博客">
-<meta property="og:description" content="原理现代浏览器在使用CSS3动画时，以下四种情形绘制的效率较高，分别是：
-
-改变位置
-改变大小
-旋转
-改变透明度
-
-层？重绘？回流和重布局？图层重组？浏览器在渲染一个页面时，会将页面分为很多个图层，图层有大有小，每个图层上有一个或多个节点。在渲染DOM的时候，浏览器所做的工作实际上是：
-
-获取DOM后分割为多个图层
-对每个图层的节点计算样式结果（Recalculate style–样式重计算）
-为">
-<meta property="og:updated_time" content="2016-05-02T04:52:14.000Z">
+<meta property="og:description" content="HTTP 和 HTTPS 是什么？　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 http://yun.pfan123.com，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。
+HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道">
+<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_ssl.png">
+<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_certbot.png">
+<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_certbot1.png">
+<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_certbot2.png">
+<meta property="og:updated_time" content="2017-03-10T06:23:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端性能优化（CSS动画篇）(转载)">
-<meta name="twitter:description" content="原理现代浏览器在使用CSS3动画时，以下四种情形绘制的效率较高，分别是：
-
-改变位置
-改变大小
-旋转
-改变透明度
-
-层？重绘？回流和重布局？图层重组？浏览器在渲染一个页面时，会将页面分为很多个图层，图层有大有小，每个图层上有一个或多个节点。在渲染DOM的时候，浏览器所做的工作实际上是：
-
-获取DOM后分割为多个图层
-对每个图层的节点计算样式结果（Recalculate style–样式重计算）
-为">
+<meta name="twitter:title" content="使用 letsencrypt 生成 SSL 证书开启 HTTPS">
+<meta name="twitter:description" content="HTTP 和 HTTPS 是什么？　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 http://yun.pfan123.com，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。
+HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道">
+<meta name="twitter:image" content="http://pfan123.github.io//img.pfan123.com/https_ssl.png">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
   
@@ -262,11 +237,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-前端性能优化（CSS动画篇" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-使用 letsencrypt 生成SSL证书开启https" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/02/前端性能优化（CSS动画篇/" class="article-date">
-  	<time datetime="2016-05-02T04:30:43.000Z" itemprop="datePublished">2016-05-02</time>
+      <a href="/2017/03/10/使用 letsencrypt 生成SSL证书开启https/" class="article-date">
+  	<time datetime="2017-03-10T07:00:21.000Z" itemprop="datePublished">2017-03-10</time>
 </a>
     </div>
   
@@ -279,7 +254,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      前端性能优化（CSS动画篇）(转载)
+      使用 letsencrypt 生成 SSL 证书开启 HTTPS
     </h1>
   
 
@@ -288,14 +263,10 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS动画篇/">CSS动画篇</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端性能优化/">前端性能优化</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/letsencrypt、HTTPS、SSL、TSL/">letsencrypt、HTTPS、SSL、TSL</a></li></ul>
 	</div>
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/CSS3/">CSS3</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -303,126 +274,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>现代浏览器在使用CSS3动画时，以下四种情形绘制的效率较高，分别是：</p>
+        <h2 id="HTTP-和-HTTPS-是什么？"><a href="#HTTP-和-HTTPS-是什么？" class="headerlink" title="HTTP 和 HTTPS 是什么？"></a>HTTP 和 HTTPS 是什么？</h2><p>　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 <a href="http://yun.pfan123.com" target="_blank" rel="external">http://yun.pfan123.com</a>，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。</p>
+<p>HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。</p>
+<h2 id="SSL-TLS-是什么？"><a href="#SSL-TLS-是什么？" class="headerlink" title="SSL/TLS 是什么？"></a>SSL/TLS 是什么？</h2><p>SSL是一个介于HTTP协议与TCP之间的一个可选层，其位置大致如下:</p>
+<p><img src="//img.pfan123.com/https_ssl.png" alt="svg基本形状"></p>
 <ul>
-<li>改变位置</li>
-<li>改变大小</li>
-<li>旋转</li>
-<li>改变透明度</li>
+<li><p>SSL：（Secure Socket Layer，安全套接字层），为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，可确保数据在网络上之传输过程中不会被截取。当前版本为3.0，它已被广泛地用于Web浏览器与服务器之间的身份认证和加密数据传输。<br>SSL协议位于TCP/IP协议与各种应用层协议之间，为数据通讯提供安全支持。SSL协议可分为两层： SSL记录协议（SSL Record Protocol）：它建立在可靠的传输协议（如TCP）之上，为高层协议提供数据封装、压缩、加密等基本功能的支持。 SSL握手协议（SSL Handshake Protocol）：它建立在SSL记录协议之上，用于在实际的数据传输开始前，通讯双方进行身份认证、协商加密算法、交换加密密钥等。</p>
+</li>
+<li><p>TLS：(Transport Layer Security，传输层安全协议)，用于两个应用程序之间提供保密性和数据完整性。<br>TLS 1.0是IETF（Internet Engineering Task Force，Internet工程任务组）制定的一种新的协议，它建立在SSL 3.0协议规范之上，是SSL 3.0的后续版本，可以理解为SSL 3.1，它是写入了 RFC 的。该协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。较低的层为 TLS 记录协议，位于某个可靠的传输协议（例如 TCP）上面。</p>
+</li>
 </ul>
-<h2 id="层？重绘？回流和重布局？图层重组？"><a href="#层？重绘？回流和重布局？图层重组？" class="headerlink" title="层？重绘？回流和重布局？图层重组？"></a>层？重绘？回流和重布局？图层重组？</h2><p>浏览器在渲染一个页面时，会将页面分为很多个图层，图层有大有小，每个图层上有一个或多个节点。在渲染DOM的时候，浏览器所做的工作实际上是：</p>
-<ol>
-<li>获取DOM后分割为多个图层</li>
-<li>对每个图层的节点计算样式结果（Recalculate style–样式重计算）</li>
-<li>为每个节点生成图形和位置（Layout–回流和重布局）</li>
-<li>将每个节点绘制填充到图层位图中（Paint Setup和Paint–重绘）</li>
-<li>图层作为纹理上传至GPU</li>
-<li>符合多个图层到页面上生成最终屏幕图像（Composite Layers–图层重组）</li>
-</ol>
-<p>Chrome中满足以下任意情况就会创建图层：</p>
+<p>SSL/TLS协议提供的服务主要有：</p>
 <ul>
-<li>3D或透视变换（perspective transform）CSS属性</li>
-<li>使用加速视频解码的video节点</li>
-<li>拥有3D（WebGL）上下文或加速的2D上下文的canvas节点</li>
-<li>混合插件（如Flash）</li>
-<li>对自己的opacity做CSS动画或使用一个动画webkit变换的元素</li>
-<li>拥有加速CSS过滤器的元素</li>
-<li>元素有一个包含复合层的后代节点（一个元素拥有一个子元素，该子元素在自己的层里）</li>
-<li>元素有一个z-index较低且包含一个复合层的兄弟元素（换句话说就是该元素在复合层上面渲染）</li>
+<li>1.认证用户和服务器，确保数据发送到正确的客户机和服务器；</li>
+<li>2.加密数据以防止数据中途被窃取；</li>
+<li>3.维护数据的完整性，确保数据在传输过程中不被改变。</li>
 </ul>
-<p>需要注意的是，如果图层中某个元素需要重绘，那么整个图层都需要重绘。比如一个图层包含很多节点，其中有个gif图，gif图的每一帧，都会重回整个图层的其他节点，然后生成最终的图层位图。所以这需要通过特殊的方式来强制gif图属于自己一个图层（translateZ(0)或者translate3d(0,0,0)），CSS3的动画也是一样（好在绝大部分情况浏览器自己会为CSS3动画的节点创建图层）</p>
-<h2 id="层和CSS动画"><a href="#层和CSS动画" class="headerlink" title="层和CSS动画"></a>层和CSS动画</h2><p>简化一下上述过程，每一帧动画浏览器可能需要做如下工作：</p>
-<ol>
-<li>计算需要被加载到节点上的样式结果（Recalculate style–样式重计算）</li>
-<li>为每个节点生成图形和位置（Layout–回流和重布局）</li>
-<li>将每个节点填充到图层中（Paint Setup和Paint–重绘）</li>
-<li>组合图层到页面上（Composite Layers–图层重组）</li>
-</ol>
-<p>如果我们需要使得动画的性能提高，需要做的就是减少浏览器在动画运行时所需要做的工作。最好的情况是，改变的属性仅仅印象图层的组合，变换（transform）和透明度（opacity）就属于这种情况</p>
-<p>现代浏览器如Chrome，Firefox，Safari和Opera都对变换和透明度采用硬件加速，但IE10+不是很确定是否硬件加速</p>
-<h2 id="触发重布局的属性"><a href="#触发重布局的属性" class="headerlink" title="触发重布局的属性"></a>触发重布局的属性</h2><p>有些节点，当你改变他时，会需要重新布局（这也意味着需要重新计算其他被影响的节点的位置和大小）。这种情况下，被影响的DOM树越大（可见节点），重绘所需要的时间就会越长，而渲染一帧动画的时间也相应变长。所以需要尽力避免这些属性</p>
-<p>一些常用的改变时会触发重布局的属性：<br>盒子模型相关属性会触发重布局：</p>
+<h2 id="HTTPS与HTTP的一些区别"><a href="#HTTPS与HTTP的一些区别" class="headerlink" title="HTTPS与HTTP的一些区别"></a>HTTPS与HTTP的一些区别</h2><p>1.HTTPS协议需要到CA申请证书，一般免费证书很少，需要交费，免费的推荐可以使用 <a href="http://letsencrypt.readthedocs.io/en/latest/using.html#getting-certificates-and-choosing-plugins" target="_blank" rel="external">letsencrypt</a>。<br>2.HTTP协议运行在TCP之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的。<br>3.HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。<br>4.HTTPS可以有效的防止运营商劫持，解决了防劫持的一个大问题。</p>
+<h2 id="如何HTTPS部署改造"><a href="#如何HTTPS部署改造" class="headerlink" title="如何HTTPS部署改造"></a>如何HTTPS部署改造</h2><p>一个网站要全站由HTTP替换成HTTPS，可能需要关注以下几点：</p>
 <ul>
-<li>width</li>
-<li>height</li>
-<li>padding</li>
-<li>margin</li>
-<li>display</li>
-<li>border-width</li>
-<li>border</li>
-<li>min-height</li>
+<li>1.安装CA证书，一般的证书都是需要收费的，这边推荐一个比较好的购买证书网站：1）<a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a>，免费，快捷，支持多域名（不是通配符），三条命令即时签署+导出证书。2）Comodo PositiveSSL，收费，但是比较稳定。</li>
+<li>2.在购买证书之后，在证书提供的网站上配置自己的域名，将证书下载下来之后，配置自己的web服务器，同时进行代码改造。</li>
+<li>3.HTTPS 降低用户访问速度。SSL握手，HTTPS 对速度会有一定程度的降低，但是只要经过合理优化和部署，HTTPS 对速度的影响完全可以接受。在很多场景下，HTTPS 速度完全不逊于 HTTP，如果使用 SPDY，HTTPS 的速度甚至还要比 HTTP 快。</li>
+<li>4.相对于HTTPS降低访问速度，其实更需要关心的是服务器端的CPU压力，HTTPS中大量的密钥算法计算，会消耗大量的CPU资源，只有足够的优化，HTTPS 的机器成本才不会明显增加。</li>
 </ul>
-<p>定位属性及浮动也会触发重布局：</p>
-<ul>
-<li>top</li>
-<li>bottom</li>
-<li>left</li>
-<li>right</li>
-<li>position</li>
-<li>float</li>
-<li>clear</li>
-</ul>
-<p>改变节点内部文字结构也会触发重布局：</p>
-<ul>
-<li>text-align</li>
-<li>overflow-y</li>
-<li>font-weight</li>
-<li>overflow</li>
-<li>font-family</li>
-<li>line-height</li>
-<li>vertival-align</li>
-<li>white-space</li>
-<li>font-size</li>
-</ul>
-<p>这么多常用属性都会触发重布局，可以看到，他们的特点就是可能修改整个节点的大小或位置，所以会触发重布局</p>
-<h3 id="别使用CSS类名做状态标记"><a href="#别使用CSS类名做状态标记" class="headerlink" title="别使用CSS类名做状态标记"></a>别使用CSS类名做状态标记</h3><p>如果在网页中使用CSS的类来对节点做状态标记，当这些节点的状态标记类修改时，将会触发节点的重绘和重布局。所以在节点上使用CSS类来做状态比较是代价很昂贵的</p>
-<h2 id="触发重绘的属性"><a href="#触发重绘的属性" class="headerlink" title="触发重绘的属性"></a>触发重绘的属性</h2><p>修改时只触发重绘的属性有：</p>
-<ul>
-<li>color</li>
-<li>border-style</li>
-<li>border-radius</li>
-<li>visibility</li>
-<li>text-decoration</li>
-<li>background</li>
-<li>background-image</li>
-<li>background-position</li>
-<li>background-repeat</li>
-<li>background-size</li>
-<li>outline-color</li>
-<li>outline</li>
-<li>outline-style</li>
-<li>outline-width</li>
-<li>box-shadow</li>
-</ul>
-<p>这样可以看到，这些属性都不会修改节点的大小和位置，自然不会触发重布局，但是节点内部的渲染效果进行了改变，所以只需要重绘就可以了</p>
-<p>手机就算重绘也很慢</p>
-<p>在重绘时，这些节点会被加载到GPU中进行重绘，这对移动设备如手机的影响还是很大的。因为CPU不如台式机或笔记本电脑，所以绘画巫妖的时间更长。而且CPU与GPU之间的有较大的带宽限制，所以纹理的上传需要一定时间</p>
-<h2 id="触发图层重组的属性"><a href="#触发图层重组的属性" class="headerlink" title="触发图层重组的属性"></a>触发图层重组的属性</h2><p>透明度竟然不会触发重绘？</p>
-<p>需要注意的是，上面那些触发重绘的属性里面没有opacity（透明度），很奇怪不是吗？实际上透明度的改变后，GPU在绘画时只是简单的降低之前已经画好的纹理的alpha值来达到效果，并不需要整体的重绘。不过这个前提是这个被修改opacity本身必须是一个图层，如果图层下还有其他节点，GPU也会将他们透明化</p>
-<p>强迫浏览器创建图层</p>
-<p>在Blink和WebKit的浏览器中，一当一个节点被设定了透明度的相关过渡效果或动画时，浏览器会将其作为一个单独的图层，但很多开发者使用translateZ(0)或者translate3d(0,0,0)去使浏览器创建图层。这种方式可以消除在动画开始之前的图层创建时间，使得动画尽快开始（创建图层和绘制图层还是比较慢的），而且不会随着抗锯齿而导出突变。不过这种方法需要节制，否则会因为创建过多的图层导致崩溃</p>
-<p>Chrome中的抗锯齿</p>
-<p>Chrome中，非根图层以及透明图层使用grayscale antialiasing而不是subpixel antialiasing，如果抗锯齿方法变化，这个效果将会非常显著。如果你打算预处理一个节点而不打算等到动画开始，可以通过这种强迫浏览器创建图层的方式进行</p>
-<p>transform变换是你的选择</p>
-<p>我们通过节点的transform可以修改节点的位置、旋转、大小等。我们平常会使用left和top属性来修改节点的位置，但正如上面所述，left和top会触发重布局，修改时的代价相当大。取而代之的更好方法是使用translate，这个不会触发重布局</p>
-<p>##JS动画和CSS3动画的比较<br>我们经常面临一个抉择：是使用JavaScript的动画还是使用CSS的动画，下面将对比一下这两种方式</p>
-<p>JS动画<br>缺点：JavaScript在浏览器的主线程中运行，而其中还有很多其他需要运行的JavaScript、样式计算、布局、绘制等对其干扰。这也就导致了线程可能出现阻塞，从而造成丢帧的情况。</p>
-<p>优点：JavaScript的动画与CSS预先定义好的动画不同，可以在其动画过程中对其进行控制：开始、暂停、回放、中止、取消都是可以做到的。而且一些动画效果，比如视差滚动效果，只有JavaScript能够完成</p>
-<p>CSS动画<br>缺点：缺乏强大的控制能力。而且很难以有意义的方式结合到一起，使得动画变得复杂且易于出问题。<br>优点：浏览器可以对动画进行优化。它必要时可以创建图层，然后在主线程之外运行。</p>
-<h2 id="前瞻"><a href="#前瞻" class="headerlink" title="前瞻"></a>前瞻</h2><p>Google目前正在探究通过JS的多线程（Web Workers）来提供更好的动画效果，而不会触发重布局及样式重计算</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>动画给予了页面丰富的视觉体验。我们应该尽力避免使用会触发重布局和重绘的属性，以免失帧。最好提前申明动画，这样能让浏览器提前对动画进行优化。由于GPU的参与，现在用来做动画的最好属性是如下几个：</p>
-<ul>
-<li>opacity</li>
-<li>translate</li>
-<li>rotate</li>
-<li>scale</li>
-</ul>
-<p>也许会有一些新的方式使得可以使用JavaScript做出更好的没有限制的动画，而且不用担心主线程的阻塞问题。但在那之前，还是好好考虑下如何做出流畅的动画吧</p>
-<p>参考资料</p>
-<ul>
-<li><a href="https://www.qianduan.net/high-performance-css3-animations/" target="_blank" rel="external">高性能 CSS3 动画</a></li>
-<li><a href="http://www.alloyteam.com/2016/01/css3995527/#prettyPhoto" target="_blank" rel="external">实例CSS3开场动画的制作与优化</a></li>
-</ul>
+<h2 id="Let’s-Encrypt-介绍"><a href="#Let’s-Encrypt-介绍" class="headerlink" title="Let’s Encrypt 介绍"></a>Let’s Encrypt 介绍</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 是一个免费、开放，自动化的证书颁发机构，由 ISRG（Internet Security Research Group）运作。</p>
+<p>ISRG 是一个关注网络安全的公益组织，其赞助商从非商业组织到财富100强公司都有，包括 Mozilla、Akamai、Cisco、Facebook，密歇根大学等等。ISRG 以消除资金，技术领域的障碍，全面推进加密连接成为互联网标配为自己的使命。</p>
+<p>申请 Let’s Encrypt 证书不但免费，还非常简单，虽然每次只有 90 天的有效期，但可以通过<a href="https://certbot.eff.org/" target="_blank" rel="external">certbot</a>脚本定期更新，  Let’s Encrypt有了<a href="https://github.com/certbot/certbot" target="_blank" rel="external">certbot</a>自动化工具，配置管理起来非常容易。</p>
+<p><img src="//img.pfan123.com/https_certbot.png" alt=" certbot生成证书 "></p>
+<p>1.下载安装 <code>certbot</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.eff.org/certbot-auto</span><br><span class="line">chmod a+x certbot-auto</span><br></pre></td></tr></table></figure>
+<p><img src="//img.pfan123.com/https_certbot1.png" alt=" certbot生成证书 "></p>
+<p>2.获取CA申请证书</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./certbot-auto certonly</span><br></pre></td></tr></table></figure>
+<p><img src="//img.pfan123.com/https_certbot2.png" alt=" certbot生成证书 "></p>
+<p>3.查看 <code>fullchain.pem</code> 和 <code>privkey.pem</code>， 配置nginx</p>
+<p>查看 <code>etc/letsencrypt/live/[DOMAIN]/</code>, 发现含有 <code>fullchain.pem</code> 和 <code>privkey.pem</code> ，然后配置 nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">    listen 443 ssl;</span><br><span class="line"></span><br><span class="line">    server_name yun.pfan123.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /etc/letsencrypt/live/yun.pfan123.com/fullchain.pem;</span><br><span class="line"></span><br><span class="line">    ssl_certificate_key /etc/letsencrypt/live/yun.pfan123.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    ssl_dhparam /etc/ssl/certs/dhparams.pem;</span><br><span class="line"></span><br><span class="line">    ssl_ciphers &apos;ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA&apos;;</span><br><span class="line"></span><br><span class="line">    ssl_prefer_server_ciphers  on;</span><br><span class="line"></span><br><span class="line">    ……</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.配置 http 强制跳转到 https：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name www.saxieyu.com;</span><br><span class="line"></span><br><span class="line">    return 301 https://$server_name$request_uri;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.验证服务器证书</p>
+<p>如上修改过 nginx 配置，并 reload 过 nginx 服务后，使用浏览器访问 <a href="https://yun.pfan123.com" target="_blank" rel="external">https://yun.pfan123.com</a>，验证服务器证书是否正确生效。</p>
+<p>也可以使用 <a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="external">ssllabs</a> 在线测试服务器证书强度及配置正确性.</p>
+<p>参考资料：</p>
+<p><a href="https://certbot.eff.org/" target="_blank" rel="external">certbot</a></p>
+<p><a href="https://github.com/certbot/certbot" target="_blank" rel="external">certbot github</a></p>
+<p><a href="http://letsencrypt.readthedocs.io/en/latest/using.html#getting-certificates-and-choosing-plugins" target="_blank" rel="external">letsencrypt docs</a></p>
 
       
     </div>
@@ -440,18 +337,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/05/03/AMD、CMD、UMD 模块的写法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          AMD、CMD、UMD 模块的写法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/21/Nodejs下的ES6兼容性与性能分析/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Nodejs下的ES6兼容性与性能分析--《转载》</div>
+    <a href="/2017/03/04/探究iPhone显示模式下device-width区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">探究iPhone不同显示模式device-width值变化</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -486,7 +374,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="前端性能优化（CSS动画篇" data-title="前端性能优化（CSS动画篇）(转载)" data-url="http://pfan123.github.io/2016/05/02/前端性能优化（CSS动画篇/"></div>
+	<div class="ds-thread" data-thread-key="使用 letsencrypt 生成SSL证书开启https" data-title="使用 letsencrypt 生成 SSL 证书开启 HTTPS" data-url="http://pfan123.github.io/2017/03/10/使用 letsencrypt 生成SSL证书开启https/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

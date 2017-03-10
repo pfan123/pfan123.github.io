@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -230,88 +230,11 @@
 
       <div class="body-wrap">
   
-    <article id="post-探究iPhone显示模式下device-width区别" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/04/探究iPhone显示模式下device-width区别/" class="article-date">
-  	<time datetime="2017-03-04T07:00:21.000Z" itemprop="datePublished">2017-03-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/04/探究iPhone显示模式下device-width区别/">探究iPhone不同显示模式device-width值变化</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>　  为了更好的大屏显示效果，苹果为 iPhone 6、iPhone 6s、iPhone 6 Plus、iPhone 7、iPhone 7 Plus 都新增了“放大显示”模式，并提示用户使用“标准”或者“放大”模式来获得更适合自己的显示效果。</p>
-<p>　　通过观察我们可以发现，iPhone 6 Plus 和 iPhone 7 Plus 在放大模式下的显示内容是和 iPhone 6、iPhone 6s、iPhone 7 的标准模式一样的，这意味着 iPhone 6、iPhone 6s、iPhone 7 放大模式的内容数量，和 iPhone 5s 的显示内容是几乎一致的。</p>
-<p><img src="//img.pfan123.com/zoomdisplaycompare.png" alt="zoomdisplaycompare"></p>
-<p>此时，设备视口宽度（device-width）、高度（device-height）, 将变为与iphone 5s一致。具体，可以参照 <a href="https://www.paintcodeapp.com/news/iphone-6-screens-demystified" target="_blank" rel="external">paintcode</a> 的信息图， 如下：</p>
-<p><img src="//img.pfan123.com/iphoneDevice.jpg" alt="iphoneDevice"></p>
-<p>而判断iphone6plus等大屏条件手机如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(window.screen.width &gt;= 375 &amp;&amp; window.devicePixelRatio == 3) || (window.screen.width &gt;= 414 &amp;&amp; window.devicePixelRatio == 3)&#123;</span><br><span class="line">	//此为iphone大屏手机ip6p，ip7p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而无法准确判断区分iphone5、iphone5s与iphone6、iphone6s。</p>
-<p>参考资料：</p>
-<p><a href="http://blog.csdn.net/freshlover/article/details/44454991" target="_blank" rel="external">信不信由你！iPhone6屏幕宽度不一定是375px，iPhone6 Plus屏幕宽度不一定是414px</a></p>
-<p><a href="https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions" target="_blank" rel="external">The Ultimate Guide To iPhone Resolutions</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/device-width-window-screen-width-区分ip6与ip6plus/">device-width window.screen.width 区分ip6与ip6plus</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-使用 letsencrypt 生成SSL证书开启https" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/04/使用 letsencrypt 生成SSL证书开启https/" class="article-date">
-  	<time datetime="2017-03-04T07:00:21.000Z" itemprop="datePublished">2017-03-04</time>
+      <a href="/2017/03/10/使用 letsencrypt 生成SSL证书开启https/" class="article-date">
+  	<time datetime="2017-03-10T07:00:21.000Z" itemprop="datePublished">2017-03-10</time>
 </a>
     </div>
   
@@ -324,7 +247,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/04/使用 letsencrypt 生成SSL证书开启https/">使用 letsencrypt 生成 SSL 证书开启 HTTPS</a>
+      <a class="article-title" href="/2017/03/10/使用 letsencrypt 生成SSL证书开启https/">使用 letsencrypt 生成 SSL 证书开启 HTTPS</a>
     </h1>
   
 
@@ -396,6 +319,83 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/letsencrypt、HTTPS、SSL、TSL/">letsencrypt、HTTPS、SSL、TSL</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-探究iPhone显示模式下device-width区别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/04/探究iPhone显示模式下device-width区别/" class="article-date">
+  	<time datetime="2017-03-04T07:00:21.000Z" itemprop="datePublished">2017-03-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/04/探究iPhone显示模式下device-width区别/">探究iPhone不同显示模式device-width值变化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>　  为了更好的大屏显示效果，苹果为 iPhone 6、iPhone 6s、iPhone 6 Plus、iPhone 7、iPhone 7 Plus 都新增了“放大显示”模式，并提示用户使用“标准”或者“放大”模式来获得更适合自己的显示效果。</p>
+<p>　　通过观察我们可以发现，iPhone 6 Plus 和 iPhone 7 Plus 在放大模式下的显示内容是和 iPhone 6、iPhone 6s、iPhone 7 的标准模式一样的，这意味着 iPhone 6、iPhone 6s、iPhone 7 放大模式的内容数量，和 iPhone 5s 的显示内容是几乎一致的。</p>
+<p><img src="//img.pfan123.com/zoomdisplaycompare.png" alt="zoomdisplaycompare"></p>
+<p>此时，设备视口宽度（device-width）、高度（device-height）, 将变为与iphone 5s一致。具体，可以参照 <a href="https://www.paintcodeapp.com/news/iphone-6-screens-demystified" target="_blank" rel="external">paintcode</a> 的信息图， 如下：</p>
+<p><img src="//img.pfan123.com/iphoneDevice.jpg" alt="iphoneDevice"></p>
+<p>而判断iphone6plus等大屏条件手机如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(window.screen.width &gt;= 375 &amp;&amp; window.devicePixelRatio == 3) || (window.screen.width &gt;= 414 &amp;&amp; window.devicePixelRatio == 3)&#123;</span><br><span class="line">	//此为iphone大屏手机ip6p，ip7p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而无法准确判断区分iphone5、iphone5s与iphone6、iphone6s。</p>
+<p>参考资料：</p>
+<p><a href="http://blog.csdn.net/freshlover/article/details/44454991" target="_blank" rel="external">信不信由你！iPhone6屏幕宽度不一定是375px，iPhone6 Plus屏幕宽度不一定是414px</a></p>
+<p><a href="https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions" target="_blank" rel="external">The Ultimate Guide To iPhone Resolutions</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/device-width-window-screen-width-区分ip6与ip6plus/">device-width window.screen.width 区分ip6与ip6plus</a></li></ul>
 	</div>
 
       
