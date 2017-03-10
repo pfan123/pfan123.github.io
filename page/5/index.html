@@ -860,6 +860,115 @@
 
 
   
+    <article id="post-Nginx配置文件详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/12/Nginx配置文件详解/" class="article-date">
+  	<time datetime="2016-06-12T01:40:43.000Z" itemprop="datePublished">2016-06-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/Nginx配置文件详解/">nginx反向代理处理静态页面(转载)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx (“engine x”) 是一个高性能的 HTTP 和 反向代理服务器，也是一个 IMAP/POP3/SMTP 代理服务器。 Nginx 是由 Igor Sysoev 为俄罗斯访问量第二的 Rambler.ru 站点开发的，第一个公开版本0.1.0发布于2004年10月4日。其将源代码以类BSD许可证的形式发布，因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。</p>
+<p>尽管Node.JS的性能不错，但处理静态事务确实不是他的专长，如：gzip编码，静态文件，HTTP缓存，SSL处理，负载平衡和反向代理及多站点代理等，都可以通过nginx来完成，从而减小node.js的负载，并通过nginx强大的缓存来节省您网站的流量从而提高网站的加载速度。</p>
+<p>虽然node.js也有一些如http-proxy的代理模块可以实现一台服务器上面架设多个网站（每个域名映射到不同nodejs进程的端口），但这种基础性的工作，其实更应该交给ngnix来完成。</p>
+<p>下面我们可以看一个多站点代理的例子, 假设你有一个node.js进程正在侦听8080端口，你希望从domaina.com的进入的连接由node.js提供服务，从domainb.com进入的连接映射到另一个静态文件服务的网站，你可以使用下面的ngix.confg(for 1.44)，配置比较简单，一般写程序的人应该都能看懂，进行之后你输入<code>http://192.168.0.101</code>, <code>http://localhost</code>会看到不同的结果.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br><span class="line">worker_processes  2;</span><br><span class="line"></span><br><span class="line">error_log  logs/error.log;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    gzip    on;</span><br><span class="line">    gzip_min_length 1k;</span><br><span class="line">    gzip_buffers    4 8k;</span><br><span class="line">    gzip_http_version   1.1;</span><br><span class="line">    gzip_types  text/plain application/x-javascript text/css application/xml;</span><br><span class="line"></span><br><span class="line">    upstream node_app &#123;</span><br><span class="line">        server 127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://node_app;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # static server</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  192.168.0.101;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   D:\GitHub\areu\web;</span><br><span class="line">            index  home.html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有一篇更加复杂的示例，由于版本相对陈旧，仅供参考 <a href="http://blog.argteam.com/coding/hardening-node-js-for-production-part-2-using-nginx-to-avoid-node-js-load/" target="_blank" rel="external">Using Nginx To Avoid NodeJS Load</a> </p>
+<p>简单说明一下，各个部分的作用</p>
+<p>指明你网站运行的端口，因为支持http/https所以有两个端口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    upstream silly_face_society_upstream &#123;</span><br><span class="line">      server 127.0.0.1:61337;</span><br><span class="line">      server 127.0.0.1:61338;</span><br><span class="line">      keepalive 64;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>静态文件拦截器，将以images/js/img/css…开头的地址映射到网站目录，由ngnix直接提供服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    server &#123;</span><br><span class="line">        ...</span><br><span class="line">        location ~ ^/(images/|img/|javascript/|js/|css/|stylesheets/|flash/|media/|static/|robots.txt|humans.txt|favicon.ico) &#123;</span><br><span class="line">          root /usr/local/silly_face_society/node/public;</span><br><span class="line">          access_log off;</span><br><span class="line">          expires max;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设置缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_cache_path  /var/cache/nginx levels=1:2 keys_zone=one:8m max_size=3000m inactive=600m;</span><br><span class="line">    proxy_temp_path /var/tmp;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设置Gzip压缩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_comp_level 6;</span><br><span class="line">    gzip_vary on;</span><br><span class="line">    gzip_min_length  1000;</span><br><span class="line">    gzip_proxied any;</span><br><span class="line">    gzip_types text/plain text/html text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line">    gzip_buffers 16 8k;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后将非静态文件交给nodejs进程去响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    server &#123;</span><br><span class="line">        ...</span><br><span class="line">        location / &#123;</span><br><span class="line">          proxy_redirect off;</span><br><span class="line">          proxy_set_header   X-Real-IP            $remote_addr;</span><br><span class="line">          proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">          proxy_set_header   Host                   $http_host;</span><br><span class="line">          proxy_set_header   X-NginX-Proxy    true;</span><br><span class="line">          ...</span><br><span class="line">          proxy_set_header   Connection &quot;&quot;;</span><br><span class="line">          proxy_http_version 1.1;</span><br><span class="line">          proxy_pass         http://silly_face_society_upstream;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分享几个nginx调试命令: Debian Linux</p>
+<p>安装nginx，使用apt-get 即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>测试nginx配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t -c /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>重启nginx服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nginx restart</span><br></pre></td></tr></table></figure>
+<p>设置某脚本开机启动 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /etc/init.d/foobar</span><br><span class="line">sudo update-rc.d foobar defaults     #开机时启动</span><br><span class="line">sudo update-rc.d -f foobar remove　　#开机时不启动</span><br><span class="line"></span><br><span class="line">find / -name &apos;node&apos;  #在根目录 &apos;/&apos;　查找　node的位置（某些场合会用到）</span><br></pre></td></tr></table></figure>
+<p>有时侯nginx在windows下面怎么杀也杀不死，可以使用此脚本　（Windows 2003 测试有效）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /F /IM nginx.exe &gt; nul</span><br></pre></td></tr></table></figure>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000002797601" target="_blank" rel="external">nginx服务器安装及配置文件详解</a></li>
+<li><a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="external">Nginx 安装配置</a></li>
+<li><a href="https://segmentfault.com/a/1190000000606752" target="_blank" rel="external">全新安装Mac OSX 开发者环境 同时使用homebrew搭建 PHP，Nginx ，MySQL(LNMP开发环境)</a></li>
+<li><a href="https://luolei.org/node-js-nginx-proxy/" target="_blank" rel="external">Nginx反向代理部署Node.js应用配置方法</a></li>
+<li><a href="http://blog.fens.me/nodejs-nginx-log4js/" target="_blank" rel="external">Nginx反向代理Nodejs – log4js日志IP显示错误</a></li>
+<li><a href="https://www.douban.com/note/265207425/" target="_blank" rel="external">node.js部署最佳实践</a></li>
+<li><a href="http://www.phpsong.com/2126.html" target="_blank" rel="external">服务器nginx+nodejs配置</a></li>
+<li><a href="https://www.zhihu.com/question/19887245" target="_blank" rel="external">如何在生产服务器上部署 Node.js 应用？</a></li>
+</ul>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-Mac-Node/">Nginx Mac Node</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -977,115 +1086,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-MySQL-PHP-FPM-Mac-OS/">Nginx MySQL PHP-FPM Mac OS</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Nginx配置文件详解" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/12/Nginx配置文件详解/" class="article-date">
-  	<time datetime="2016-06-12T01:40:43.000Z" itemprop="datePublished">2016-06-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/12/Nginx配置文件详解/">nginx反向代理处理静态页面(转载)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Nginx (“engine x”) 是一个高性能的 HTTP 和 反向代理服务器，也是一个 IMAP/POP3/SMTP 代理服务器。 Nginx 是由 Igor Sysoev 为俄罗斯访问量第二的 Rambler.ru 站点开发的，第一个公开版本0.1.0发布于2004年10月4日。其将源代码以类BSD许可证的形式发布，因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。</p>
-<p>尽管Node.JS的性能不错，但处理静态事务确实不是他的专长，如：gzip编码，静态文件，HTTP缓存，SSL处理，负载平衡和反向代理及多站点代理等，都可以通过nginx来完成，从而减小node.js的负载，并通过nginx强大的缓存来节省您网站的流量从而提高网站的加载速度。</p>
-<p>虽然node.js也有一些如http-proxy的代理模块可以实现一台服务器上面架设多个网站（每个域名映射到不同nodejs进程的端口），但这种基础性的工作，其实更应该交给ngnix来完成。</p>
-<p>下面我们可以看一个多站点代理的例子, 假设你有一个node.js进程正在侦听8080端口，你希望从domaina.com的进入的连接由node.js提供服务，从domainb.com进入的连接映射到另一个静态文件服务的网站，你可以使用下面的ngix.confg(for 1.44)，配置比较简单，一般写程序的人应该都能看懂，进行之后你输入<code>http://192.168.0.101</code>, <code>http://localhost</code>会看到不同的结果.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br><span class="line">worker_processes  2;</span><br><span class="line"></span><br><span class="line">error_log  logs/error.log;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    gzip    on;</span><br><span class="line">    gzip_min_length 1k;</span><br><span class="line">    gzip_buffers    4 8k;</span><br><span class="line">    gzip_http_version   1.1;</span><br><span class="line">    gzip_types  text/plain application/x-javascript text/css application/xml;</span><br><span class="line"></span><br><span class="line">    upstream node_app &#123;</span><br><span class="line">        server 127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://node_app;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # static server</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  192.168.0.101;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   D:\GitHub\areu\web;</span><br><span class="line">            index  home.html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里有一篇更加复杂的示例，由于版本相对陈旧，仅供参考 <a href="http://blog.argteam.com/coding/hardening-node-js-for-production-part-2-using-nginx-to-avoid-node-js-load/" target="_blank" rel="external">Using Nginx To Avoid NodeJS Load</a> </p>
-<p>简单说明一下，各个部分的作用</p>
-<p>指明你网站运行的端口，因为支持http/https所以有两个端口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    upstream silly_face_society_upstream &#123;</span><br><span class="line">      server 127.0.0.1:61337;</span><br><span class="line">      server 127.0.0.1:61338;</span><br><span class="line">      keepalive 64;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>静态文件拦截器，将以images/js/img/css…开头的地址映射到网站目录，由ngnix直接提供服务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    server &#123;</span><br><span class="line">        ...</span><br><span class="line">        location ~ ^/(images/|img/|javascript/|js/|css/|stylesheets/|flash/|media/|static/|robots.txt|humans.txt|favicon.ico) &#123;</span><br><span class="line">          root /usr/local/silly_face_society/node/public;</span><br><span class="line">          access_log off;</span><br><span class="line">          expires max;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>设置缓存</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_cache_path  /var/cache/nginx levels=1:2 keys_zone=one:8m max_size=3000m inactive=600m;</span><br><span class="line">    proxy_temp_path /var/tmp;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>设置Gzip压缩</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_comp_level 6;</span><br><span class="line">    gzip_vary on;</span><br><span class="line">    gzip_min_length  1000;</span><br><span class="line">    gzip_proxied any;</span><br><span class="line">    gzip_types text/plain text/html text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line">    gzip_buffers 16 8k;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最后将非静态文件交给nodejs进程去响应：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    ...</span><br><span class="line">    server &#123;</span><br><span class="line">        ...</span><br><span class="line">        location / &#123;</span><br><span class="line">          proxy_redirect off;</span><br><span class="line">          proxy_set_header   X-Real-IP            $remote_addr;</span><br><span class="line">          proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">          proxy_set_header   Host                   $http_host;</span><br><span class="line">          proxy_set_header   X-NginX-Proxy    true;</span><br><span class="line">          ...</span><br><span class="line">          proxy_set_header   Connection &quot;&quot;;</span><br><span class="line">          proxy_http_version 1.1;</span><br><span class="line">          proxy_pass         http://silly_face_society_upstream;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>分享几个nginx调试命令: Debian Linux</p>
-<p>安装nginx，使用apt-get 即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
-<p>测试nginx配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t -c /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>重启nginx服务器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nginx restart</span><br></pre></td></tr></table></figure>
-<p>设置某脚本开机启动 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /etc/init.d/foobar</span><br><span class="line">sudo update-rc.d foobar defaults     #开机时启动</span><br><span class="line">sudo update-rc.d -f foobar remove　　#开机时不启动</span><br><span class="line"></span><br><span class="line">find / -name &apos;node&apos;  #在根目录 &apos;/&apos;　查找　node的位置（某些场合会用到）</span><br></pre></td></tr></table></figure>
-<p>有时侯nginx在windows下面怎么杀也杀不死，可以使用此脚本　（Windows 2003 测试有效）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /F /IM nginx.exe &gt; nul</span><br></pre></td></tr></table></figure>
-<p>参考资料：</p>
-<ul>
-<li><a href="https://segmentfault.com/a/1190000002797601" target="_blank" rel="external">nginx服务器安装及配置文件详解</a></li>
-<li><a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="external">Nginx 安装配置</a></li>
-<li><a href="https://segmentfault.com/a/1190000000606752" target="_blank" rel="external">全新安装Mac OSX 开发者环境 同时使用homebrew搭建 PHP，Nginx ，MySQL(LNMP开发环境)</a></li>
-<li><a href="https://luolei.org/node-js-nginx-proxy/" target="_blank" rel="external">Nginx反向代理部署Node.js应用配置方法</a></li>
-<li><a href="http://blog.fens.me/nodejs-nginx-log4js/" target="_blank" rel="external">Nginx反向代理Nodejs – log4js日志IP显示错误</a></li>
-<li><a href="https://www.douban.com/note/265207425/" target="_blank" rel="external">node.js部署最佳实践</a></li>
-<li><a href="http://www.phpsong.com/2126.html" target="_blank" rel="external">服务器nginx+nodejs配置</a></li>
-<li><a href="https://www.zhihu.com/question/19887245" target="_blank" rel="external">如何在生产服务器上部署 Node.js 应用？</a></li>
-</ul>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-Mac-Node/">Nginx Mac Node</a></li></ul>
 	</div>
 
       
