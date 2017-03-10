@@ -14,23 +14,23 @@
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="本文介绍的工具是 Fiddler，它能够在本机和服务端之间建立一个代理，通过这个代理，可以对所有经过的请求和响应进行拦截、修改、分析等。理论上说，只要你使用的软件支持代理，都可以用 Fiddler 进行拦截，包括浏览器、命令行等。
 类似的软件有很多，比如 WireShark、HttpWatch 等，如果只是模拟发请求的话，Chrome 中有几个插件也很不错，比如 Postman、REST Clie">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_1.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_2.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_3.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_4.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_5.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_6.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_7.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_8.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_9.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_10.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_11.png">
-<meta property="og:updated_time" content="2017-02-28T15:21:20.000Z">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_1.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_2.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_3.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_4.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_5.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_6.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_7.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_8.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_9.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_10.png">
+<meta property="og:image" content="http://img.pfan123.com/fiddler_11.png">
+<meta property="og:updated_time" content="2017-03-10T07:29:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fiddler实战深入研究">
 <meta name="twitter:description" content="本文介绍的工具是 Fiddler，它能够在本机和服务端之间建立一个代理，通过这个代理，可以对所有经过的请求和响应进行拦截、修改、分析等。理论上说，只要你使用的软件支持代理，都可以用 Fiddler 进行拦截，包括浏览器、命令行等。
 类似的软件有很多，比如 WireShark、HttpWatch 等，如果只是模拟发请求的话，Chrome 中有几个插件也很不错，比如 Postman、REST Clie">
-<meta name="twitter:image" content="http://pfan123.github.io//img.pfan123.com/fiddler_1.png">
+<meta name="twitter:image" content="http://img.pfan123.com/fiddler_1.png">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
   
@@ -96,7 +96,7 @@
 						<li>Links</li>
 						
 						
-						<li>A propos</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -284,17 +284,17 @@
         <p>本文介绍的工具是 <a href="http://www.telerik.com/fiddler" target="_blank" rel="external">Fiddler</a>，它能够在本机和服务端之间建立一个代理，通过这个代理，可以对所有经过的请求和响应进行拦截、修改、分析等。理论上说，只要你使用的软件支持代理，都可以用 Fiddler 进行拦截，包括浏览器、命令行等。</p>
 <p>类似的软件有很多，比如 WireShark、HttpWatch 等，如果只是模拟发请求的话，Chrome 中有几个插件也很不错，比如 Postman、REST Client 等。</p>
 <h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><h3 id="会话（Session）"><a href="#会话（Session）" class="headerlink" title="会话（Session）"></a>会话（Session）</h3><p>不同于服务端的 Session，这里仅仅指一次HTTP请求而已。会话面板在工具左侧，如下图所示。</p>
-<p><img src="//img.pfan123.com/fiddler_1.png" alt="fiddler1"></p>
+<p><img src="http://img.pfan123.com/fiddler_1.png" alt="fiddler1"></p>
 <p>图中显示了三条请求，每一列的具体含义都很清晰，认识英文单词就能懂了。</p>
 <p>只是左边 # 号下的图标，帮各位找了一下，见下图。</p>
-<p><img src="//img.pfan123.com/fiddler_2.png" alt="fiddler2"></p>
+<p><img src="http://img.pfan123.com/fiddler_2.png" alt="fiddler2"></p>
 <p>默认情况下，一旦开启 Fiddler，就会走它的代理。想暂停这种行为，那请看到左下方有个状态栏。</p>
-<p><img src="//img.pfan123.com/fiddler_3.png" alt="fiddler3"></p>
+<p><img src="http://img.pfan123.com/fiddler_3.png" alt="fiddler3"></p>
 <p>单击一下左边的 Capturing，就能停止拦截，想再开启，就再单击一下。</p>
 <p>它的右边是会话的来源，可以设置仅仅拦截浏览器发出的请求。</p>
 <p>右边还有有三种选择：1、在请求发出之前进行断点；2、在响应回来的时候进行断点；3、不设断点。</p>
 <h3 id="审查（Inspector）"><a href="#审查（Inspector）" class="headerlink" title="审查（Inspector）"></a>审查（Inspector）</h3><p>随便单击一条会话，右侧就会显示详细信息。</p>
-<p><img src="//img.pfan123.com/fiddler_4.png" alt="fiddler4"></p>
+<p><img src="http://img.pfan123.com/fiddler_4.png" alt="fiddler4"></p>
 <p>首先，这里有上下两栏，上面是 Request，下面是 Response。</p>
 <p>Request 中有三个比较重要的：</p>
 <ul>
@@ -322,19 +322,19 @@
 <li>go：放行所有的断点。</li>
 </ul>
 <h2 id="请求重定向-AutoResponder"><a href="#请求重定向-AutoResponder" class="headerlink" title="请求重定向(AutoResponder)"></a>请求重定向(AutoResponder)</h2><p>所谓请求在前端就是一些基本的css，js，图片等请求，重定向是指页面请求资源文件替换成其他需要替换成的文件。</p>
-<p>比如目前需要调试线上某个js或者css文件等，可以使用fiddler捕获这个文件的请求，然后复制线上一份文件(比如JS或者css)代码放到本地，在本地的文件(JS或者css)修改完后，替换线上的文件来调式，当一切设置完毕之后，可以直接把代码提交到服务器上即可，如下所示：<br><img src="//img.pfan123.com/fiddler_5.png" alt="fiddler5"></p>
+<p>比如目前需要调试线上某个js或者css文件等，可以使用fiddler捕获这个文件的请求，然后复制线上一份文件(比如JS或者css)代码放到本地，在本地的文件(JS或者css)修改完后，替换线上的文件来调式，当一切设置完毕之后，可以直接把代码提交到服务器上即可，如下所示：<br><img src="http://img.pfan123.com/fiddler_5.png" alt="fiddler5"></p>
 <p>如上：<code>Enable automatic responses</code> 复选框的含义是：控制是否激活 <code>AutoResponder</code> 选项卡，如果没有选中该选项，选项卡上的其他选项就不可选。</p>
-<p><code>Unmatched  requests passthrough</code> 复选框的含义是： 如果选中该选项，不匹配的请求会正常发送到服务器，如果没有选中该选项，Fiddler会为所有和该规则完全不匹配的HTTP请求生成 HTTP/404 Not Found 响应，比如我现在不勾选它，如下所示：<br><img src="//img.pfan123.com/fiddler_6.png" alt="fiddler6"></p>
-<p>那么现在再来访问淘宝网，就访问不了，提示如下所示：<br><img src="//img.pfan123.com/fiddler_7.png" alt="fiddler7"></p>
-<p><code>Enable Latency</code>的含义是：控制匹配某个规则的请求时立即执行，还是延迟Latency字段中所指定的毫秒数。如果没有选中该选项，Latency字段就不会显示，使用这个选项可以更准确地模拟现实中的服务器响应，取消该选项可以提升性能。如下所示：<br><img src="//img.pfan123.com/fiddler_8.png" alt="fiddler8"></p>
-<p>我们也可以点击右键进行毫秒数设置它，如下：<br><img src="//img.pfan123.com/fiddler_9.png" alt="fiddler9"></p>
+<p><code>Unmatched  requests passthrough</code> 复选框的含义是： 如果选中该选项，不匹配的请求会正常发送到服务器，如果没有选中该选项，Fiddler会为所有和该规则完全不匹配的HTTP请求生成 HTTP/404 Not Found 响应，比如我现在不勾选它，如下所示：<br><img src="http://img.pfan123.com/fiddler_6.png" alt="fiddler6"></p>
+<p>那么现在再来访问淘宝网，就访问不了，提示如下所示：<br><img src="http://img.pfan123.com/fiddler_7.png" alt="fiddler7"></p>
+<p><code>Enable Latency</code>的含义是：控制匹配某个规则的请求时立即执行，还是延迟Latency字段中所指定的毫秒数。如果没有选中该选项，Latency字段就不会显示，使用这个选项可以更准确地模拟现实中的服务器响应，取消该选项可以提升性能。如下所示：<br><img src="http://img.pfan123.com/fiddler_8.png" alt="fiddler8"></p>
+<p>我们也可以点击右键进行毫秒数设置它，如下：<br><img src="http://img.pfan123.com/fiddler_9.png" alt="fiddler9"></p>
 <p>在下方的Rule Editor选项卡中可以调整上面的请求替换，如下：<br>第一个下拉框指需要替换的文件，第二个下拉框a.js是替换上面的下拉框的文件；当然不一定要这样替换，如果正则非常好的话，我们可以使用正则替换需要替换的文件。当我们点击 save后即可替换。</p>
-<p><img src="//img.pfan123.com/fiddler_10.png" alt="fiddler10"></p>
+<p><img src="http://img.pfan123.com/fiddler_10.png" alt="fiddler10"></p>
 <h2 id="Composer选项卡"><a href="#Composer选项卡" class="headerlink" title="Composer选项卡"></a>Composer选项卡</h2><p>Composer选项卡支持手动构建和发送HTTP，HTTPS和FTP请求，我们还可以从web session列表中拖曳session，把它放到composer选项卡中，当我们点击Execute按钮，把请求发送到服务器端。</p>
 <p>Composer使用场景如下：</p>
 <p>比如开发需要测试post请求接口，都知道浏览器请求只能是get请求，所以无法使用浏览器来测试，因此可以使用Composer构造post请求，点击execute发送请求。</p>
 <p>Composer选项卡是由4个子选项卡组成的，如下所示：</p>
-<p><img src="//img.pfan123.com/fiddler_11.png" alt="fiddler11"></p>
+<p><img src="http://img.pfan123.com/fiddler_11.png" alt="fiddler11"></p>
 <p>其中 Scratchpad 选项卡基本不用，先看 <code>Options</code> 选项卡中 <code>Request Options</code> 的复选框中的含义如下：</p>
 <p><code>Inspect  Session</code>  请求执行后，Inspectors选项卡会被激活，可以查看请求结果。</p>
 <p><code>Fix Content-Length header*</code>  该选项控制Composer是否会自动添加或修改Content-Length请求头，表示请求体的大小。在很多情况下，缺少适当的Content-Length头的请求会导致http请求响应出错。</p>
