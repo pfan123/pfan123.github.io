@@ -14,16 +14,16 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="HTTP 和 HTTPS 是什么？　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 http://yun.pfan123.com，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。
 HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_ssl.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_certbot.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_certbot1.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/https_certbot2.png">
-<meta property="og:updated_time" content="2017-03-10T06:38:06.000Z">
+<meta property="og:image" content="http://img.pfan123.com/https_ssl.png">
+<meta property="og:image" content="http://img.pfan123.com/https_certbot.png">
+<meta property="og:image" content="http://img.pfan123.com/https_certbot1.png">
+<meta property="og:image" content="http://img.pfan123.com/https_certbot2.png">
+<meta property="og:updated_time" content="2017-03-10T07:01:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 letsencrypt 生成 SSL 证书开启 HTTPS">
 <meta name="twitter:description" content="HTTP 和 HTTPS 是什么？　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 http://yun.pfan123.com，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。
 HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道">
-<meta name="twitter:image" content="http://pfan123.github.io//img.pfan123.com/https_ssl.png">
+<meta name="twitter:image" content="http://img.pfan123.com/https_ssl.png">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
   
@@ -89,7 +89,7 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>A propos</li>
 						
 					</ul>
 				</div>
@@ -277,7 +277,7 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
         <h2 id="HTTP-和-HTTPS-是什么？"><a href="#HTTP-和-HTTPS-是什么？" class="headerlink" title="HTTP 和 HTTPS 是什么？"></a>HTTP 和 HTTPS 是什么？</h2><p>　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 <a href="http://yun.pfan123.com" target="_blank" rel="external">http://yun.pfan123.com</a>，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。</p>
 <p>HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。</p>
 <h2 id="SSL-TLS-是什么？"><a href="#SSL-TLS-是什么？" class="headerlink" title="SSL/TLS 是什么？"></a>SSL/TLS 是什么？</h2><p>SSL是一个介于HTTP协议与TCP之间的一个可选层，其位置大致如下:</p>
-<p><img src="//img.pfan123.com/https_ssl.png" alt="svg基本形状"></p>
+<p><img src="http://img.pfan123.com/https_ssl.png" alt="svg基本形状"></p>
 <ul>
 <li><p>SSL：（Secure Socket Layer，安全套接字层），为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，可确保数据在网络上之传输过程中不会被截取。当前版本为3.0，它已被广泛地用于Web浏览器与服务器之间的身份认证和加密数据传输。<br>SSL协议位于TCP/IP协议与各种应用层协议之间，为数据通讯提供安全支持。SSL协议可分为两层： SSL记录协议（SSL Record Protocol）：它建立在可靠的传输协议（如TCP）之上，为高层协议提供数据封装、压缩、加密等基本功能的支持。 SSL握手协议（SSL Handshake Protocol）：它建立在SSL记录协议之上，用于在实际的数据传输开始前，通讯双方进行身份认证、协商加密算法、交换加密密钥等。</p>
 </li>
@@ -301,13 +301,13 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
 <h2 id="Let’s-Encrypt-介绍"><a href="#Let’s-Encrypt-介绍" class="headerlink" title="Let’s Encrypt 介绍"></a>Let’s Encrypt 介绍</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 是一个免费、开放，自动化的证书颁发机构，由 ISRG（Internet Security Research Group）运作。</p>
 <p>ISRG 是一个关注网络安全的公益组织，其赞助商从非商业组织到财富100强公司都有，包括 Mozilla、Akamai、Cisco、Facebook，密歇根大学等等。ISRG 以消除资金，技术领域的障碍，全面推进加密连接成为互联网标配为自己的使命。</p>
 <p>申请 Let’s Encrypt 证书不但免费，还非常简单，虽然每次只有 90 天的有效期，但可以通过<a href="https://certbot.eff.org/" target="_blank" rel="external">certbot</a>脚本定期更新，  Let’s Encrypt有了<a href="https://github.com/certbot/certbot" target="_blank" rel="external">certbot</a>自动化工具，配置管理起来非常容易。</p>
-<p><img src="//img.pfan123.com/https_certbot.png" alt=" certbot生成证书 "></p>
+<p><img src="http://img.pfan123.com/https_certbot.png" alt=" certbot生成证书 "></p>
 <p>1.下载安装 <code>certbot</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.eff.org/certbot-auto</span><br><span class="line">chmod a+x certbot-auto</span><br></pre></td></tr></table></figure>
-<p><img src="//img.pfan123.com/https_certbot1.png" alt=" certbot生成证书 "></p>
+<p><img src="http://img.pfan123.com/https_certbot1.png" alt=" certbot生成证书 "></p>
 <p>2.获取CA申请证书</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./certbot-auto certonly</span><br></pre></td></tr></table></figure>
-<p><img src="//img.pfan123.com/https_certbot2.png" alt=" certbot生成证书 "></p>
+<p><img src="http://img.pfan123.com/https_certbot2.png" alt=" certbot生成证书 "></p>
 <p>3.查看 <code>fullchain.pem</code> 和 <code>privkey.pem</code>， 配置nginx</p>
 <p>查看 <code>etc/letsencrypt/live/[DOMAIN]/</code>, 发现含有 <code>fullchain.pem</code> 和 <code>privkey.pem</code> ，然后配置 nginx</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">    listen 443 ssl;</span><br><span class="line"></span><br><span class="line">    server_name yun.pfan123.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /etc/letsencrypt/live/yun.pfan123.com/fullchain.pem;</span><br><span class="line"></span><br><span class="line">    ssl_certificate_key /etc/letsencrypt/live/yun.pfan123.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    ssl_dhparam /etc/ssl/certs/dhparams.pem;</span><br><span class="line"></span><br><span class="line">    ssl_ciphers &apos;ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA&apos;;</span><br><span class="line"></span><br><span class="line">    ssl_prefer_server_ciphers  on;</span><br><span class="line"></span><br><span class="line">    ……</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
