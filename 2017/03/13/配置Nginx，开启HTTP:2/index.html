@@ -14,7 +14,7 @@
 <meta property="og:description" content="HTTP/2 是什么？HTTP/2（超文本传输协议第2版，最初命名为HTTP 2.0 ），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于SPDY协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。与 HTTP1.1 完全语义兼容，几">
 <meta property="og:image" content="http://img.pfan123.com/http2_2_2.png">
 <meta property="og:image" content="http://img.pfan123.com/http2_1_1.png">
-<meta property="og:updated_time" content="2017-03-13T08:44:52.000Z">
+<meta property="og:updated_time" content="2017-03-13T08:46:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="部署 HTTP/2">
 <meta name="twitter:description" content="HTTP/2 是什么？HTTP/2（超文本传输协议第2版，最初命名为HTTP 2.0 ），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于SPDY协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。与 HTTP1.1 完全语义兼容，几">
@@ -294,8 +294,7 @@
 <p>注意:不能混用SPDY和HTTP/2，如果你两个都同时开启，会报错。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx: [warn] invalid parameter &quot;spdy&quot;: ngx_http_spdy_module was superseded by ngx_http_v2_module in /etc/nginx/conf.d/vhost.conf:12</span><br></pre></td></tr></table></figure>
-<p>##配置Nginx</p>
-<p>Nginx 配置 http_v2_module 和 http_ssl_module 两个模块，以及最新openssl</p>
+<h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>Nginx 配置 http_v2_module 和 http_ssl_module 两个模块，以及最新openssl</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-openssl=.././openssl --with-http_v2_module --with-http_ssl_module</span><br></pre></td></tr></table></figure>
 <p>重启nginx服务器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
