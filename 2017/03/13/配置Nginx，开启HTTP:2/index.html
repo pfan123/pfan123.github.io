@@ -4,17 +4,21 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016/6 | pfan博客</title>
+  <title>部署 HTTP/2 | pfan博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="pfan博客 新起点，新高度">
-<meta property="og:type" content="website">
-<meta property="og:title" content="pfan博客">
-<meta property="og:url" content="http://pfan123.github.io/archives/2016/06/index.html">
+  <meta name="description" content="HTTP/2 是什么？HTTP/2（超文本传输协议第2版，最初命名为HTTP 2.0 ），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于SPDY协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。与 HTTP1.1 完全语义兼容，几">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署 HTTP/2">
+<meta property="og:url" content="http://pfan123.github.io/2017/03/13/配置Nginx，开启HTTP:2/index.html">
 <meta property="og:site_name" content="pfan博客">
-<meta property="og:description" content="pfan博客 新起点，新高度">
+<meta property="og:description" content="HTTP/2 是什么？HTTP/2（超文本传输协议第2版，最初命名为HTTP 2.0 ），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于SPDY协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。与 HTTP1.1 完全语义兼容，几">
+<meta property="og:image" content="http://img.pfan123.com/http2_2_2.png">
+<meta property="og:image" content="http://img.pfan123.com/http2_1_1.png">
+<meta property="og:updated_time" content="2017-03-13T08:37:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pfan博客">
-<meta name="twitter:description" content="pfan博客 新起点，新高度">
+<meta name="twitter:title" content="部署 HTTP/2">
+<meta name="twitter:description" content="HTTP/2 是什么？HTTP/2（超文本传输协议第2版，最初命名为HTTP 2.0 ），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于SPDY协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。与 HTTP1.1 完全语义兼容，几">
+<meta name="twitter:image" content="http://img.pfan123.com/http2_2_2.png">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
   
@@ -228,267 +232,155 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-配置Nginx，开启HTTP:2" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2017/03/13/配置Nginx，开启HTTP:2/" class="article-date">
+  	<time datetime="2017-03-13T02:00:21.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      部署 HTTP/2
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP-2，Nginx/">HTTP/2，Nginx</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/27/CSS模块化/" class="archive-article-date">
-  	<time datetime="2016-06-27T10:40:43.000Z" itemprop="datePublished">Jun 27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/27/CSS模块化/">CSS模块化</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="HTTP-2-是什么？"><a href="#HTTP-2-是什么？" class="headerlink" title="HTTP/2 是什么？"></a>HTTP/2 是什么？</h2><p>HTTP/2（超文本传输协议第2版，最初命名为<a href="https://zh.wikipedia.org/wiki/HTTP" target="_blank" rel="external">HTTP 2.0</a> ），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于<a href="https://zh.wikipedia.org/wiki/SPDY" target="_blank" rel="external">SPDY</a>协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。与 HTTP1.1 完全语义兼容，几乎可以无缝升级。目前主流浏览器都已经支持 HTTP/2 了（IE 自 IE 11 开始支持）。</p>
+<blockquote>
+<p>早些时候，Nginx 曾发布过一个 early-alpha patch 来提供对 HTTP/2 的支持，但从最新发布的 Nginx 1.9.5 开始，httpv2module 已经替换了 ngxhttpspdy_module 并正式开始提供全面的 HTTP/2 支持。</p>
+</blockquote>
+<p>下面说下如何升级到HTTP/2，目前我的nginx版本为 1.10.3 ：</p>
+<h2 id="升级-OpenSSL"><a href="#升级-OpenSSL" class="headerlink" title="升级 OpenSSL"></a>升级 OpenSSL</h2><blockquote>
+<p>Note that accepting HTTP/2 connections over TLS requires the “Application-Layer Protocol Negotiation” (ALPN) TLS extension support, which is available only since OpenSSL version 1.0.2. Using the “Next Protocol Negotiation” (NPN) TLS extension for this purpose (available since OpenSSL version 1.0.1) is not guaranteed.</p>
+</blockquote>
+<p>官方提到，目前升级 HTTP/2 使用 ALPN，OpenSSL需要在 1.0.2 之上。</p>
+<p>1.检查OpenSSL版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl version</span><br></pre></td></tr></table></figure>
+<p>如果版本不够可以，在<a href="https://www.openssl.org/source/" target="_blank" rel="external">OpenSSL</a>下载。</p>
+<p>2.下载 OpenSSL 的最新版，当前最新版本为1.1.0e</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.openssl.org/source/openssl-1.1.0e.tar.gz</span><br><span class="line"></span><br><span class="line">tar zxvf openssl-1.1.0e.tar.gz</span><br><span class="line"></span><br><span class="line">mv openssl-1.1.0e／ openssl</span><br></pre></td></tr></table></figure>
+<p>3.编译安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib shared zlib-dynamic</span><br><span class="line">make depend</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>4.检查版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl version</span><br><span class="line">OpenSSL 1.1.0e  16 Feb 2017</span><br></pre></td></tr></table></figure>
+<h2 id="Nginx启动HTTP-2"><a href="#Nginx启动HTTP-2" class="headerlink" title="Nginx启动HTTP/2"></a>Nginx启动HTTP/2</h2><p>开启HTTP/2也十分简单，直接在指定的域名nginx.conf中配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;  </span><br><span class="line">  listen        443 ssl http2; </span><br><span class="line">  server_name   luolei.org;</span><br><span class="line"></span><br><span class="line">  #SSL配置</span><br><span class="line">  ssl                   on;</span><br><span class="line">  ssl_certificate       /etc/nginx/conf.d/certificate.crt;</span><br><span class="line">  ssl_certificate_key   /etc/nginx/conf.d/certificate.key;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在listen后面增加http2即可。</p>
+<blockquote>
+<p>注意:不能混用SPDY和HTTP/2，如果你两个都同时开启，会报错。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx: [warn] invalid parameter &quot;spdy&quot;: ngx_http_spdy_module was superseded by ngx_http_v2_module in /etc/nginx/conf.d/vhost.conf:12</span><br></pre></td></tr></table></figure>
+<p>##重启Nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
+<p>重启服务器之后，打开chrome浏览器，进入网络Network，打开Protocol，看到主域的Protocol已经变了成了h2，这就意味着已经成功升级到HTTP/2。<br><img src="http://img.pfan123.com/http2_2_2.png" alt="http2"></p>
+<p>或者使用Chrome的网络工具，在地址栏中输入chrome://net-internals/#http2</p>
+<p><img src="http://img.pfan123.com/http2_1_1.png" alt="http2"></p>
+<p>参考资料：</p>
+<p><a href="https://imququ.com/post/http2-resource.html" target="_blank" rel="external">HTTP/2 资料汇总</a></p>
+<p><a href="https://imququ.com/post/my-nginx-conf.html" target="_blank" rel="external">本博客 Nginx 配置之完整篇</a></p>
+<p><a href="http://blog.csdn.net/sahusoft/article/details/7388617" target="_blank" rel="external">“error while loading shared libraries: xxx.so.x” 错误的原因和解决办法</a></p>
+<p><a href="https://www.openssl.org/source/" target="_blank" rel="external">OpenSSL资源下载</a></p>
+<p><a href="https://www.qianduan.net/a-simple-performance-comparison-of-https-spdy-and-http2/" target="_blank" rel="external">HTTPS, SPDY和 HTTP/2性能的简单对比</a></p>
+<p><a href="http://www.infoq.com/cn/news/2015/02/https-spdy-http2-comparison" target="_blank" rel="external">HTTPS、SPDY和HTTP/2的性能比较</a></p>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css-modules-scope-模块化/">css modules  scope  模块化</a></li></ul>
-	</div>
+      
+    </div>
 
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/CSS3/">CSS3</a>
-	</div>
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/12/用 Git Hooks 进行自动部署/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用 Git Hooks 进行自动部署</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+    
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/21/Mac怎么制作iphone铃声？/" class="archive-article-date">
-  	<time datetime="2016-06-21T15:40:43.000Z" itemprop="datePublished">Jun 21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/21/Mac怎么制作iphone铃声？/">Mac怎么制作iphone铃声？</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac-iphone-铃声/">mac iphone 铃声</a></li></ul>
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/兴趣爱好/">兴趣爱好</a>
-	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/16/如何愉快的使用ESLint进行代码校验/" class="archive-article-date">
-  	<time datetime="2016-06-16T02:40:43.000Z" itemprop="datePublished">Jun 16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/16/如何愉快的使用ESLint进行代码校验/">如何愉快的使用ESLint进行代码校验－-转载</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ESLint/">ESLint</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/12/vim快捷操作整理/" class="archive-article-date">
-  	<time datetime="2016-06-12T02:40:43.000Z" itemprop="datePublished">Jun 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/12/vim快捷操作整理/">vim快捷操作整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim-vi/">Vim vi</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/12/Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境/" class="archive-article-date">
-  	<time datetime="2016-06-12T01:40:43.000Z" itemprop="datePublished">Jun 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/12/Mac OS使用brew安装Nginx、MySQL、PHP-FPM的LAMP开发环境/">Mac使用brew安装Nginx、MySQL、PHP的LAMP开发环境</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-MySQL-PHP-FPM-Mac-OS/">Nginx MySQL PHP-FPM Mac OS</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="配置Nginx，开启HTTP:2" data-title="部署 HTTP/2" data-url="http://pfan123.github.io/2017/03/13/配置Nginx，开启HTTP:2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/12/Nginx配置文件详解/" class="archive-article-date">
-  	<time datetime="2016-06-12T01:40:43.000Z" itemprop="datePublished">Jun 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/12/Nginx配置文件详解/">nginx反向代理处理静态页面(转载)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx-Mac-Node/">Nginx Mac Node</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/05/ssh常用命令/" class="archive-article-date">
-  	<time datetime="2016-06-05T10:40:43.000Z" itemprop="datePublished">Jun 5</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/05/ssh常用命令/">ssh常用命令</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh常用命令-SSH/">ssh常用命令  SSH</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 </div>
       <footer id="footer">
@@ -514,8 +406,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

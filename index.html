@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>A propos</li>
 						
 					</ul>
 				</div>
@@ -229,6 +229,109 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-配置Nginx，开启HTTP:2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/13/配置Nginx，开启HTTP:2/" class="article-date">
+  	<time datetime="2017-03-13T02:00:21.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/13/配置Nginx，开启HTTP:2/">部署 HTTP/2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="HTTP-2-是什么？"><a href="#HTTP-2-是什么？" class="headerlink" title="HTTP/2 是什么？"></a>HTTP/2 是什么？</h2><p>HTTP/2（超文本传输协议第2版，最初命名为<a href="https://zh.wikipedia.org/wiki/HTTP" target="_blank" rel="external">HTTP 2.0</a> ），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于<a href="https://zh.wikipedia.org/wiki/SPDY" target="_blank" rel="external">SPDY</a>协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。与 HTTP1.1 完全语义兼容，几乎可以无缝升级。目前主流浏览器都已经支持 HTTP/2 了（IE 自 IE 11 开始支持）。</p>
+<blockquote>
+<p>早些时候，Nginx 曾发布过一个 early-alpha patch 来提供对 HTTP/2 的支持，但从最新发布的 Nginx 1.9.5 开始，httpv2module 已经替换了 ngxhttpspdy_module 并正式开始提供全面的 HTTP/2 支持。</p>
+</blockquote>
+<p>下面说下如何升级到HTTP/2，目前我的nginx版本为 1.10.3 ：</p>
+<h2 id="升级-OpenSSL"><a href="#升级-OpenSSL" class="headerlink" title="升级 OpenSSL"></a>升级 OpenSSL</h2><blockquote>
+<p>Note that accepting HTTP/2 connections over TLS requires the “Application-Layer Protocol Negotiation” (ALPN) TLS extension support, which is available only since OpenSSL version 1.0.2. Using the “Next Protocol Negotiation” (NPN) TLS extension for this purpose (available since OpenSSL version 1.0.1) is not guaranteed.</p>
+</blockquote>
+<p>官方提到，目前升级 HTTP/2 使用 ALPN，OpenSSL需要在 1.0.2 之上。</p>
+<p>1.检查OpenSSL版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl version</span><br></pre></td></tr></table></figure>
+<p>如果版本不够可以，在<a href="https://www.openssl.org/source/" target="_blank" rel="external">OpenSSL</a>下载。</p>
+<p>2.下载 OpenSSL 的最新版，当前最新版本为1.1.0e</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.openssl.org/source/openssl-1.1.0e.tar.gz</span><br><span class="line"></span><br><span class="line">tar zxvf openssl-1.1.0e.tar.gz</span><br><span class="line"></span><br><span class="line">mv openssl-1.1.0e／ openssl</span><br></pre></td></tr></table></figure>
+<p>3.编译安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib shared zlib-dynamic</span><br><span class="line">make depend</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>4.检查版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl version</span><br><span class="line">OpenSSL 1.1.0e  16 Feb 2017</span><br></pre></td></tr></table></figure>
+<h2 id="Nginx启动HTTP-2"><a href="#Nginx启动HTTP-2" class="headerlink" title="Nginx启动HTTP/2"></a>Nginx启动HTTP/2</h2><p>开启HTTP/2也十分简单，直接在指定的域名nginx.conf中配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;  </span><br><span class="line">  listen        443 ssl http2; </span><br><span class="line">  server_name   luolei.org;</span><br><span class="line"></span><br><span class="line">  #SSL配置</span><br><span class="line">  ssl                   on;</span><br><span class="line">  ssl_certificate       /etc/nginx/conf.d/certificate.crt;</span><br><span class="line">  ssl_certificate_key   /etc/nginx/conf.d/certificate.key;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在listen后面增加http2即可。</p>
+<blockquote>
+<p>注意:不能混用SPDY和HTTP/2，如果你两个都同时开启，会报错。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx: [warn] invalid parameter &quot;spdy&quot;: ngx_http_spdy_module was superseded by ngx_http_v2_module in /etc/nginx/conf.d/vhost.conf:12</span><br></pre></td></tr></table></figure>
+<p>##重启Nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
+<p>重启服务器之后，打开chrome浏览器，进入网络Network，打开Protocol，看到主域的Protocol已经变了成了h2，这就意味着已经成功升级到HTTP/2。<br><img src="http://img.pfan123.com/http2_2_2.png" alt="http2"></p>
+<p>或者使用Chrome的网络工具，在地址栏中输入chrome://net-internals/#http2</p>
+<p><img src="http://img.pfan123.com/http2_1_1.png" alt="http2"></p>
+<p>参考资料：</p>
+<p><a href="https://imququ.com/post/http2-resource.html" target="_blank" rel="external">HTTP/2 资料汇总</a></p>
+<p><a href="https://imququ.com/post/my-nginx-conf.html" target="_blank" rel="external">本博客 Nginx 配置之完整篇</a></p>
+<p><a href="http://blog.csdn.net/sahusoft/article/details/7388617" target="_blank" rel="external">“error while loading shared libraries: xxx.so.x” 错误的原因和解决办法</a></p>
+<p><a href="https://www.openssl.org/source/" target="_blank" rel="external">OpenSSL资源下载</a></p>
+<p><a href="https://www.qianduan.net/a-simple-performance-comparison-of-https-spdy-and-http2/" target="_blank" rel="external">HTTPS, SPDY和 HTTP/2性能的简单对比</a></p>
+<p><a href="http://www.infoq.com/cn/news/2015/02/https-spdy-http2-comparison" target="_blank" rel="external">HTTPS、SPDY和HTTP/2的性能比较</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP-2，Nginx/">HTTP/2，Nginx</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-用 Git Hooks 进行自动部署" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -570,89 +673,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/letsencrypt、HTTPS、SSL、TSL/">letsencrypt、HTTPS、SSL、TSL</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-配置Nginx，开启HTTP:2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/10/配置Nginx，开启HTTP:2/" class="article-date">
-  	<time datetime="2017-03-10T02:00:21.000Z" itemprop="datePublished">2017-03-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/配置Nginx，开启HTTP:2/">部署 HTTP/2</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="HTTP-2-是什么？"><a href="#HTTP-2-是什么？" class="headerlink" title="HTTP/2 是什么？"></a>HTTP/2 是什么？</h2><p>HTTP/2（超文本传输协议第2版，最初命名为HTTP 2.0），是HTTP协议的的第二个主要版本，使用于万维网。HTTP/2是HTTP协议自1999年HTTP 1.1发布后的首个更新，主要基于SPDY协议。它由互联网工程任务组（IETF）的Hypertext Transfer Protocol Bis（httpbis）工作小组进行开发。[1]该组织于2014年12月将HTTP/2标准提议递交至IESG进行讨论[2]，于2015年2月17日被批准。[3] HTTP/2标准于2015年5月以RFC 7540正式发表。[4]</p>
-<p>如此一来，可以通过这种方式去自动完成一些重复性工作；比如，用 Webhook 来自动触发一些持续集成（CI）工具的运作，比如 <a href="https://github.com/integrations/travis-ci" target="_blank" rel="external">Travis CI</a>；又或者是通过 Webhook 去部署你的线上服务器。</p>
-<h2 id="Webhook使用场景"><a href="#Webhook使用场景" class="headerlink" title="Webhook使用场景"></a>Webhook使用场景</h2><p>实际工作中，经常有这样的场景，本地提交代码到git仓库以后需要网站远程自动同步代码, 大概流程如下图： </p>
-<p><img src="http://img.pfan123.com/webhook1.png" alt="Webhook"></p>
-<h2 id="Webhook自动化部署"><a href="#Webhook自动化部署" class="headerlink" title="Webhook自动化部署"></a>Webhook自动化部署</h2><p>1.为了响应 Webhook 发出的请求，从而做一些我们想做的事情，我们得先实现一个响应服务器。本文采用 Node 来实现一个原型，你当然也可以用 PHP，python 等， 这里使用了<a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>插件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&apos;http&apos;)</span><br><span class="line">const createHandler = require(&apos;github-webhook-handler&apos;)</span><br><span class="line">const handler = createHandler(&#123; path: &apos;/webhook&apos;, secret: &apos;myhashsecret&apos; &#125;)</span><br><span class="line">const exec = require(&apos;child_process&apos;).exec</span><br><span class="line"></span><br><span class="line">var commands = [</span><br><span class="line">  &apos;cd .././blog&apos;,</span><br><span class="line">  &apos;git clean -df&apos;,</span><br><span class="line">  &apos;git pull&apos;</span><br><span class="line">].join(&apos; &amp;&amp; &apos;)</span><br><span class="line"></span><br><span class="line">http.createServer(function (req, res) &#123;</span><br><span class="line">  console.log(req.url)</span><br><span class="line">  handler(req, res, function (err) &#123;</span><br><span class="line">    res.statusCode = 404</span><br><span class="line">    res.end(&apos;no such location&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(7777)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;error&apos;, function (err) &#123;</span><br><span class="line">  console.error(&apos;Error:&apos;, err.message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;push&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received a push event for %s to %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref)</span><br><span class="line"></span><br><span class="line">    //执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">    exec(commands, function (error, stdout, stderr) &#123;</span><br><span class="line">      if (error) &#123;</span><br><span class="line">        console.log(error.stack);</span><br><span class="line">        console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">      &#125;</span><br><span class="line">      console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;issues&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received an issue event for %s action=%s: #%d %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.action,</span><br><span class="line">    event.payload.issue.number,</span><br><span class="line">    event.payload.issue.title)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>例如  <code>deploy.sh</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">exec(&apos;sh deploy.sh&apos;, function (error, stdout, stderr) &#123;</span><br><span class="line">  if (error) &#123;</span><br><span class="line">    console.log(error.stack);</span><br><span class="line">    console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"> </span><br><span class="line">WEB_PATH=&apos;/www/blog/&apos;</span><br><span class="line"> </span><br><span class="line">echo &quot;Start deployment&quot;</span><br><span class="line"></span><br><span class="line">cd $WEB_PATH</span><br><span class="line">echo &quot;pulling source code...&quot;</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git clean -f</span><br><span class="line">git pull</span><br><span class="line">git checkout master</span><br><span class="line">echo &quot;Finished.&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="配置-Webhook"><a href="#配置-Webhook" class="headerlink" title="配置 Webhook"></a>配置 Webhook</h2><p>Webhook 的配置是十分简单的，首先进入你的 repo 主页，通过点击页面上的按钮 [settings] -&gt; [Webhooks &amp; service] 进入 Webhooks 配置主页面。也可以通过下面这个链接直接进入配置页面：</p>
-<p><img src="http://img.pfan123.com/webhook2.png" alt="Webhook"></p>
-<p>配置好 Webhook 后，Github 会发送一个 ping 来测试这个地址。如果成功了，那么这个 Webhook 前就会加上一个绿色的勾；如果你得到的是一个红色的叉，那就好好检查一下哪儿出问题了吧！</p>
-<p><img src="http://img.pfan123.com/webhook3.png" alt="Webhook"></p>
-<p>参考资料：</p>
-<p><a href="https://imququ.com/post/http2-resource.html" target="_blank" rel="external">HTTP/2 资料汇总</a></p>
-<p><a href="https://coding.net/help/doc/git/webhook.html" target="_blank" rel="external">coding Webhook</a></p>
-<p><a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP-2，Nginx/">HTTP/2，Nginx</a></li></ul>
 	</div>
 
       
