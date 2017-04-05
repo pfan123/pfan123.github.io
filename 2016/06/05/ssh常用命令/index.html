@@ -24,7 +24,7 @@
 2、连接到远程主机指定的端口：
 命令格式：
 12ssh name@remoteserver -p 2222 或者ssh remoteserver -l nam">
-<meta property="og:updated_time" content="2017-03-09T11:12:50.000Z">
+<meta property="og:updated_time" content="2017-04-05T06:49:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh常用命令">
 <meta name="twitter:description" content="1、连接到远程主机：
@@ -309,7 +309,7 @@
 <p>运行结束以后，在$HOME/.ssh/目录下，会新生成两个文件：id_rsa.pub和id_rsa。前者是你的公钥，后者是你的私钥。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//查看公钥，如下</span><br><span class="line">➜  ~ cat ~/.ssh/id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCrP9L9GGttZgk3HQ/gfi9O6snm8J0atMGWet9NHGlzj+Di2eziYL5qWYrPiwIfLVYQ7IHLHM2k5WJl4cQoVj2mWpvq0feRfMBvRemfKb/F2jVKcFTJthzfyt+yQQ3p/HxoEwhpbJ2i1wDk77ANBIPFUtSdBbNoFsX7ftxYBKvsHRojWj4ZYuZZ39lXkZjt61k6Wr89iZlI9bPuhJFMVs83l37Tx/Losstj4NaO48IEdUGiEBzGX8lVWzw8vc6amHN5WN+sdfsdfsdsdf/vFkKLHd/6t+LvhoLRadHzSwqXRqDCY7ikixLh001b9sV8MO2jYp9R6B6zKBD6X3dah2+ulzjaNQuvAiZjxSMO7xALQxPI59qxWhbMYLgzXYe8hswZWZ+ClIzdLFsYX2BeQVfFM3sroi9A2kRmSGvTNgmBLxehBECv6eLcvQDBRwj69NtHNS4T5obnfN7MHKNRQI7jpNFqTQ6h23C+7VG16ec42MHggRcIjKFw57sq/6dmjKiYxwM16JKADrVvFxDzaQbuRgvvh0+d9mxwU/ejQic7CE3E7an35yTH9b4g3yJh+5QOMBEyurMpAQjMdZOrOLw== sdfsdfsdfsd@qq.com</span><br></pre></td></tr></table></figure>
 <p>这时再输入下面的命令，将公钥传送到远程主机host上面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-copy-id user@host</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-copy-id user@host  [-p 端口]</span><br></pre></td></tr></table></figure>
 <p>好了，从此你再登录，就不需要输入密码了。<br>如果还是不行，就打开远程主机的/etc/ssh/sshd_config这个文件，检查下面几行前面”#”注释是否取掉。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RSAAuthentication yes</span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line">AuthorizedKeysFile .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 <p>然后，重启远程主机的ssh服务。</p>
