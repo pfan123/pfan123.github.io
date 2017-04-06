@@ -1033,10 +1033,10 @@
 
 
   
-    <article id="post-斜率计算" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-几个 CSS 方法论" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/24/斜率计算/" class="article-date">
+      <a href="/2016/10/24/几个 CSS 方法论/" class="article-date">
   	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
 </a>
     </div>
@@ -1050,7 +1050,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/斜率计算/">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a>
+      <a class="article-title" href="/2016/10/24/几个 CSS 方法论/">几个 CSS 方法论</a>
     </h1>
   
 
@@ -1059,53 +1059,271 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我们可以使用正切<code>Math.tan()</code>操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。<code>Math.atan()</code>和<code>Math.atan2()</code>两个函数可以计算反正切，接下来分析一下具体用法：</p>
-<h3 id="一、Math-atan"><a href="#一、Math-atan" class="headerlink" title="一、Math.atan()"></a>一、Math.atan()</h3><p>Math.atan()接受一个参数:用法如下: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angel = Math.atan(slope)  //slope值计算为y/x （斜率比值无法判断 y、x方向，如－1/－1， 1/－1等情况）</span><br><span class="line">//angel为一个角度的弧度值，`slope`为直线的斜率，是一个数字，这个数字可以是负的无穷大到正无穷大之间的任何一个值(tan的取值范围)</span><br></pre></td></tr></table></figure>
-<p>不过，利用它进行计算比较复杂。因为它的周期性，一个数字的反正切值不止一个。例如atan(-1)的值可能是45度，也可能是225度。这样就是它的周期性，对于正切函数来说，它的周期是180度，所以两个相差180度的角具有相同的正切和斜率:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tanθ=tan(θ+180)</span><br></pre></td></tr></table></figure></p>
-<p>然而，<code>Math.atan()</code>只能返回一个角度值，因此确定它的角度非常的复杂，而且，90度和270度的正切是无穷大，因为除数为零，我们也是比较难以处理的，因此我们更多的会采用第二个函数<code>Math.atan2()</code>进行处理。</p>
-<h3 id="二、Math-atan2"><a href="#二、Math-atan2" class="headerlink" title="二、Math.atan2()"></a>二、Math.atan2()</h3><p>Math.atan2()接受两个参数x和y，方法如下: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angel=Math.atan2(y,x) </span><br><span class="line"></span><br><span class="line">// x 指定点的 x 坐标的数字。 </span><br><span class="line">// y 指定点的 y 坐标的数字。</span><br></pre></td></tr></table></figure>
-<p>计算出来的结果angel是一个弧度值，也可以表示相对直角三角形对角的角，其中 x 是临边边长，而 y 是对边边长。</p>
-<h3 id="三、-对比Math-atan-与-Math-atan2-输出测试"><a href="#三、-对比Math-atan-与-Math-atan2-输出测试" class="headerlink" title="三、 对比Math.atan() 与 Math.atan2()输出测试"></a>三、 对比Math.atan() 与 Math.atan2()输出测试</h3><pre><code>//输入弧度值，return 角度值
-function trace(x){
-  //弧度=角度*Math.PI/180
-  return 180*x/Math.PI
+        <p>在大型、复杂和快速迭代的系统中，CSS 将非常难以维护。原因之一就是 CSS 没有作用域的概念，每个 CSS 都是全局的，这意味着对 CSS 的任何修改就可能导致一些 UI 的级联改变。</p>
+<p>CSS 的扩展语言 – <a href="http://sixrevisions.com/elsewhere-on-the-web/the-best-css-preprocessors-right-now/" target="_blank" rel="external">CSS 预处理器</a>，比如 Sass、Less 和 Stylus，使我们编写 CSS 更加容易，但在我看来，这些 CSS 的扩展语言并没有真正解决可扩展性问题。</p>
+<p>在 CSS 支持作用域机制之前，我们需要一种机制，使我们的样式只与特定的 HTML 部分关联，这就是 CSS 方法论。本文将讨论如下的 CSS 方法论：</p>
+<ul>
+<li>Object-Oriented CSS (OOCSS)</li>
+<li>Block, Element, Modifier (BEM)</li>
+<li>Scalable and Modular Architecture for CSS (SMACSS)</li>
+<li>SUIT CSS</li>
+<li>Systematic CSS</li>
+</ul>
+<p>CSS 方法论是正式的，文档化的 CSS 编写方法，使我们能够将 CSS 作为一些小的独立的模块来开发和维护，而不是一个庞大的不可分割的一坨代码。采用一种 CSS 方法论 – 即便这是你自己创建的 – 它将使你在 Web 开发中更加得心应手。</p>
+<p>相关文章：<a href="http://sixrevisions.com/css/css-development-at-large-sites/" target="_blank" rel="external">CSS Development at Large-Scale Websites</a></p>
+<p>每个 CSS 方法论都为可扩展性和可维护性提供了一套解决方案，一个 CSS 方法论通常会定义：</p>
+<ul>
+<li>CSS 和 HTML 的最佳实践</li>
+<li>Class 和 ID 的命名约定</li>
+<li>有序的、分组的 CSS 样式</li>
+<li>代码格式</li>
+</ul>
+<p>没有“最好”的 CSS 方法论，不同的个人/团队/项目适合于不同的方法论。希望通过本文你可以找到一个适合你的方法论，或者激发你创建一个你自己的。</p>
+<h3 id="Object-Oriented-CSS-OOCSS"><a href="#Object-Oriented-CSS-OOCSS" class="headerlink" title="Object-Oriented CSS (OOCSS)"></a>Object-Oriented CSS (OOCSS)</h3><p>Object-Oriented CSS 简称为 OOCSS，发布于 2009 年，这是第一个被广泛采用的 CSS 方法论，直到今天仍有很大的影响力。<br>OOCSS 主张结构与样式分离，明确区分内容和它的容器。在 OOCSS 中，样式规则使用相互独立的 CSS 选择器来界定。</p>
+<h3 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h3><p>例如，一个按钮元素可以通过两个样式来设定：</p>
+<ul>
+<li>.button – 提供按钮的基本样式</li>
+<li>.grey-btn – 应用颜色和其他可视化属性</li>
+</ul>
+<p><code>HTML</code>:</p>
+<pre><code>&lt;button class=&quot;button grey-btn&quot;&gt;
+</code></pre><p><code>CSS</code>:</p>
+<pre><code>.button {
+  box-sizing: border-box;
+  height: 50px;
+  width: 100%;
 }
-
-测试如下：
-①对比一
-x=Math.atan(1)//计算正切值为1的数字对应的弧度值，输出弧度值0.785398163397448 （当斜率值为－7/－7或7/7）
-trace(x) //输出45 
-
-x=Math.atan2(7,7) //输出弧度值 0.785398163397448  
-
-trace(x)   //输出45 
-
-②对比二
-x=Math.atan2(7,-7) //输出弧度值 2.35619449019234 
-trace(x)   //转换为角度值 135  
-
-x=Math.atan2(-7,7) //输出弧度值 -0.785398163397448
-trace(x)  //转换为角度值输出-45
-
-x=Math.atan2(-7,-7)   //输出弧度值 -2.35619449019234
-trace(x)  //转换为角度值输出-135
-</code></pre><p>从这些测试可以看出，通过坐标系的自动调整，可以很自由的计算出处于不同象限的位置相对应的角度. </p>
-<h3 id="四、-计算两点间连线的倾斜角"><a href="#四、-计算两点间连线的倾斜角" class="headerlink" title="四、 计算两点间连线的倾斜角"></a>四、 计算两点间连线的倾斜角</h3><p><code>Math.atan2()</code>函数返回点(x,y)和原点(0,0)之间直线的倾斜角，那么如何计算任意两点间直线的倾斜角呢？</p>
-<p>其实只需要将两点x、y坐标分别相减得到一个新的点(x2-x1,y2-y1)，然后利用它求出角度就可以了。使用下面的一个转换可以实现计算出两点间连线的夹角：</p>
-<pre><code>//输入弧度值，return 角度值
-function trace(x){
-  //弧度=角度*Math.PI/180
-  return 180*x/Math.PI
+.grey-btn {
+  background: #EEE;
+  border: 1px solid #DDD;
+  box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 3px;
+  color: #555;
 }
-var x = Math.atan2(y2-y1,x2-x1);  //得到弧度值
-trace(x)  //获取角度值
-</code></pre><p>具体实例例子：</p>
-<pre><code>//测试,计算点(3,3)和(5,5)构成的连线的夹角 
-x=Math.atan2(5-3,5-3) //输出弧度值 0.785398163397448
-trace(x)  //输出角度值 45
-</code></pre><p>参考资料:<br><a href="http://www.w3school.com.cn/jsref/jsref_atan.asp" target="_blank" rel="external">JavaScript atan() 方法</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a><br><a href="http://blog.pfan123.com/2016/10/24/%E8%A7%92%E5%BA%A6%E4%B8%8E%E5%BC%A7%E5%BA%A6%E7%9A%84%E8%BD%AC%E6%8D%A2/" target="_blank" rel="external">角度与弧度的转换</a></p>
+</code></pre><p>OOCSS 方法论的目标之一是减少样式规则中相同属性的重复率。该方法论试图通过许多小的、模块化的、专有功能的 CSS 类来实现这一目标。很少通过类型选择器（比如：h1，div 和 body）来指定其样式。</p>
+<p>注意：在 OOCSS 方法论中，不鼓励使用后代选择器：</p>
+<p><code>CSS</code>:</p>
+<pre><code>/* 在 OOCSS 中，不鼓励使用后代选择器 */
+.wrapper .blog-post .button {
+  ...
+}
+</code></pre><p>避免使用后代选择器，这样 HTML 的呈现就不依赖于特定的 HTML 结构（样式与结构分离）。<br>OOCSS 鼓励大家尽量复用已有样式，通过扩展现有的样式规则来创建新的样式类，而不要修改或覆盖已有的 CSS 属性。</p>
+<p>下面我们想让无序列表的第一项的颜色突出一些，先看看不好的方式：</p>
+<p><code>HTML</code>:</p>
+<pre><code>&lt;!-- 反例 --&gt;
+&lt;ul class=&quot;to-do&quot;&gt;
+  &lt;li&gt;Combine my CSS files&lt;/li&gt;
+  &lt;li&gt;Run CSS Lint&lt;/li&gt;
+  &lt;li&gt;Minify my stylesheet&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><p><code>CSS</code>:</p>
+<pre><code>/* OOCSS */
+.to-do {
+  color: #FFF;
+  background-color: #000;
+}
+.first-to-do-item {
+  color: #FF0000;
+}
+</code></pre><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>OOCSS 的主要缺陷是将产生大量的 CSS 类，这将非常难以维护。在我看来，面向对象编程的理念并不是非常适合 CSS。但这并不是说 OOCSS 的原则不实用，相反，OOCSS 是一个最基础的方法论，它给大规模的 CSS 带来了福音。</p>
+<h4 id="Block-Element-Modifier-BEM"><a href="#Block-Element-Modifier-BEM" class="headerlink" title="Block, Element, Modifier (BEM)"></a>Block, Element, Modifier (BEM)</h4><p>Block, Element, Modifier 通常被称为 BEM，由俄罗斯的 Google 团队设计。BEM 的主要设计理念是用不同的角色来区分不同的 CSS 类，也就是说用角色来命名 CSS 类。BEM 补充了 OOCSS 的不足，因为 OOCSS 并没有任何的命名约定。</p>
+<p>在 BEM 方法论中，block 是一个独立的模块化的 UI 组件，一个 block 可以由多个 HTML 元素组成，甚至可以由多个 block 组成，例如导航菜单或搜索表单。element 是 block 的组成部分，服务于一个单一的目的，例如，在一个导航中，element 就是导航菜单中的链接，在实际中就是一个 li 元素和一个 a 元素。modifier 用于改变 block 和 element 的默认样式。</p>
+<p>下面是 BEM 的命名规范：</p>
+<ul>
+<li>.block</li>
+<li>.block–modifier</li>
+<li>.block__element</li>
+<li>.block__element–modifier</li>
+</ul>
+<h3 id="案例分析-1"><a href="#案例分析-1" class="headerlink" title="案例分析"></a>案例分析</h3><p>看下面的登录表单：</p>
+<pre><code>&lt;form&gt;
+  &lt;label&gt;Username &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;&lt;/label&gt;
+  &lt;label&gt;Password &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;&lt;/label&gt;
+  &lt;button&gt;Sign in&lt;/button&gt;
+&lt;/form&gt;
+</code></pre><p>用 BEM 方法论将如下实现：</p>
+<pre><code>&lt;form class=&quot;loginform loginform--errors&quot;&gt;
+  &lt;label class=&quot;loginform__username loginform__username--error&quot;&gt;
+    Username &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;loginform__password&quot;&gt;
+    Password &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;
+  &lt;/label&gt;
+  &lt;button class=&quot;loginform__btn loginform__btn--inactive&quot;&gt;
+    Sign in
+  &lt;/button&gt;
+&lt;/form&gt;
+</code></pre><p><code>.loginform</code> 类就是 block。</p>
+<ul>
+<li>.loginform__username 用户名</li>
+<li>.loginform__password 密码</li>
+<li>.loginform__btn 登录按钮</li>
+</ul>
+<p>还有三个 modifier 分别是：</p>
+<ul>
+<li>.loginform__username–error 使用户名元素呈现为一个错误提醒的样式</li>
+<li>.loginform__btn–inactive 使登录按钮元素呈现为不可用的样式</li>
+<li>.loginform–errors 使整个登录表单呈现为错误提醒的样式</li>
+</ul>
+<p>BEM 的命名约定有助于 CSS 作者遵循 OOCSS 的扁平化设计原则，避免了使用深层次的后代选择器。例如下面的 CSS 选择器：</p>
+<pre><code>.loginform .username .error {
+  ...
+}
+</code></pre><p>可以使用单一一个 CSS 类来实现：</p>
+<pre><code>.loginform__username--error {
+  ...
+}
+</code></pre><h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>BEM 是一个非常健壮的命名约定，可以方便地区分不同 CSS 类的目的，而且在 HTML 中也可以很方便地识别 CSS 类之间的关系。</p>
+<p>BEM 的反对者主要有以下两类：<br>-CSS 类名太长太丑<br>-命名约定对不熟练的开发者不友好</p>
+<h3 id="Scalable-and-Modular-Architecture-for-CSS-SMACSS"><a href="#Scalable-and-Modular-Architecture-for-CSS-SMACSS" class="headerlink" title="Scalable and Modular Architecture for CSS (SMACSS)"></a>Scalable and Modular Architecture for CSS (SMACSS)</h3><p>Jonathan Snook 在 2011 年出版了《Scalable and Modular Architecture for CSS》这本书，简称为 SMACSS，发音是 [smacks]。<br>该方法论的核心思路是如何为 CSS 样式分类。Snook 提出了一下五类：</p>
+<ul>
+<li>Base 为单个 HTML 元素设置默认样式，通常是标签选择器：</li>
+</ul>
+<pre><code>h1 {
+ font-size: 32px;
+}
+div {
+  margin: 0 auto;
+}
+a {
+  color: blue;
+}
+</code></pre><ul>
+<li>Layout 与网页布局相关的样式，样式名通常以 layout- 或 l- 开头：</li>
+</ul>
+<pre><code>.layout-sidebar {
+  width: 320px;
+}
+.l-comments {
+  width: 640px;
+}
+</code></pre><ul>
+<li>Modules 模块和可复用的组件：</li>
+</ul>
+<pre><code>.call-to-action-button {
+  text-transform: uppercase;
+  color: #FFF200;
+}
+.search-form {
+  display: inline-block;
+  background-color: E1E1E1;
+}
+</code></pre><ul>
+<li>State 指定界面特定状态的样式规则：</li>
+</ul>
+<pre><code>.is-hidden {
+  display: none;
+}
+.is-highlighted {
+  color: #FF0000;
+  background-color: #F4F0BB;
+  border: 1px solid #CBBD15;
+}
+</code></pre><ul>
+<li>Themes 影响整体布局和模块的样式，由用户设置触发。</li>
+</ul>
+<p>SMACSS 提供了一个比 BEM 更简单的命名约定。基础样式（base）没有 CSS 类名，因为他们都是标签选择器（h1, p, a 等），模块（module）有一个唯一的样式名，子模块用父模块名作为前缀。</p>
+<p>看下面布局，在 .l-footer 中，有一个搜索模块，并且搜索表单至少被用户提交过一次：</p>
+<pre><code>&lt;section class=&quot;l-footer&quot;&gt;
+  &lt;form class=&quot;search is-submitted&quot;&gt;
+    &lt;input type=&quot;search&quot; /&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Search&quot;&gt;
+  &lt;/form&gt;
+&lt;/section&gt;
+</code></pre><p>SMACSS 也不推荐使用后代选择器，Jonathan Snook 还介绍了<a href="https://smacss.com/book/applicability" target="_blank" rel="external">CSS 的最佳实用深度</a>理论，该理论的核心思想是通过类名来精确控制目标元素的样式，从而减少 HTML 结构对样式的影响。</p>
+<h3 id="SUIT-CSS"><a href="#SUIT-CSS" class="headerlink" title="SUIT CSS"></a>SUIT CSS</h3><p>Nicolas Gallagher 提出的 SUIT CSS 发布于 2014年，他通过 CSS 预处理器定义了一套类似 BEM 命名规范，SUIT CSS 的命名方式有如下五种：</p>
+<ul>
+<li>u-utilityName</li>
+<li>ComponentName</li>
+<li>ComponentName–modifierName</li>
+<li>ComponentName-elementName</li>
+<li>ComponentName.is-stateOfName</li>
+</ul>
+<p>该命名约定突出的区分了：</p>
+<ul>
+<li>General utility classes</li>
+<li>Standalone/modular UI components</li>
+<li>Individual elements</li>
+<li>Modifiers</li>
+</ul>
+<p>看下面的登录表单：</p>
+<pre><code>&lt;form class=&quot;LoginForm LoginForm--errors&quot;&gt;
+  &lt;label class=&quot;LoginForm-username is-required&quot;&gt;
+    Username &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;
+  &lt;/label&gt;
+  &lt;label class=&quot;LoginForm-password&quot;&gt;
+    Password &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;
+  &lt;/label&gt;
+  &lt;button class=&quot;LoginForm-button is-inactive&quot;&gt;Sign in&lt;/button&gt;
+&lt;/form&gt;
+</code></pre><h3 id="Systematic-CSS"><a href="#Systematic-CSS" class="headerlink" title="Systematic CSS"></a>Systematic CSS</h3><p>Systematic CSS 是原文作者最近才提出来的一个方法论，借鉴了许多 OOCSS、BEM、SMACSS、SUIT CSS 和其他一些 CSS 方法论的原理和思路。Systematic CSS 可以作为现有 CSS 方法论的简单的替代方案，只需要记住少许几个命名约定，并且命名也更加直观。</p>
+<p>在 Systematic CSS 方法论中，一个页面被分为一下四个部分：</p>
+<ul>
+<li>Layout</li>
+<li>Elements</li>
+<li>Widgets</li>
+<li>Modifiers</li>
+</ul>
+<p>首先，使用 section 或 div 元素来创建一个页面布局：</p>
+<pre><code>&lt;div class=&quot;CONTAINER&quot;&gt;
+  &lt;header class=&quot;BANNER&quot;&gt;&lt;/header&gt;
+  &lt;nav class=&quot;NAVIGATION_PRIMARY&quot;&gt;&lt;/nav&gt;
+  &lt;nav class=&quot;NAVIGATION_SECONDARY&quot;&gt;&lt;/nav&gt;
+  &lt;main class=&quot;MAIN&quot;&gt;&lt;/main&gt;
+  &lt;aside class=&quot;ADVERTS&quot;&gt;&lt;/aside&gt;
+  &lt;footer class=&quot;FOOTER&quot;&gt;
+    &lt;nav class=&quot;SITEMAP&quot;&gt;&lt;/nav&gt;
+    &lt;div class=&quot;LEGAL&quot;&gt;&lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/div&gt;
+</code></pre><p>其次，为内容和交互元素建立默认样式，比如，标题（h1, h2, h3）、段落（p）、列表（ul 和 ol）、表格（table）、表单（form）等。</p>
+<p>然后，确定页面中那些重复的部分，将这些重复的部分提取为一个个独立的模块。在 Systematic CSS 中这些模块被称为 widget。看下面两个 widget：</p>
+<pre><code>&lt;!-- navigation bar --&gt;
+&lt;div class=&quot;NavBar&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;./&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;about.html&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;learn/&quot;&gt;Learn&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;extend/&quot;&gt;Extend&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;share/&quot;&gt;Share&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;!-- search form --&gt;
+&lt;div class=&quot;SearchBox&quot;&gt;
+  &lt;form action=&quot;search.html&quot; method=&quot;get&quot;&gt;
+    &lt;label for=&quot;input-search&quot;&gt;Search&lt;/label&gt;
+    &lt;input name=&quot;q&quot; type=&quot;search&quot; id=&quot;input-search&quot; /&gt;
+    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre><p>最后，为一些默认样式添加修饰（modifier）类。<br>看下面例子，navbar-primary 修饰类改变了 NavBar 的默认样式，navbar-selected 修饰类标记了当前的选中项：</p>
+<pre><code>&lt;div class=&quot;NavBar navbar-primary&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;./&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;about.html&quot; class=&quot;navbar-selected&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;learn/&quot;&gt;Learn&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;extend/&quot;&gt;Extend&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;share/&quot;&gt;Share&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre><p>在 Systematic CSS 中，一个 CSS 类可以是：</p>
+<ul>
+<li>布局（layout）名称</li>
+<li>组件（widget）名称</li>
+<li>修饰符</li>
+</ul>
+<p>一个 CSS 类只能是以上三种的一种，不能将以上三种结合使用。它们分别有不同的命名约定：</p>
+<ul>
+<li>Layout - 全大写</li>
+<li>Widget - 大驼峰</li>
+<li>Modifier - 全小写加连接符</li>
+</ul>
+<p>这个命名约定的优点是，类的层次结构由它们的名字来代表。<br>布局的类名采用全大写的形式，非常显眼，例如：.NAVIGATION，.SIDEBAR，.FOOTER。<br>组件的类名采用大驼峰的形式，比较显眼，例如：.MainMenu，.ImageGrid，.BlogPost。<br>修饰类是最不重要的类，因为它们修饰一些默认样式，不是默认样式的必要部分，所以它们采用全小写的形式，也最不显眼，例如：.is-highlighted，.has-errors，.hidden。</p>
+<h3 id="其他-CSS-方法论"><a href="#其他-CSS-方法论" class="headerlink" title="其他 CSS 方法论"></a>其他 CSS 方法论</h3><ul>
+<li>Atomic Design</li>
+<li>DoCSSa</li>
+<li>csstyle</li>
+</ul>
+<p>参考资料:<br><a href="http://sixrevisions.com/css/css-methodologies" target="_blank" rel="external">A Look at Some CSS Methodologies</a><br><a href="http://sixrevisions.com/css/standardized-methods-for-css/" target="_blank" rel="external">5 Standardized Methods for Writing CSS</a><br><a href="http://sixrevisions.com/css/using-css3-appropriately/" target="_blank" rel="external">Are You Using CSS3 Appropriately?</a><br><a href="http://sixrevisions.com/css/css-style-guides/" target="_blank" rel="external">A List of CSS Styles Guides for Inspiration</a></p>
 
       
     </div>
@@ -1122,7 +1340,7 @@ trace(x)  //输出角度值 45
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math-atan-、Math-atan2-斜率/">Math.atan()、Math.atan2() 斜率</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-BEM-OOCSS/">CSS BEM OOCSS</a></li></ul>
 	</div>
 
       
@@ -1225,10 +1443,10 @@ trace(x)  //输出角度值 45
 
 
   
-    <article id="post-H5全景－CSS3D篇" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-斜率计算" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/24/H5全景－CSS3D篇/" class="article-date">
+      <a href="/2016/10/24/斜率计算/" class="article-date">
   	<time datetime="2016-10-24T15:56:21.000Z" itemprop="datePublished">2016-10-24</time>
 </a>
     </div>
@@ -1242,7 +1460,7 @@ trace(x)  //输出角度值 45
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/H5全景－CSS3D篇/">H5全景－CSS3d篇</a>
+      <a class="article-title" href="/2016/10/24/斜率计算/">斜率计算：反正切函数 Math.atan() 与 Math.atan2() 的区别</a>
     </h1>
   
 
@@ -1251,15 +1469,53 @@ trace(x)  //输出角度值 45
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>perspective 属性定义 3D 元素距视图的距离，以像素计。该属性允许您改变 3D 元素查看 3D 元素的视图。</p>
-<p>现在说全景会不会有点迟=。=  <a href="https://zhuanlan.zhihu.com/p/22761057#!" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/22761057#!</a></p>
-<p>CSS 3D应该注意的事项  <a href="http://www.w3cplus.com/css3/things-watch-working-css-3d.html" target="_blank" rel="external">http://www.w3cplus.com/css3/things-watch-working-css-3d.html</a></p>
-<p>天猫HTML5互动技术实践 <a href="https://yq.aliyun.com/articles/59052" target="_blank" rel="external">https://yq.aliyun.com/articles/59052</a></p>
-<p>H5打造3d场景不完全攻略（一）: H5 3d表现形式  <a href="https://segmentfault.com/a/1190000006188118" target="_blank" rel="external">https://segmentfault.com/a/1190000006188118</a></p>
-<p>H5打造3d场景不完全攻略（二）: Amazing CSS3D  <a href="https://segmentfault.com/a/1190000007262754" target="_blank" rel="external">https://segmentfault.com/a/1190000007262754</a></p>
-<p>前端黑科技——纯clip-path打造的3D模型渲染器 <a href="http://www.tuicool.com/articles/ZfQzy2v" target="_blank" rel="external">http://www.tuicool.com/articles/ZfQzy2v</a></p>
-<p>CSS3 3D transforms系列教程-3D旋转木马  <a href="http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201502061338.html" target="_blank" rel="external">http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201502061338.html</a></p>
-<p>参考资料:<br><a href="http://sixrevisions.com/css/css-methodologies" target="_blank" rel="external">A Look at Some CSS Methodologies</a><br><a href="http://sixrevisions.com/css/standardized-methods-for-css/" target="_blank" rel="external">5 Standardized Methods for Writing CSS</a><br><a href="http://sixrevisions.com/css/using-css3-appropriately/" target="_blank" rel="external">Are You Using CSS3 Appropriately?</a><br><a href="http://sixrevisions.com/css/css-style-guides/" target="_blank" rel="external">A List of CSS Styles Guides for Inspiration</a></p>
+        <p>我们可以使用正切<code>Math.tan()</code>操作将角度转变为斜率，那么怎样利用斜率来转换为角度呢？可以利用斜率的反正切函数将它转换为相应的角度。<code>Math.atan()</code>和<code>Math.atan2()</code>两个函数可以计算反正切，接下来分析一下具体用法：</p>
+<h3 id="一、Math-atan"><a href="#一、Math-atan" class="headerlink" title="一、Math.atan()"></a>一、Math.atan()</h3><p>Math.atan()接受一个参数:用法如下: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angel = Math.atan(slope)  //slope值计算为y/x （斜率比值无法判断 y、x方向，如－1/－1， 1/－1等情况）</span><br><span class="line">//angel为一个角度的弧度值，`slope`为直线的斜率，是一个数字，这个数字可以是负的无穷大到正无穷大之间的任何一个值(tan的取值范围)</span><br></pre></td></tr></table></figure>
+<p>不过，利用它进行计算比较复杂。因为它的周期性，一个数字的反正切值不止一个。例如atan(-1)的值可能是45度，也可能是225度。这样就是它的周期性，对于正切函数来说，它的周期是180度，所以两个相差180度的角具有相同的正切和斜率:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tanθ=tan(θ+180)</span><br></pre></td></tr></table></figure></p>
+<p>然而，<code>Math.atan()</code>只能返回一个角度值，因此确定它的角度非常的复杂，而且，90度和270度的正切是无穷大，因为除数为零，我们也是比较难以处理的，因此我们更多的会采用第二个函数<code>Math.atan2()</code>进行处理。</p>
+<h3 id="二、Math-atan2"><a href="#二、Math-atan2" class="headerlink" title="二、Math.atan2()"></a>二、Math.atan2()</h3><p>Math.atan2()接受两个参数x和y，方法如下: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">angel=Math.atan2(y,x) </span><br><span class="line"></span><br><span class="line">// x 指定点的 x 坐标的数字。 </span><br><span class="line">// y 指定点的 y 坐标的数字。</span><br></pre></td></tr></table></figure>
+<p>计算出来的结果angel是一个弧度值，也可以表示相对直角三角形对角的角，其中 x 是临边边长，而 y 是对边边长。</p>
+<h3 id="三、-对比Math-atan-与-Math-atan2-输出测试"><a href="#三、-对比Math-atan-与-Math-atan2-输出测试" class="headerlink" title="三、 对比Math.atan() 与 Math.atan2()输出测试"></a>三、 对比Math.atan() 与 Math.atan2()输出测试</h3><pre><code>//输入弧度值，return 角度值
+function trace(x){
+  //弧度=角度*Math.PI/180
+  return 180*x/Math.PI
+}
+
+测试如下：
+①对比一
+x=Math.atan(1)//计算正切值为1的数字对应的弧度值，输出弧度值0.785398163397448 （当斜率值为－7/－7或7/7）
+trace(x) //输出45 
+
+x=Math.atan2(7,7) //输出弧度值 0.785398163397448  
+
+trace(x)   //输出45 
+
+②对比二
+x=Math.atan2(7,-7) //输出弧度值 2.35619449019234 
+trace(x)   //转换为角度值 135  
+
+x=Math.atan2(-7,7) //输出弧度值 -0.785398163397448
+trace(x)  //转换为角度值输出-45
+
+x=Math.atan2(-7,-7)   //输出弧度值 -2.35619449019234
+trace(x)  //转换为角度值输出-135
+</code></pre><p>从这些测试可以看出，通过坐标系的自动调整，可以很自由的计算出处于不同象限的位置相对应的角度. </p>
+<h3 id="四、-计算两点间连线的倾斜角"><a href="#四、-计算两点间连线的倾斜角" class="headerlink" title="四、 计算两点间连线的倾斜角"></a>四、 计算两点间连线的倾斜角</h3><p><code>Math.atan2()</code>函数返回点(x,y)和原点(0,0)之间直线的倾斜角，那么如何计算任意两点间直线的倾斜角呢？</p>
+<p>其实只需要将两点x、y坐标分别相减得到一个新的点(x2-x1,y2-y1)，然后利用它求出角度就可以了。使用下面的一个转换可以实现计算出两点间连线的夹角：</p>
+<pre><code>//输入弧度值，return 角度值
+function trace(x){
+  //弧度=角度*Math.PI/180
+  return 180*x/Math.PI
+}
+var x = Math.atan2(y2-y1,x2-x1);  //得到弧度值
+trace(x)  //获取角度值
+</code></pre><p>具体实例例子：</p>
+<pre><code>//测试,计算点(3,3)和(5,5)构成的连线的夹角 
+x=Math.atan2(5-3,5-3) //输出弧度值 0.785398163397448
+trace(x)  //输出角度值 45
+</code></pre><p>参考资料:<br><a href="http://www.w3school.com.cn/jsref/jsref_atan.asp" target="_blank" rel="external">JavaScript atan() 方法</a><br><a href="http://www.w3school.com.cn/jsref/jsref_atan2.asp" target="_blank" rel="external">JavaScript atan2() 方法</a><br><a href="http://blog.pfan123.com/2016/10/24/%E8%A7%92%E5%BA%A6%E4%B8%8E%E5%BC%A7%E5%BA%A6%E7%9A%84%E8%BD%AC%E6%8D%A2/" target="_blank" rel="external">角度与弧度的转换</a></p>
 
       
     </div>
@@ -1276,7 +1532,7 @@ trace(x)  //输出角度值 45
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5全景、CSS3d、perspective/">H5全景、CSS3d、perspective</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math-atan-、Math-atan2-斜率/">Math.atan()、Math.atan2() 斜率</a></li></ul>
 	</div>
 
       
