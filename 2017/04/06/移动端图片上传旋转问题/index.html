@@ -4,28 +4,27 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>localstorage基本知识 | pfan博客</title>
+  <title>移动端图片上传旋转问题 | pfan博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HTML5 LocalStorage 发展历程说到本地存储，这玩意真是历尽千辛万苦才走到HTML5这一步，之前的历史大概如下图所示：
+  <meta name="description" content="前言最近在处理移动端选择图片实时预览并上传时遇到一个问题：上传前图片使用img标签预览正常，但通过canvas对图片进行裁切处理，有时会出现图片翻转的问题，一般是翻转 90 度。后经一翻测试研究，发现横向拍照，正常，竖直拍照图片出现旋转90度，后来发现图片拍照会有 Exif 信息存在方向问题。
 
-最早的Cookies自然是大家都知道，问题主要就是太小，大概也就4KB的样子，而且IE6只支持每个域名20个cookies，太少了。优势就是大家都支持，而且支持得还蛮好。很早以前那些禁用cookies的用户也都慢慢的不存在了，就好像以前禁用javascript的用">
+PS：其实，大部分的图片查看客户端早已支持自动旋转，所以一般情况下数码设备拍的照片用电脑看，方向都是正">
 <meta property="og:type" content="article">
-<meta property="og:title" content="localstorage基本知识">
-<meta property="og:url" content="http://pfan123.github.io/2016/12/15/localstorage基本知识/index.html">
+<meta property="og:title" content="移动端图片上传旋转问题">
+<meta property="og:url" content="http://pfan123.github.io/2017/04/06/移动端图片上传旋转问题/index.html">
 <meta property="og:site_name" content="pfan博客">
-<meta property="og:description" content="HTML5 LocalStorage 发展历程说到本地存储，这玩意真是历尽千辛万苦才走到HTML5这一步，之前的历史大概如下图所示：
+<meta property="og:description" content="前言最近在处理移动端选择图片实时预览并上传时遇到一个问题：上传前图片使用img标签预览正常，但通过canvas对图片进行裁切处理，有时会出现图片翻转的问题，一般是翻转 90 度。后经一翻测试研究，发现横向拍照，正常，竖直拍照图片出现旋转90度，后来发现图片拍照会有 Exif 信息存在方向问题。
 
-最早的Cookies自然是大家都知道，问题主要就是太小，大概也就4KB的样子，而且IE6只支持每个域名20个cookies，太少了。优势就是大家都支持，而且支持得还蛮好。很早以前那些禁用cookies的用户也都慢慢的不存在了，就好像以前禁用javascript的用">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/localstorage_1.jpg">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/localstorage_2.png">
-<meta property="og:image" content="http://pfan123.github.io//img.pfan123.com/localstorage_3.png">
-<meta property="og:updated_time" content="2016-12-15T12:07:10.000Z">
+PS：其实，大部分的图片查看客户端早已支持自动旋转，所以一般情况下数码设备拍的照片用电脑看，方向都是正">
+<meta property="og:image" content="http://img.pfan123.com/exif/exif_1.png">
+<meta property="og:image" content="http://img.pfan123.com/exif/exif_2.png">
+<meta property="og:updated_time" content="2017-04-06T12:44:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="localstorage基本知识">
-<meta name="twitter:description" content="HTML5 LocalStorage 发展历程说到本地存储，这玩意真是历尽千辛万苦才走到HTML5这一步，之前的历史大概如下图所示：
+<meta name="twitter:title" content="移动端图片上传旋转问题">
+<meta name="twitter:description" content="前言最近在处理移动端选择图片实时预览并上传时遇到一个问题：上传前图片使用img标签预览正常，但通过canvas对图片进行裁切处理，有时会出现图片翻转的问题，一般是翻转 90 度。后经一翻测试研究，发现横向拍照，正常，竖直拍照图片出现旋转90度，后来发现图片拍照会有 Exif 信息存在方向问题。
 
-最早的Cookies自然是大家都知道，问题主要就是太小，大概也就4KB的样子，而且IE6只支持每个域名20个cookies，太少了。优势就是大家都支持，而且支持得还蛮好。很早以前那些禁用cookies的用户也都慢慢的不存在了，就好像以前禁用javascript的用">
-<meta name="twitter:image" content="http://pfan123.github.io//img.pfan123.com/localstorage_1.jpg">
+PS：其实，大部分的图片查看客户端早已支持自动旋转，所以一般情况下数码设备拍的照片用电脑看，方向都是正">
+<meta name="twitter:image" content="http://img.pfan123.com/exif/exif_1.png">
   
     <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
   
@@ -239,11 +238,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-localstorage基本知识" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-移动端图片上传旋转问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/12/15/localstorage基本知识/" class="article-date">
-  	<time datetime="2016-12-15T08:56:21.000Z" itemprop="datePublished">2016-12-15</time>
+      <a href="/2017/04/06/移动端图片上传旋转问题/" class="article-date">
+  	<time datetime="2017-04-06T02:00:21.000Z" itemprop="datePublished">2017-04-06</time>
 </a>
     </div>
   
@@ -256,7 +255,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      localstorage基本知识
+      移动端图片上传旋转问题
     </h1>
   
 
@@ -265,7 +264,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5、localstorage、sessionStorage/">HTML5、localstorage、sessionStorage</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exif，oritation，input，file/">exif，oritation，input，file</a></li></ul>
 	</div>
 
         
@@ -276,38 +275,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="HTML5-LocalStorage-发展历程"><a href="#HTML5-LocalStorage-发展历程" class="headerlink" title="HTML5 LocalStorage 发展历程"></a>HTML5 LocalStorage 发展历程</h2><p>说到本地存储，这玩意真是历尽千辛万苦才走到HTML5这一步，之前的历史大概如下图所示：</p>
-<p><img src="//img.pfan123.com/localstorage_1.jpg" alt="HTML5 LocalStorage发展历史"></p>
-<p>最早的Cookies自然是大家都知道，问题主要就是太小，大概也就4KB的样子，而且IE6只支持每个域名20个cookies，太少了。优势就是大家都支持，而且支持得还蛮好。很早以前那些禁用cookies的用户也都慢慢的不存在了，就好像以前禁用javascript的用户不存在了一样。</p>
-<p>到了HTML5把这些都统一了，官方建议是每个网站5MB，非常大了，就存些字符串，足够了。比较诡异的是居然所有支持的浏览器目前都采用的5MB，尽管有一些浏览器可以让用户设置，但对于网页制作者来说，目前的形势就5MB来考虑是比较妥当的。 </p>
-<h2 id="HTML-本地存储API"><a href="#HTML-本地存储API" class="headerlink" title="HTML 本地存储API"></a>HTML 本地存储API</h2><p>localstorage在浏览器的API有两个：<code>localStorage</code>和<code>sessionStorage</code>，存在于window对象中：<code>localStorage</code>对应<code>window.localStorage</code>，<code>sessionStorage</code>对应<code>window.sessionStorage</code>。<br><code>localStorage</code>和<code>sessionStorage</code>的区别主要是在于其生存期。</p>
-<h2 id="本地存储基本使用方法"><a href="#本地存储基本使用方法" class="headerlink" title="本地存储基本使用方法"></a>本地存储基本使用方法</h2><p>localStorage用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(&quot;b&quot;,&quot;isaac&quot;);//设置b为&quot;isaac&quot;</span><br><span class="line">var b = localStorage.getItem(&quot;b&quot;);//获取b的值,为&quot;isaac&quot;</span><br><span class="line">var a = localStorage.key(0); // 获取第0个数据项的键名，此处即为“b”</span><br><span class="line">localStorage.removeItem(&quot;b&quot;);//清除c的值</span><br><span class="line">localStorage.clear();//清除当前域名下的所有localstorage数据</span><br></pre></td></tr></table></figure></p>
-<p>sessionStorage用法（在当前页面才能生效，反之清楚存储）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(&quot;b&quot;,&quot;isaac&quot;);//设置b为&quot;isaac&quot;</span><br><span class="line">var b = sessionStorage.getItem(&quot;b&quot;);//获取b的值,为&quot;isaac&quot;</span><br><span class="line">var a = sessionStorage.key(0); // 获取第0个数据项的键名，此处即为“b”</span><br><span class="line">sessionStorage.removeItem(&quot;b&quot;);//清除c的值</span><br><span class="line">sessionStorage.clear();//清除当前域名下的所有localstorage数据</span><br></pre></td></tr></table></figure>
-<h2 id="本地存储作用域"><a href="#本地存储作用域" class="headerlink" title="本地存储作用域"></a>本地存储作用域</h2><p><img src="//img.pfan123.com/localstorage_2.png" alt="HTML5 LocalStorage发展历史"></p>
-<ul>
-<li>这里的作用域指的是：如何隔离开不同页面之间的<code>localStorage</code>（总不能在百度的页面上能读到腾讯的<code>localStorage</code>吧，哈哈哈）。</li>
-<li><code>localStorage</code>只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份<code>localStorage</code>数据。</li>
-<li><code>sessionStorage</code>比<code>localStorage</code>更严苛一点，除了协议、主机名、端口外，还要求在同一窗口（也就是浏览器的标签页）下。</li>
-</ul>
-<h2 id="本地存储生存期"><a href="#本地存储生存期" class="headerlink" title="本地存储生存期"></a>本地存储生存期</h2><p><code>localStorage</code>理论上来说是永久有效的，即不主动清空的话就不会消失，即使保存的数据超出了浏览器所规定的大小，也不会把旧数据清空而只会报错。但需要注意的是，在移动设备上的浏览器或各<code>Native App</code>用到的<code>WebView</code>里，<code>localStorage</code>都是不可靠的，可能会因为各种原因（比如说退出App、网络切换、内存不足等原因）被清空。<br><code>sessionStorage</code>的生存期顾名思义，类似于<code>session</code>，只要关闭浏览器（也包括浏览器的标签页），就会被清空。由于<code>sessionStorage</code>的生存期太短，因此应用场景很有限，但从另一方面来看，不容易出现异常情况，比较可靠。</p>
-<h2 id="本地存储的空间（SIZE）"><a href="#本地存储的空间（SIZE）" class="headerlink" title="本地存储的空间（SIZE）"></a>本地存储的空间（SIZE）</h2><p>各主流浏览器（包含PC、移动端）竟然惊人的一致，pc端为5M，移动的为2.5M。值得说明的是，安卓上手 Q 、手机QQ浏览器、微信中则是 2.5M 的数量级，因此在移动端，本地存储的 SIZE 更加珍贵。IOS 待测试。 综上，SIZE 在 2 - 5M 的区间。 测试页面：<a href="http://dev-test.nemikor.com/web-storage/support-test/" target="_blank" rel="external">Web Storage Support Test
-</a></p>
-<h3 id="超过最大值的行为"><a href="#超过最大值的行为" class="headerlink" title="超过最大值的行为"></a>超过最大值的行为</h3><ul>
-<li>各浏览器也惊人的一致，都是抛出一个错误<code>QUOTA_EXCEEDED_ERR</code>。</li>
-<li>在<code>firefox</code>以及<code>opera</code>中，用户可以自己设置本地存储的大小。</li>
-</ul>
-<p><img src="//img.pfan123.com/localstorage_3.png" alt="HTML5 LocalStorage发展历史"></p>
-<h2 id="整站本地存储的规划"><a href="#整站本地存储的规划" class="headerlink" title="整站本地存储的规划"></a>整站本地存储的规划</h2><p>客户端的存储空间非常宝贵，然而站点也因为业务的不同，很难有一个统一的实施细则，但是有几个大原则不会变。</p>
-<ul>
-<li>只保存重要页面的重要数据<br>典型的，首页首屏<br>对业务庞大的站点，这点尤其重要</li>
-<li>极大提高用户体验的数据<br>比如表单的状态，可以提交之前保存，当用户刷新页面时可以还原<br>静态资源，比如 js 和 css</li>
-<li>一个请求一个 key 值（一个 cgi 一个 key 值）<br>避免请求链接加参数的 key (<a href="http://request-ajax.cgi[params])，这样必然让" target="_blank" rel="external">http://request-ajax.cgi[params])，这样必然让</a> key 值趋于冗余从而撑爆空间<br>以上几大原则仅作参考，一切从实际业务出发。</li>
-</ul>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在处理移动端选择图片实时预览并上传时遇到一个问题：上传前图片使用img标签预览正常，但通过canvas对图片进行裁切处理，有时会出现图片翻转的问题，一般是翻转 90 度。后经一翻测试研究，发现横向拍照，正常，竖直拍照图片出现旋转90度，后来发现图片拍照会有 Exif 信息存在方向问题。</p>
+<blockquote>
+<p>PS：其实，大部分的图片查看客户端早已支持自动旋转，所以一般情况下数码设备拍的照片用电脑看，方向都是正确的。许多缩略图生成程序，也是可以指定缩放前自动旋转的（例如 ImageMagick 的 -auto-orient 参数）。</p>
+</blockquote>
+<h2 id="EXIF"><a href="#EXIF" class="headerlink" title="EXIF"></a>EXIF</h2><p>EXIF 全称 (Exchangeable Image File Format) 照相机拍摄图像一般都由两大部分组成，一部分是数据本身，它记录了每个像素的颜色值，另外一部分是文件头，这里面记录着形如图像的宽度，高度等信息。所讨论的方向信息便是被存储于文件头中。更为具体一些：百度百科中对其 <a href="http://baike.baidu.com/item/EXIF%E4%BF%A1%E6%81%AF" target="_blank" rel="external">EXIF</a> 的解释为：</p>
+<blockquote>
+<p>可交换图像文件格式常被简称为Exif（Exchangeable image file format），是专门为数码相机的照片设定的，可以记录数码照片的属性信息和拍摄数据… Exif可以附加于JPEG、TIFF、RIFF等文件之中。</p>
+</blockquote>
+<p>注意：PNG格式的图像中不包含。</p>
+<p><img src="http://img.pfan123.com/exif/exif_1.png" alt="Exif 信息"></p>
+<p>当然，Exif 中的 Orientation 属性，取决于拍照的设备是否拥有方向传感器。不过根据我的了解，目前大部分数码拍照设备都支持记录方向。1 是默认值，2、4、5、7 表示照片进行了翻转。一般情况下，取值应该是 1、3、6、8 中的一种。下面有张更形象的图描述了具体的旋转策略：</p>
+<p><img src="http://img.pfan123.com/exif/exif_2.png" alt="Exif 信息"></p>
+<h2 id="获取EXIF旋转图片"><a href="#获取EXIF旋转图片" class="headerlink" title="获取EXIF旋转图片"></a>获取EXIF旋转图片</h2><p>如何从图片中获取 Exif 信息，各个语言都有封装好的代码可以直接使用。推荐一个比较好用的库，api也比较齐全 <a href="https://github.com/exif-js/exif-js/" target="_blank" rel="external">exif-js</a>，它做法分为两步，首先判断 img.src，如果是 Data URI（即base64）则通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/Base64_encoding_and_decoding" target="_blank" rel="external">atob</a> 函数转解码base-64编码字符串换为二进制，如果是 Object URL 通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/readAsArrayBuffer" target="_blank" rel="external">readAsArrayBuffer</a> 函数读取二进制，反之则通过 Ajax 获取原始二进制；第二步是从原始数据不同位置匹配获取相关信息，基本是体力活了。</p>
+<p>从图片 Exif 信息中取到 Orientation 后，就可以根据它来自动旋转图片了，示例代码: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">input.addEventListener(&quot;change&quot;, function()&#123;</span><br><span class="line">     var file = this.files[0];</span><br><span class="line"></span><br><span class="line">     // 接受 jpeg, jpg, png 类型的图片</span><br><span class="line">     // if (!/\/(?:jpeg|jpg|png)/i.test(file.type)) return;</span><br><span class="line"></span><br><span class="line">     var reader = new FileReader();</span><br><span class="line">     var compressCanvas = document.querySelector(&quot;.babyhappy_compressimg_con&quot;);</span><br><span class="line">     compressCtx = compressCanvas.getContext(&quot;2d&quot;);</span><br><span class="line"></span><br><span class="line">     reader.onload = function(event) &#123;</span><br><span class="line">         var result = this.result;</span><br><span class="line">         var image = new  Image();</span><br><span class="line">         image.src = reader.result;</span><br><span class="line"></span><br><span class="line">         image.onload = function()&#123;</span><br><span class="line">           EXIF.getData(image, function()&#123;</span><br><span class="line">             EXIF.getAllTags(this);</span><br><span class="line">             var orientation = EXIF.getTag(this, &apos;Orientation&apos;);       </span><br><span class="line">             switch(orientation)&#123;</span><br><span class="line">                 case 1:</span><br><span class="line">                     //0°</span><br><span class="line">                     compressCanvas.height = image.height;</span><br><span class="line">                     compressCanvas.width = image.width;</span><br><span class="line">                     compressCtx.clearRect(0, 0, compressCanvas.width, compressCanvas.height)</span><br><span class="line">                     compressCtx.drawImage(image, 0, 0, image.width, image.height);</span><br><span class="line">                     break;</span><br><span class="line">                 case 6:</span><br><span class="line">                     //顺时针90°</span><br><span class="line">                     compressCanvas.width = image.height;</span><br><span class="line">                     compressCanvas.height = image.width;</span><br><span class="line">                     compressCtx.clearRect(0, 0, compressCanvas.width, compressCanvas.height)</span><br><span class="line">                     compressCtx.translate(0, 0);</span><br><span class="line">                     compressCtx.rotate(90 * Math.PI / 180);</span><br><span class="line">                     compressCtx.drawImage(image, 0, -image.height, image.width, image.height);</span><br><span class="line">                     break;</span><br><span class="line">                 case 8:</span><br><span class="line">                     //逆时针90°</span><br><span class="line">                     compressCanvas.width = image.height;</span><br><span class="line">                     compressCanvas.height = image.width;</span><br><span class="line">                     compressCtx.clearRect(0, 0, compressCanvas.width, compressCanvas.height)</span><br><span class="line">                     compressCtx.translate(0, 0);</span><br><span class="line">                     compressCtx.rotate(-90 * Math.PI / 180);</span><br><span class="line">                     compressCtx.drawImage(image, -image.width, 0, image.width, image.height);</span><br><span class="line">                     break;</span><br><span class="line">                 case 3:</span><br><span class="line">                     //180°</span><br><span class="line">                     compressCanvas.height = image.height;</span><br><span class="line">                     compressCanvas.width = image.width;</span><br><span class="line">                     compressCtx.clearRect(0, 0, compressCanvas.width, compressCanvas.height)</span><br><span class="line">                     compressCtx.translate(0, 0);</span><br><span class="line">                     compressCtx.rotate(Math.PI);</span><br><span class="line">                     compressCtx.drawImage(image, -image.width, -image.height, image.width, image.height);</span><br><span class="line">                     break;</span><br><span class="line">                 default:</span><br><span class="line">                     compressCanvas.height = image.height;</span><br><span class="line">                     compressCanvas.width = image.width;</span><br><span class="line">                     compressCtx.clearRect(0, 0, compressCanvas.width, compressCanvas.height)</span><br><span class="line">                     compressCtx.drawImage(image, 0, 0, image.width, image.height);</span><br><span class="line">             &#125;</span><br><span class="line">              var base64 = compressCanvas.toDataURL(&quot;image/jpeg&quot;, .5);    </span><br><span class="line"></span><br><span class="line">           &#125;)                    </span><br><span class="line">                           </span><br><span class="line">         &#125;</span><br><span class="line">     reader.readAsDataURL(file);                        </span><br><span class="line">   &#125;, false)</span><br></pre></td></tr></table></figure>
+<p><a href="http://jdc.jd.com/fd/h5/1703/babyhappy/index.html#crop" target="_blank" rel="external">示例演示demo</a></p>
 <p>参考资料：</p>
-<p><a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="external">HTML5 LocalStorage 本地存储</a></p>
-<p><a href="https://segmentfault.com/a/1190000004121465" target="_blank" rel="external">localstorage 必知必会</a></p>
-<p><a href="http://imweb.io/topic/5590a443fbb23aae3d5e450a" target="_blank" rel="external">使用localStorage必须了解的点</a>  </p>
+<p><a href="http://code.ciaoca.com/javascript/exif-js/" target="_blank" rel="external">Exif.js 读取图像的元数据</a><br><a href="https://github.com/exif-js/exif-js/" target="_blank" rel="external">exif-js github</a><br><a href="http://tgideas.qq.com/webplat/info/news_version3/804/808/811/m579/201409/278736.shtml" target="_blank" rel="external">H5拍照应用开发经历的那些坑儿</a></p>
 
       
     </div>
@@ -325,18 +310,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/01/11/dataURI 中使用 SVG正确姿势/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          探究 dataURI 中使用 SVG 正确姿势
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/12/08/解析HTML:XML生成文档对象模型/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">解析HTML/XML生成文档对象模型</div>
+    <a href="/2017/04/05/git生成ssh key及本地解决多个ssh key的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git生成ssh key及本地解决多个ssh key的问题</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -371,7 +347,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="localstorage基本知识" data-title="localstorage基本知识" data-url="http://pfan123.github.io/2016/12/15/localstorage基本知识/"></div>
+	<div class="ds-thread" data-thread-key="移动端图片上传旋转问题" data-title="移动端图片上传旋转问题" data-url="http://pfan123.github.io/2017/04/06/移动端图片上传旋转问题/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
