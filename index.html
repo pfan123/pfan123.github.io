@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>A propos</li>
 						
 					</ul>
 				</div>
@@ -539,7 +539,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/12/用 Git Hooks 进行自动部署/">用 Git Hooks 进行自动部署</a>
+      <a class="article-title" href="/2017/03/12/用 Git Hooks 进行自动部署/">用 Git 钩子进行自动部署</a>
     </h1>
   
 
@@ -548,12 +548,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Git-Hook"><a href="#Git-Hook" class="headerlink" title="Git Hook"></a>Git Hook</h2><p>Git Hook是在Git仓库中特定事件发生时自动运行的脚本。它可以让你自定义Git内部的行为，在开发周期中的关键点触发自定义的行为。</p>
-<p>Git Hook最常见的使用场景包括推行提交规范，根据仓库状态改变项目环境，和接入持续集成工作流。但是，因为脚本可以完全定制，你可以用Git钩子来自动化或者优化你开发工作流中任意部分。更通俗的讲，当设置了 Git Hook 后，只要你的远程仓库收到一次 push 之后，Git Hook 就能帮你执行一次 bash 脚本。</p>
-<h2 id="Git-Hook-安装"><a href="#Git-Hook-安装" class="headerlink" title="Git Hook 安装"></a>Git Hook 安装</h2><p>钩子存在于每个Git仓库的.git/hooks目录中。 当你用 git init 初始化一个新版本库时，Git 默认会在这个目录中放置一些示例脚本。所有的示例都是 shell 脚本，其中一些还混杂了 Perl 代码，不过，任何正确命名的可执行脚本都可以正常使用 —— 你可以用 Ruby 或 Python，或其它语言编写它们。 这些示例的名字都是以 .sample 结尾，如果你想启用它们，得先移除这个后缀。</p>
+        <h2 id="Git-钩子"><a href="#Git-钩子" class="headerlink" title="Git 钩子"></a>Git 钩子</h2><p>Git 钩子(hooks)是在 Git 仓库中特定事件(certain points)触发后被调用的脚本。通过钩子可以自定义 Git 内部的相关（如 git push）行为，在开发周期中的关键点触发自定义的行为。Git 含有两种类型的钩子：客户端的和服务器端的。客户端钩子由诸如提交和合并这样的操作所调用，而服务器端钩子作用于诸如接收被推送的提交这样的联网操作。 </p>
+<p><img src="https://cdn.rawgit.com/o2team/misc/gh-pages/pfan123/githook/githook_1.png" alt="Webhook1"></p>
+<p>Git 钩子最常见的使用场景包括根据仓库状态改变项目环境、接入持续集成工作流等。由于脚本是可以完全定制，所以你可以用 Git 钩子来自动化或者优化你开发工作流中任意部分。</p>
+<p>在这篇文章中，我们会先简要介绍 Git 钩子相关要素，然后实例使用 Git 钩子进行博客自动部署。</p>
+<h2 id="Git-钩子安装"><a href="#Git-钩子安装" class="headerlink" title="Git 钩子安装"></a>Git 钩子安装</h2><p>Git 钩子存在于每个 Git 仓库的 <code>.git/hooks</code> 目录中。 当你用 <code>git init</code> 初始化一个新版本库时，Git 默认会在这个目录中放置一些示例脚本。所有的示例都是 shell 脚本，其中一些还混杂了 Perl 代码，不过，任何正确命名的可执行脚本都可以正常使用 —— 你可以用 Ruby 或 Python，或其它语言编写它们。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  hooks git:(master) ls</span><br><span class="line">applypatch-msg.sample     pre-applypatch.sample     pre-rebase.sample</span><br><span class="line">commit-msg.sample         pre-commit.sample         prepare-commit-msg.sample</span><br><span class="line">post-update.sample        pre-push.sample           update.sample</span><br></pre></td></tr></table></figure>
-<h2 id="Git-Hooks-进行自动部署"><a href="#Git-Hooks-进行自动部署" class="headerlink" title="Git Hooks 进行自动部署"></a>Git Hooks 进行自动部署</h2><p>1.在服务器初始化一个远程 Git 裸仓库 (bare)</p>
-<p>裸仓库与 git clone 初使化的仓库不太一样，裸仓库其实相当于通过克隆来的仓库里的.git文件夹，整个裸仓库中只有git索引（index），并没有任何代码相关的东西。要实现Push to Deploy，首先我们需要一个裸仓库。</p>
+<blockquote>
+<p>.sample拓展名是为了防止它们默认被执行，安装一个钩子只需要去掉.sample拓展名即可。</p>
+</blockquote>
+<h2 id="Git-钩子的作用域"><a href="#Git-钩子的作用域" class="headerlink" title="Git 钩子的作用域"></a>Git 钩子的作用域</h2><p>Git 钩子是对本地仓库相关操作影响，对于任何 Git 仓库来说钩子都是本地的，初始的钩子都是从 Git 默认模板目录中自动安装。</p>
+<p>在开发团队中为了保持团队所使用钩子一致，维护起来算是比较复杂的，因为 <code>.git/hooks</code> 目录不随你的项目一起拷贝，也不受版本控制影响。</p>
+<p><img src="https://cdn.rawgit.com/o2team/misc/gh-pages/pfan123/githook/githook_2.png" alt="Webhook1"></p>
+<blockquote>
+<p>简单的解决办法是把钩子文件存放在项目的实际目录中（在.git 外），这样就可以像其他文件一样进行版本控制，然后在.git/hooks中创建一个链接，或者简单地在更新后把它们复制到.git/hooks目录下。</p>
+</blockquote>
+<p>当我们了解了以上 Git 钩子基础知识后，下面我们来实例操作 Git 钩子进行博客自动部署。</p>
+<h2 id="Git-钩子进行自动部署"><a href="#Git-钩子进行自动部署" class="headerlink" title="Git 钩子进行自动部署"></a>Git 钩子进行自动部署</h2><p>如何实现 Git 钩子进行自动部署，其实原理很简单，我们只需要监听每次本地 <code>git push</code>到远程服务器，然后远程服务器同步拉取最新文件，重启服务器即可（pm2 reload xx）。</p>
+<p><img src="https://cdn.rawgit.com/o2team/misc/gh-pages/pfan123/githook/githook_3.png" alt="Webhook1"></p>
+<p>1.在服务器初始化一个远程 Git 裸仓库 (git init –bare)</p>
+<p>裸仓库与 <code>git init</code> 初使化的仓库不太一样，裸仓库其实相当于通过克隆来的仓库里的.git文件夹，整个裸仓库中只有git索引（index），不包含工作目录。要实现Push to Deploy，首先我们需要一个裸仓库。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git init --bare xxx-bare.git</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">mkdir xxx-bare.git</span><br><span class="line">cd xxx-bare.git</span><br><span class="line">git init --bare</span><br></pre></td></tr></table></figure>
 <p><code>post-update.sample</code>去掉sample， 在里面增加执行脚本:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line">DIR_ONE=/home/user/deploy-directory</span><br><span class="line">#</span><br><span class="line">cd $DIR_ONE</span><br><span class="line">git clean -fd</span><br><span class="line">#</span><br><span class="line">git checkout --force</span><br></pre></td></tr></table></figure>
@@ -584,6 +598,89 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webhook，git，-Git-Hooks/">Webhook，git， Git Hooks</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+    
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Webhook 实践" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/10/Webhook 实践/" class="article-date">
+  	<time datetime="2017-03-10T02:00:21.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/10/Webhook 实践/">Webhook 进行网站自动化部署</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Webhook-是什么？"><a href="#Webhook-是什么？" class="headerlink" title="Webhook 是什么？"></a>Webhook 是什么？</h2><p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">Webhook</a>，也就是人们常说的钩子，是一个很有用的工具。Webhook 允许第三方应用监听 Github.com 上的特定事件，在这些事件发生时通过 HTTP POST 方式通知( 超时5秒) 到第三方应用指定的 Web URL。 例如项目有新的内容 Push，或是 Merge Request 有更新等。 WebHook 可方便用户实现自动部署，自动测试，自动打包，监控项目变化等。</p>
+<p>如此一来，可以通过这种方式去自动完成一些重复性工作；比如，用 Webhook 来自动触发一些持续集成（CI）工具的运作，比如 <a href="https://github.com/integrations/travis-ci" target="_blank" rel="external">Travis CI</a>；又或者是通过 Webhook 去部署你的线上服务器。</p>
+<h2 id="Webhook使用场景"><a href="#Webhook使用场景" class="headerlink" title="Webhook使用场景"></a>Webhook使用场景</h2><p>实际工作中，经常有这样的场景，本地提交代码到git仓库以后需要网站远程自动同步代码, 大概流程如下图： </p>
+<p><img src="http://img.pfan123.com/webhook1.png" alt="Webhook"></p>
+<h2 id="Webhook自动化部署"><a href="#Webhook自动化部署" class="headerlink" title="Webhook自动化部署"></a>Webhook自动化部署</h2><p>1.为了响应 Webhook 发出的请求，从而做一些我们想做的事情，我们得先实现一个响应服务器。本文采用 Node 来实现一个原型，你当然也可以用 PHP，python 等， 这里使用了<a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&apos;http&apos;)</span><br><span class="line">const createHandler = require(&apos;github-webhook-handler&apos;)</span><br><span class="line">const handler = createHandler(&#123; path: &apos;/webhook&apos;, secret: &apos;myhashsecret&apos; &#125;)</span><br><span class="line">const exec = require(&apos;child_process&apos;).exec</span><br><span class="line"></span><br><span class="line">var commands = [</span><br><span class="line">  &apos;cd .././blog&apos;,</span><br><span class="line">  &apos;git clean -df&apos;,</span><br><span class="line">  &apos;git pull&apos;</span><br><span class="line">].join(&apos; &amp;&amp; &apos;)</span><br><span class="line"></span><br><span class="line">http.createServer(function (req, res) &#123;</span><br><span class="line">  console.log(req.url)</span><br><span class="line">  handler(req, res, function (err) &#123;</span><br><span class="line">    res.statusCode = 404</span><br><span class="line">    res.end(&apos;no such location&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(7777)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;error&apos;, function (err) &#123;</span><br><span class="line">  console.error(&apos;Error:&apos;, err.message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;push&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received a push event for %s to %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref)</span><br><span class="line"></span><br><span class="line">    //执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">    exec(commands, function (error, stdout, stderr) &#123;</span><br><span class="line">      if (error) &#123;</span><br><span class="line">        console.log(error.stack);</span><br><span class="line">        console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">      &#125;</span><br><span class="line">      console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;issues&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received an issue event for %s action=%s: #%d %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.action,</span><br><span class="line">    event.payload.issue.number,</span><br><span class="line">    event.payload.issue.title)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>例如  <code>deploy.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">exec(&apos;sh deploy.sh&apos;, function (error, stdout, stderr) &#123;</span><br><span class="line">  if (error) &#123;</span><br><span class="line">    console.log(error.stack);</span><br><span class="line">    console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"> </span><br><span class="line">WEB_PATH=&apos;/www/blog/&apos;</span><br><span class="line"> </span><br><span class="line">echo &quot;Start deployment&quot;</span><br><span class="line"></span><br><span class="line">cd $WEB_PATH</span><br><span class="line">echo &quot;pulling source code...&quot;</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git clean -f</span><br><span class="line">git pull</span><br><span class="line">git checkout master</span><br><span class="line">echo &quot;Finished.&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="配置-Webhook"><a href="#配置-Webhook" class="headerlink" title="配置 Webhook"></a>配置 Webhook</h2><p>Webhook 的配置是十分简单的，首先进入你的 repo 主页，通过点击页面上的按钮 [settings] -&gt; [Webhooks &amp; service] 进入 Webhooks 配置主页面。也可以通过下面这个链接直接进入配置页面：</p>
+<p><img src="http://img.pfan123.com/webhook2.png" alt="Webhook"></p>
+<p>配置好 Webhook 后，Github 会发送一个 ping 来测试这个地址。如果成功了，那么这个 Webhook 前就会加上一个绿色的勾；如果你得到的是一个红色的叉，那就好好检查一下哪儿出问题了吧！</p>
+<p><img src="http://img.pfan123.com/webhook3.png" alt="Webhook"></p>
+<p>参考资料：</p>
+<p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">Webhook</a></p>
+<p><a href="https://coding.net/help/doc/git/webhook.html" target="_blank" rel="external">coding Webhook</a></p>
+<p><a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webhook，git/">Webhook，git</a></li></ul>
 	</div>
 
       
@@ -696,89 +793,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/letsencrypt、HTTPS、SSL、TSL/">letsencrypt、HTTPS、SSL、TSL</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-    
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Webhook 实践" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/10/Webhook 实践/" class="article-date">
-  	<time datetime="2017-03-10T02:00:21.000Z" itemprop="datePublished">2017-03-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/Webhook 实践/">Webhook 进行网站自动化部署</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Webhook-是什么？"><a href="#Webhook-是什么？" class="headerlink" title="Webhook 是什么？"></a>Webhook 是什么？</h2><p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">Webhook</a>，也就是人们常说的钩子，是一个很有用的工具。Webhook 允许第三方应用监听 Github.com 上的特定事件，在这些事件发生时通过 HTTP POST 方式通知( 超时5秒) 到第三方应用指定的 Web URL。 例如项目有新的内容 Push，或是 Merge Request 有更新等。 WebHook 可方便用户实现自动部署，自动测试，自动打包，监控项目变化等。</p>
-<p>如此一来，可以通过这种方式去自动完成一些重复性工作；比如，用 Webhook 来自动触发一些持续集成（CI）工具的运作，比如 <a href="https://github.com/integrations/travis-ci" target="_blank" rel="external">Travis CI</a>；又或者是通过 Webhook 去部署你的线上服务器。</p>
-<h2 id="Webhook使用场景"><a href="#Webhook使用场景" class="headerlink" title="Webhook使用场景"></a>Webhook使用场景</h2><p>实际工作中，经常有这样的场景，本地提交代码到git仓库以后需要网站远程自动同步代码, 大概流程如下图： </p>
-<p><img src="http://img.pfan123.com/webhook1.png" alt="Webhook"></p>
-<h2 id="Webhook自动化部署"><a href="#Webhook自动化部署" class="headerlink" title="Webhook自动化部署"></a>Webhook自动化部署</h2><p>1.为了响应 Webhook 发出的请求，从而做一些我们想做的事情，我们得先实现一个响应服务器。本文采用 Node 来实现一个原型，你当然也可以用 PHP，python 等， 这里使用了<a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>插件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&apos;http&apos;)</span><br><span class="line">const createHandler = require(&apos;github-webhook-handler&apos;)</span><br><span class="line">const handler = createHandler(&#123; path: &apos;/webhook&apos;, secret: &apos;myhashsecret&apos; &#125;)</span><br><span class="line">const exec = require(&apos;child_process&apos;).exec</span><br><span class="line"></span><br><span class="line">var commands = [</span><br><span class="line">  &apos;cd .././blog&apos;,</span><br><span class="line">  &apos;git clean -df&apos;,</span><br><span class="line">  &apos;git pull&apos;</span><br><span class="line">].join(&apos; &amp;&amp; &apos;)</span><br><span class="line"></span><br><span class="line">http.createServer(function (req, res) &#123;</span><br><span class="line">  console.log(req.url)</span><br><span class="line">  handler(req, res, function (err) &#123;</span><br><span class="line">    res.statusCode = 404</span><br><span class="line">    res.end(&apos;no such location&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(7777)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;error&apos;, function (err) &#123;</span><br><span class="line">  console.error(&apos;Error:&apos;, err.message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;push&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received a push event for %s to %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref)</span><br><span class="line"></span><br><span class="line">    //执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">    exec(commands, function (error, stdout, stderr) &#123;</span><br><span class="line">      if (error) &#123;</span><br><span class="line">        console.log(error.stack);</span><br><span class="line">        console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">      &#125;</span><br><span class="line">      console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;issues&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received an issue event for %s action=%s: #%d %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.action,</span><br><span class="line">    event.payload.issue.number,</span><br><span class="line">    event.payload.issue.title)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>例如  <code>deploy.sh</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">exec(&apos;sh deploy.sh&apos;, function (error, stdout, stderr) &#123;</span><br><span class="line">  if (error) &#123;</span><br><span class="line">    console.log(error.stack);</span><br><span class="line">    console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"> </span><br><span class="line">WEB_PATH=&apos;/www/blog/&apos;</span><br><span class="line"> </span><br><span class="line">echo &quot;Start deployment&quot;</span><br><span class="line"></span><br><span class="line">cd $WEB_PATH</span><br><span class="line">echo &quot;pulling source code...&quot;</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git clean -f</span><br><span class="line">git pull</span><br><span class="line">git checkout master</span><br><span class="line">echo &quot;Finished.&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="配置-Webhook"><a href="#配置-Webhook" class="headerlink" title="配置 Webhook"></a>配置 Webhook</h2><p>Webhook 的配置是十分简单的，首先进入你的 repo 主页，通过点击页面上的按钮 [settings] -&gt; [Webhooks &amp; service] 进入 Webhooks 配置主页面。也可以通过下面这个链接直接进入配置页面：</p>
-<p><img src="http://img.pfan123.com/webhook2.png" alt="Webhook"></p>
-<p>配置好 Webhook 后，Github 会发送一个 ping 来测试这个地址。如果成功了，那么这个 Webhook 前就会加上一个绿色的勾；如果你得到的是一个红色的叉，那就好好检查一下哪儿出问题了吧！</p>
-<p><img src="http://img.pfan123.com/webhook3.png" alt="Webhook"></p>
-<p>参考资料：</p>
-<p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">Webhook</a></p>
-<p><a href="https://coding.net/help/doc/git/webhook.html" target="_blank" rel="external">coding Webhook</a></p>
-<p><a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a></p>
-
-      
-    </div>
-
-    <!-- S 打赏模块 -->
-    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
-    </div>
-    <!-- E 打赏模块 -->
-
-
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webhook，git/">Webhook，git</a></li></ul>
 	</div>
 
       
