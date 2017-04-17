@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>ES6的模块化理解 | pfan博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前沿历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装来。其他语言都有这项功能，比如 Ruby 的require、Python 的import，甚至就连 CSS 都有@import，但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。
+在 ES6 之前，社区制定了一些模块加载方案，最主要的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6的模块化理解">
+<meta property="og:url" content="http://pfan123.github.io/2017/04/12/ES6的模块化理解/index.html">
+<meta property="og:site_name" content="pfan博客">
+<meta property="og:description" content="前沿历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装来。其他语言都有这项功能，比如 Ruby 的require、Python 的import，甚至就连 CSS 都有@import，但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。
+在 ES6 之前，社区制定了一些模块加载方案，最主要的">
+<meta property="og:updated_time" content="2017-04-16T12:12:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6的模块化理解">
+<meta name="twitter:description" content="前沿历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装来。其他语言都有这项功能，比如 Ruby 的require、Python 的import，甚至就连 CSS 都有@import，但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。
+在 ES6 之前，社区制定了一些模块加载方案，最主要的">
+  
+    <link rel="alternative" href="/atom.xml" title="pfan博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">pfan</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">新起点，新高度</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>		
+					
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+
+			</div>
+		
+
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+				        	<li class = "article_cate_tit"> 文章分类</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/技术杂谈/">技术杂谈</a>	</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/兴趣爱好/">兴趣爱好</a>		</li>
+				        	<li class = "article_cate_a"> <a href = "/categories/日志/">日志</a></li>
+				        	<li class = "article_cate_a"> <a href = "/categories/JavaScript/">JavaScript</a>	</li>
+				        	<li class = "article_cate_a"> <a  href = "/categories/CSS3/">CSS3</a>	</li>
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+
+
+
+				<style type="text/css">
+					.article_cate_tit{
+						color:#ba8f6c;
+						margin-top:6px;
+					}
+					.article_cate_con a{
+						display:block;
+						font-size:12px;
+						text-align:center;
+						margin:4px 0;
+					}
+					#header .header-menu{
+						line-height:21px;
+					}
+					.article_cate_a{
+						line-height:18px !important;
+					}	
+					.article_cate_a a{
+						font-size:12px !important;
+					}				
+					#container .left-col .overlay{
+						height:130px;
+					}
+					.header-nav{
+						top:160px;
+					}
+				</style>	
+				<!-- E 新增模块-->
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/gitignore-git/" style="font-size: 10px;">.gitignore git</a> <a href="/tags/htaccess-配置二级域名-绑定子目录/" style="font-size: 10px;">.htaccess  配置二级域名  绑定子目录</a> <a href="/tags/AMD/" style="font-size: 10px;">AMD</a> <a href="/tags/CMD/" style="font-size: 10px;">CMD</a> <a href="/tags/CSS-BEM-OOCSS/" style="font-size: 10px;">CSS BEM OOCSS</a> <a href="/tags/CSS动画篇/" style="font-size: 10px;">CSS动画篇</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/ES6、module、import、export/" style="font-size: 10px;">ES6、module、import、export</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Git，Git查看历史记录/" style="font-size: 10px;">Git，Git查看历史记录</a> <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/H5-视频直播-video/" style="font-size: 10px;">H5 视频直播 video</a> <a href="/tags/H5全景、CSS3d、perspective/" style="font-size: 15px;">H5全景、CSS3d、perspective</a> <a href="/tags/HLS、RTMP协议/" style="font-size: 10px;">HLS、RTMP协议</a> <a href="/tags/HTML5/" style="font-size: 15px;">HTML5</a> <a href="/tags/HTML5-视频直播-video-canvas/" style="font-size: 10px;">HTML5 视频直播 video canvas</a> <a href="/tags/HTML5、localstorage、sessionStorage/" style="font-size: 10px;">HTML5、localstorage、sessionStorage</a> <a href="/tags/HTML、XML解析、dom-level、htmlparser2、xmldom、sax-js、cheerio/" style="font-size: 10px;">HTML、XML解析、dom level、htmlparser2、xmldom、sax-js、cheerio</a> <a href="/tags/HTTP-2，Nginx/" style="font-size: 10px;">HTTP/2，Nginx</a> <a href="/tags/HTTP、-node-http-proxy、-nginx、-proxy/" style="font-size: 15px;">HTTP、 node-http-proxy、 nginx、 proxy</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Linux、CentOS/" style="font-size: 10px;">Linux、CentOS</a> <a href="/tags/Linux、UNIX/" style="font-size: 10px;">Linux、UNIX</a> <a href="/tags/Linux、Unix/" style="font-size: 20px;">Linux、Unix</a> <a href="/tags/Linux、Unix、nvm、node/" style="font-size: 10px;">Linux、Unix、nvm、node</a> <a href="/tags/Mac-命令-Terminal-osx/" style="font-size: 10px;">Mac 命令 Terminal osx</a> <a href="/tags/Mac、root/" style="font-size: 10px;">Mac、root</a> <a href="/tags/Math-atan-、Math-atan2-斜率/" style="font-size: 10px;">Math.atan()、Math.atan2() 斜率</a> <a href="/tags/Mongoose参考手册-MongoDB-数据库-node/" style="font-size: 10px;">Mongoose参考手册  MongoDB  数据库 node</a> <a href="/tags/Nginx-负载均衡/" style="font-size: 10px;">Nginx  负载均衡</a> <a href="/tags/Nginx-负载均衡-node-jdc-解决方案-host/" style="font-size: 10px;">Nginx  负载均衡 node  jdc 解决方案 host</a> <a href="/tags/Nginx-Mac-Node/" style="font-size: 10px;">Nginx Mac Node</a> <a href="/tags/Nginx-MySQL-PHP-FPM-Mac-OS/" style="font-size: 10px;">Nginx MySQL PHP-FPM Mac OS</a> <a href="/tags/Nodejs学习实践-nodejs-ES6/" style="font-size: 10px;">Nodejs学习实践 nodejs  ES6</a> <a href="/tags/PreloadJS-EaselJS-TweenJS-SoundJS/" style="font-size: 10px;">PreloadJS EaselJS TweenJS SoundJS</a> <a href="/tags/SVG-Sprites-Symbols/" style="font-size: 10px;">SVG Sprites Symbols</a> <a href="/tags/SVG-icon、-导出优化/" style="font-size: 10px;">SVG icon、 导出优化</a> <a href="/tags/SVG、dataURI、base64/" style="font-size: 10px;">SVG、dataURI、base64</a> <a href="/tags/UMD/" style="font-size: 10px;">UMD</a> <a href="/tags/Vim-vi/" style="font-size: 10px;">Vim vi</a> <a href="/tags/Webhook，git/" style="font-size: 10px;">Webhook，git</a> <a href="/tags/Webhook，git，-Git-Hooks/" style="font-size: 10px;">Webhook，git， Git Hooks</a> <a href="/tags/createJS/" style="font-size: 10px;">createJS</a> <a href="/tags/css-modules-scope-模块化/" style="font-size: 10px;">css modules  scope  模块化</a> <a href="/tags/device-width-window-screen-width-区分ip6与ip6plus/" style="font-size: 10px;">device-width window.screen.width 区分ip6与ip6plus</a> <a href="/tags/deviceorientation、orientationchange-重力感应/" style="font-size: 10px;">deviceorientation、orientationchange 重力感应</a> <a href="/tags/deviceorientation、orientationchange-重力感应-CSS3D/" style="font-size: 10px;">deviceorientation、orientationchange 重力感应 CSS3D</a> <a href="/tags/exif，oritation，input，file/" style="font-size: 10px;">exif，oritation，input，file</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/fiddler/" style="font-size: 10px;">fiddler</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo初始/" style="font-size: 10px;">hexo初始</a> <a href="/tags/hexo相关问题/" style="font-size: 10px;">hexo相关问题</a> <a href="/tags/howler-js、-video-js/" style="font-size: 10px;">howler.js、 video.js</a> <a href="/tags/insertAdjacentHTML方法/" style="font-size: 10px;">insertAdjacentHTML方法</a> <a href="/tags/insertAdjacentText方法/" style="font-size: 10px;">insertAdjacentText方法</a> <a href="/tags/javascript、canvas、toDataURL/" style="font-size: 10px;">javascript、canvas、toDataURL()</a> <a href="/tags/letsencrypt、HTTPS、SSL、TSL/" style="font-size: 10px;">letsencrypt、HTTPS、SSL、TSL</a> <a href="/tags/mac-iphone-铃声/" style="font-size: 10px;">mac iphone 铃声</a> <a href="/tags/node-版本管理-nvm-n/" style="font-size: 10px;">node 版本管理  nvm  n</a> <a href="/tags/node-读写excel-JS-XLSX-分析excel写入/" style="font-size: 10px;">node 读写excel JS-XLSX 分析excel写入</a> <a href="/tags/pm2学习实践-nodejs-pm2/" style="font-size: 10px;">pm2学习实践 nodejs pm2</a> <a href="/tags/react-flux-redux-ECMAScript6-Vue-Angular-Angular2-0-NuclearJS/" style="font-size: 10px;">react flux redux ECMAScript6 Vue Angular Angular2.0 NuclearJS</a> <a href="/tags/ssh常用命令-SSH/" style="font-size: 10px;">ssh常用命令  SSH</a> <a href="/tags/ssh，Nginx/" style="font-size: 10px;">ssh，Nginx</a> <a href="/tags/svg、path、circle、rect、ellipse、polygon、polyline、line/" style="font-size: 10px;">svg、path、circle、rect、ellipse、polygon、polyline、line</a> <a href="/tags/video-canvas/" style="font-size: 10px;">video canvas</a> <a href="/tags/vue-router-vue/" style="font-size: 10px;">vue-router, vue</a> <a href="/tags/webp/" style="font-size: 10px;">webp</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/三角学、弧度、角度/" style="font-size: 10px;">三角学、弧度、角度</a> <a href="/tags/买房前必备知识-house-home/" style="font-size: 10px;">买房前必备知识  house home</a> <a href="/tags/买车前必备知识-car/" style="font-size: 10px;">买车前必备知识  car</a> <a href="/tags/京东购物H5活动CP重构规范/" style="font-size: 10px;">京东购物H5活动CP重构规范</a> <a href="/tags/优化JavaScript的执行效率/" style="font-size: 10px;">优化JavaScript的执行效率</a> <a href="/tags/前端性能优化/" style="font-size: 10px;">前端性能优化</a> <a href="/tags/吉他/" style="font-size: 10px;">吉他</a> <a href="/tags/吉他知识/" style="font-size: 10px;">吉他知识</a> <a href="/tags/学吉他知识集锦/" style="font-size: 10px;">学吉他知识集锦</a> <a href="/tags/搬瓦工，Shadowsocks/" style="font-size: 10px;">搬瓦工，Shadowsocks</a> <a href="/tags/旅游-帝都畅游-相约北京/" style="font-size: 10px;">旅游 帝都畅游 相约北京</a> <a href="/tags/模块的写法/" style="font-size: 10px;">模块的写法</a> <a href="/tags/运营规范/" style="font-size: 10px;">运营规范</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/pingfan1990/">博客园博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cfuns.com/house.php">前端网博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pingfan1990.sinaapp.com/">pfan展示平台</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://doc.pfan123.com/">pfan前端开发导航平台</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">因上努力，果上随缘</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">pfan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">pfan</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">新起点，新高度</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ES6的模块化理解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/12/ES6的模块化理解/" class="article-date">
+  	<time datetime="2017-04-12T02:00:21.000Z" itemprop="datePublished">2017-04-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6的模块化理解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6、module、import、export/">ES6、module、import、export</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前沿"><a href="#前沿" class="headerlink" title="前沿"></a>前沿</h2><p>历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装来。其他语言都有这项功能，比如 Ruby 的<code>require</code>、Python 的<code>import</code>，甚至就连 CSS 都有<code>@import</code>，但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。</p>
+<p>在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS 和 AMD 两种。前者用于服务器，后者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。</p>
+<p>现在ES6自带了模块化，可以直接作用import和export在浏览器中导入和导出各个模块。每一个ES6模块都是一个包含JS代码的文件，模块本质上就是一段脚本，而不是用 module 关键字定义一个模块，但是模块与脚本还是有两点区别：</p>
+<ul>
+<li>在ES6模块中，无论你是否加入“use strict;”语句，默认情况下模块都是在严格模式下运行。</li>
+<li>在模块中你可以使用import和export关键字。</li>
+</ul>
+<p>现代浏览器对模块(module)支持程度不同， 目前都是使用babelJS， 或者Traceur把ES6代码转化为兼容ES5版本的js代码.</p>
+<h2 id="ES6的模块化特点"><a href="#ES6的模块化特点" class="headerlink" title="ES6的模块化特点"></a>ES6的模块化特点</h2><p>1.每一个模块只加载一次， 每一个JS只执行一次， 如果下次再去加载同目录下同文件，直接从内存中读取。 一个模块就是一个单例，或者说就是一个对象；</p>
+<p>2.每一个模块内声明的变量都是局部变量， 不会污染全局作用域；</p>
+<p>3.模块内部的变量或者函数可以通过export导出；</p>
+<p>4.一个模块可以导入别的模块</p>
+<h2 id="export-命令"><a href="#export-命令" class="headerlink" title="export 命令"></a>export 命令</h2><p>模块功能主要由两个命令构成：<code>export</code>和<code>import</code>。<code>export</code>命令用于规定模块的对外接口，<code>import</code>命令用于输入其他模块提供的功能。</p>
+<p>一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用export关键字输出该变量。</p>
+<p>1.<code>export</code>命令输出变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//导出变量</span><br><span class="line">export var firstName = &apos;Michael&apos;;</span><br><span class="line">export var lastName = &apos;Jackson&apos;;</span><br><span class="line">export var year = 1958;</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">var firstName = &apos;Michael&apos;</span><br><span class="line">var lastName = &apos;Jackson&apos;</span><br><span class="line"></span><br><span class="line">export &#123;firstName, lastName&#125;</span><br></pre></td></tr></table></figure>
+<p>2.<code>export</code>命令输出函数或类（class）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//导出函数</span><br><span class="line">export function multiply(x, y) &#123;</span><br><span class="line">  return x * y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//导出类</span><br><span class="line">export class Point &#123;</span><br><span class="line">  constructor(x, y) &#123;</span><br><span class="line">    this.x = x;</span><br><span class="line">    this.y = y;</span><br><span class="line">  &#125;</span><br><span class="line">  toString() &#123;</span><br><span class="line">    return &apos;(&apos;+this.x+&apos;, &apos;+this.y+&apos;)&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通常情况下，<code>export</code> 输出的变量就是本来的名字，但是可以使用as关键字重命名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function v1() &#123; ... &#125;</span><br><span class="line">function v2() &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">export &#123;</span><br><span class="line">  v1 as streamV1,</span><br><span class="line">  v2 as streamV2,</span><br><span class="line">  v2 as streamLatestVersion</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面代码使用as关键字，重命名了函数v1和v2的对外接口。重命名后，v2可以用不同的名字输出两次。</p>
+<p><code>注意</code>： 需要特别注意的是，export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 报错</span><br><span class="line">export 1;</span><br><span class="line"></span><br><span class="line">// 报错</span><br><span class="line">var m = 1;</span><br><span class="line">export m;</span><br></pre></td></tr></table></figure>
+<p>上面两种写法都会报错，因为没有提供对外的接口。第一种写法直接输出1，第二种写法通过变量<code>m</code>，还是直接输出1。<code>1</code>只是一个值，不是接口。正确的写法是下面这样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 写法一</span><br><span class="line">export var m = 1;</span><br><span class="line"></span><br><span class="line">// 写法二</span><br><span class="line">var m = 1;</span><br><span class="line">export &#123;m&#125;;</span><br><span class="line"></span><br><span class="line">// 写法三</span><br><span class="line">var n = 1;</span><br><span class="line">export &#123;n as m&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面三种写法都是正确的，规定了对外的接口<code>m</code>。其他脚本可以通过这个接口，取到值<code>1</code>。它们的实质是，在接口名与模块内部变量之间，建立了一一对应的关系。</p>
+<p>同样的，<code>function</code>和<code>class</code>的输出，也必须遵守这样的写法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 报错</span><br><span class="line">function f() &#123;&#125;</span><br><span class="line">export f;</span><br><span class="line"></span><br><span class="line">// 正确</span><br><span class="line">export function f() &#123;&#125;;</span><br><span class="line"></span><br><span class="line">// 正确</span><br><span class="line">function f() &#123;&#125;</span><br><span class="line">export &#123;f&#125;;</span><br></pre></td></tr></table></figure>
+<p>另外，<code>export</code>语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export var foo = &apos;bar&apos;;</span><br><span class="line">setTimeout(() =&gt; foo = &apos;baz&apos;, 500);</span><br></pre></td></tr></table></figure>
+<p>上面代码输出变量<code>foo</code>，值为<code>bar</code>，500毫秒之后变成<code>baz</code>。</p>
+<p>最后，<code>export</code>命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下一节的<code>import</code>命令也是如此。这是因为处于条件代码块之中，就没法做静态优化了，违背了ES6模块的设计初衷。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">  export default &apos;bar&apos; // SyntaxError</span><br><span class="line">&#125;</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，<code>export</code>语句放在函数之中，结果报错。</p>
+<h2 id="import-命令"><a href="#import-命令" class="headerlink" title="import 命令"></a>import 命令</h2><p>使用<code>export</code>命令定义了模块的对外接口以后，其他 JS 文件就可以通过<code>import</code>命令加载这个模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// main.js</span><br><span class="line">import &#123;firstName, lastName, year&#125; from &apos;./profile&apos;;</span><br><span class="line"></span><br><span class="line">function setName(element) &#123;</span><br><span class="line">  element.textContent = firstName + &apos; &apos; + lastName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码的<code>import</code>命令，用于加载<code>profile.js</code>文件，并从中输入变量。<code>import</code>命令接受一对大括号，里面指定要从其他模块导入的变量名。大括号里面的变量名，必须与被导入模块（<code>profile.js</code>）对外接口的名称相同。</p>
+<p>如果想为输入的变量重新取一个名字，<code>import</code>命令要使用<code>as</code>关键字，将输入的变量重命名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; lastName as surname &#125; from &apos;./profile&apos;;</span><br></pre></td></tr></table></figure>
+<p><code>import</code>后面的<code>from</code>指定模块文件的位置，可以是相对路径，也可以是绝对路径，<code>.js</code>路径可以省略。如果只是模块名，不带有路径，那么必须有配置文件，告诉 JavaScript 引擎该模块的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123;myMethod&#125; from &apos;util&apos;;</span><br></pre></td></tr></table></figure>
+<p>上面代码中，<code>util</code>是模块文件名，由于不带有路径，必须通过配置，告诉引擎怎么取到这个模块。</p>
+<p>注意，<code>import</code>命令具有提升效果，会提升到整个模块的头部，首先执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foo();</span><br><span class="line"></span><br><span class="line">import &#123; foo &#125; from &apos;my_module&apos;;</span><br></pre></td></tr></table></figure>
+<p>上面的代码不会报错，因为<code>import</code>的执行早于<code>foo</code>的调用。这种行为的本质是，<code>import</code>命令是编译阶段执行的，在代码运行之前。</p>
+<p>由于<code>import</code>是静态执行，所以不能使用表达式和变量。</p>
+<h2 id="export-default命令"><a href="#export-default命令" class="headerlink" title="export default命令"></a>export default命令</h2><p>从前面的例子可以看出，使用<code>import</code>命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。但是，用户肯定希望快速上手，未必愿意阅读文档，去了解模块有哪些属性和方法。</p>
+<p>为了给用户提供方便，就要用到<code>export default</code>命令，为模块指定默认输出。</p>
+<p>其他模块加载该模块时，<code>import</code> 命令可以为该匿名函数指定任意名字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// export-default.js</span><br><span class="line">export default function () &#123;</span><br><span class="line">  console.log(&apos;foo&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码的<code>import</code>命令，可以用任意名称指向<code>export-default.js</code>输出的方法，这时就不需要知道原模块输出的函数名。需要注意的是，这时<code>import</code>命令后面，不使用大括号。</p>
+<p><code>export default</code>命令用在非匿名函数前，也是可以的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// export-default.js</span><br><span class="line">export default function foo() &#123;</span><br><span class="line">  console.log(&apos;foo&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者写成</span><br><span class="line"></span><br><span class="line">function foo() &#123;</span><br><span class="line">  console.log(&apos;foo&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default foo;</span><br></pre></td></tr></table></figure>
+<p>参考资料：</p>
+<p><a href="http://blog.csdn.net/sahusoft/article/details/7388617" target="_blank" rel="external">“error while loading shared libraries: xxx.so.x” 错误的原因和解决办法</a></p>
+<p><a href="https://www.zhihu.com/question/20351507/answer/14859415" target="_blank" rel="external">AMD 和 CMD 的区别有哪些</a></p>
+<p><a href="https://github.com/seajs/seajs/issues/277" target="_blank" rel="external">SeaJS和RequireJS的异同</a></p>
+<p><a href="http://www.infoq.com/cn/articles/es6-in-depth-modules" target="_blank" rel="external">深入浅出ES6（十六）：模块Modules - InfoQ</a></p>
+<p><a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="external">Module 的语法–阮一峰</a></p>
+
+      
+    </div>
+
+    <!-- S 打赏模块 -->
+    <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+    </div>
+    <!-- E 打赏模块 -->
+
+
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/04/06/移动端图片上传旋转问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">移动端图片上传旋转问题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+    
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ES6的模块化理解" data-title="ES6的模块化理解" data-url="http://pfan123.github.io/2017/04/12/ES6的模块化理解/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 pfan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="js/MathJax.js>
+</script>
+
+
+  </div>
+</body>
+</html>
