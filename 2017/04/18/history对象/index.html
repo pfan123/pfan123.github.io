@@ -22,7 +22,7 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 history 对象提供了一系列方法，允许在浏览历史之间移动。
 
 back()：移动到上一个访问页面，等同于浏览器的后退键。forward()：移动到下一个访问页面，等同于浏览">
-<meta property="og:updated_time" content="2017-04-18T07:31:57.000Z">
+<meta property="og:updated_time" content="2017-06-07T16:16:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="history对象--转载">
 <meta name="twitter:description" content="一、概述浏览器窗口有一个 history 对象，用来保存浏览历史。
@@ -48,7 +48,7 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			<img lazy-src="//litten.github.io/assets/blogImg/litten.png" class="js-avatar">
 			
 		</a>
 
@@ -126,9 +126,9 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 					<nav class="header-nav">
 						<div class="social">
 							
-								<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+								<a class="github" target="_blank" href="//github.com/pfan123" title="github">github</a>
 					        
-								<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+								<a class="weibo" target="_blank" href="//weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
 					        
 						</div>
 					</nav>
@@ -177,13 +177,11 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/pingfan1990/">博客园博客</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="//www.cnblogs.com/pingfan1990/">博客园博客</a>
 			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cfuns.com/house.php">前端网博客</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="//case.pfan123.com/">pfan展示平台</a>
 			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pingfan1990.sinaapp.com/">pfan展示平台</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://doc.pfan123.com/">pfan前端开发导航平台</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="//docs.pfan123.com/">pfan前端开发导航平台</a>
 			        
 			        </div>
 				</section>
@@ -212,7 +210,7 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 		<header id="header" class="inner">
 			<div class="profilepic">
 			
-				<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+				<img lazy-src="//litten.github.io/assets/blogImg/litten.png" class="js-avatar">
 			
 			</div>
 			<hgroup>
@@ -234,9 +232,9 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+						<a class="github" target="_blank" href="//github.com/pfan123" title="github">github</a>
 			        
-						<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+						<a class="weibo" target="_blank" href="//weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
 			        
 				</div>
 			</nav>
@@ -307,7 +305,7 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 <p>上面代码中，<code>pushState</code> 想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。</p>
 <h2 id="三、history-replaceState"><a href="#三、history-replaceState" class="headerlink" title="三、history.replaceState()"></a>三、history.replaceState()</h2><p><code>history.replaceState</code> 方法的参数与 <code>pushState</code> 方法一模一样，区别是它修改浏览历史中当前纪录。</p>
 <p>假定当前网页是 <code>example.com/example.html</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;page: 1&#125;, &apos;title 1&apos;, &apos;?page=1&apos;);</span><br><span class="line">history.pushState(&#123;page: 2&#125;, &apos;title 2&apos;, &apos;?page=2&apos;);</span><br><span class="line">history.replaceState(&#123;page: 3&#125;, &apos;title 3&apos;, &apos;?page=3&apos;);</span><br><span class="line"></span><br><span class="line">history.back()</span><br><span class="line">// url显示为http://example.com/example.html?page=1</span><br><span class="line"></span><br><span class="line">history.back()</span><br><span class="line">// url显示为http://example.com/example.html</span><br><span class="line"></span><br><span class="line">history.go(2)</span><br><span class="line">// url显示为http://example.com/example.html?page=3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;page: 1&#125;, &apos;title 1&apos;, &apos;?page=1&apos;);</span><br><span class="line">history.pushState(&#123;page: 2&#125;, &apos;title 2&apos;, &apos;?page=2&apos;);</span><br><span class="line">history.replaceState(&#123;page: 3&#125;, &apos;title 3&apos;, &apos;?page=3&apos;);</span><br><span class="line"></span><br><span class="line">history.back()</span><br><span class="line">// url显示为//example.com/example.html?page=1</span><br><span class="line"></span><br><span class="line">history.back()</span><br><span class="line">// url显示为//example.com/example.html</span><br><span class="line"></span><br><span class="line">history.go(2)</span><br><span class="line">// url显示为//example.com/example.html?page=3</span><br></pre></td></tr></table></figure>
 <h2 id="四、history-state属性"><a href="#四、history-state属性" class="headerlink" title="四、history.state属性"></a>四、history.state属性</h2><p><code>history.state</code> 属性返回当前页面的 <code>state</code> 对象。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;page: 1&#125;, &apos;title 1&apos;, &apos;?page=1&apos;);</span><br><span class="line"></span><br><span class="line">history.state</span><br><span class="line">// &#123; page: 1 &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="五、popstate事件"><a href="#五、popstate事件" class="headerlink" title="五、popstate事件"></a>五、popstate事件</h2><p>每当同一个文档的浏览历史（即 <code>history</code> 对象）出现变化时，就会触发 <code>popstate</code> 事件。</p>
@@ -342,14 +340,14 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
 <p><code>URLSearchParams</code> 还可以与 <code>URL</code> 接口结合使用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var url = new URL(location);</span><br><span class="line">var foo = url.searchParams.get(&apos;foo&apos;) || &apos;somedefault&apos;;</span><br></pre></td></tr></table></figure>
 <p>参考资料：</p>
-<p><a href="http://javascript.ruanyifeng.com/bom/history.html" target="_blank" rel="external">history对象</a><br><a href="https://developer.mozilla.org/zh-CN/docs/DOM/Manipulating_the_browser_history" target="_blank" rel="external">操纵浏览器的历史记录</a><br><a href="https://www.zhihu.com/question/27806318" target="_blank" rel="external">hashchange和popstate的用法区别</a><br><a href="https://segmentfault.com/a/1190000004574465" target="_blank" rel="external">历史记录API中hashchange与popstate的比较</a></p>
+<p><a href="//javascript.ruanyifeng.com/bom/history.html">history对象</a><br><a href="https://developer.mozilla.org/zh-CN/docs/DOM/Manipulating_the_browser_history" target="_blank" rel="external">操纵浏览器的历史记录</a><br><a href="https://www.zhihu.com/question/27806318" target="_blank" rel="external">hashchange和popstate的用法区别</a><br><a href="https://segmentfault.com/a/1190000004574465" target="_blank" rel="external">历史记录API中hashchange与popstate的比较</a></p>
 
       
     </div>
 
     <!-- S 打赏模块 -->
     <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+        <img src="//img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
     </div>
     <!-- E 打赏模块 -->
 
@@ -436,7 +434,7 @@ back()：移动到上一个访问页面，等同于浏览器的后退键。forwa
     		&copy; 2017 pfan
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
+      		<a href="//hexo.io/" target="_blank">Hexo</a>  Theme <a href="//github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
       	</div>
     </div>
   </div>

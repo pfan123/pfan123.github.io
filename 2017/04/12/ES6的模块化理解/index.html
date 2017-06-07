@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="pfan博客">
 <meta property="og:description" content="前沿历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装来。其他语言都有这项功能，比如 Ruby 的require、Python 的import，甚至就连 CSS 都有@import，但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。
 在 ES6 之前，社区制定了一些模块加载方案，最主要的">
-<meta property="og:updated_time" content="2017-04-16T12:12:45.000Z">
+<meta property="og:updated_time" content="2017-06-07T16:18:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6的模块化理解">
 <meta name="twitter:description" content="前沿历史上，JavaScript 一直没有模块（module）体系，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装来。其他语言都有这项功能，比如 Ruby 的require、Python 的import，甚至就连 CSS 都有@import，但是JavaScript任何这方面的支持都没有，这对开发大型的、复杂的项目形成了巨大障碍。
@@ -36,7 +36,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+			<img lazy-src="//litten.github.io/assets/blogImg/litten.png" class="js-avatar">
 			
 		</a>
 
@@ -114,9 +114,9 @@
 					<nav class="header-nav">
 						<div class="social">
 							
-								<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+								<a class="github" target="_blank" href="//github.com/pfan123" title="github">github</a>
 					        
-								<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+								<a class="weibo" target="_blank" href="//weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
 					        
 						</div>
 					</nav>
@@ -165,13 +165,11 @@
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/pingfan1990/">博客园博客</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="//www.cnblogs.com/pingfan1990/">博客园博客</a>
 			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.w3cfuns.com/house.php">前端网博客</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="//case.pfan123.com/">pfan展示平台</a>
 			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://pingfan1990.sinaapp.com/">pfan展示平台</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://doc.pfan123.com/">pfan前端开发导航平台</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="//docs.pfan123.com/">pfan前端开发导航平台</a>
 			        
 			        </div>
 				</section>
@@ -200,7 +198,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 			
-				<img lazy-src="http://litten.github.io/assets/blogImg/litten.png" class="js-avatar">
+				<img lazy-src="//litten.github.io/assets/blogImg/litten.png" class="js-avatar">
 			
 			</div>
 			<hgroup>
@@ -222,9 +220,9 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/pfan123" title="github">github</a>
+						<a class="github" target="_blank" href="//github.com/pfan123" title="github">github</a>
 			        
-						<a class="weibo" target="_blank" href="http://weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
+						<a class="weibo" target="_blank" href="//weibo.com/gaolu1990/home?wvr=5" title="weibo">weibo</a>
 			        
 				</div>
 			</nav>
@@ -326,18 +324,18 @@
 <p><code>export default</code>命令用在非匿名函数前，也是可以的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// export-default.js</span><br><span class="line">export default function foo() &#123;</span><br><span class="line">  console.log(&apos;foo&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者写成</span><br><span class="line"></span><br><span class="line">function foo() &#123;</span><br><span class="line">  console.log(&apos;foo&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default foo;</span><br></pre></td></tr></table></figure>
 <p>参考资料：</p>
-<p><a href="http://blog.csdn.net/sahusoft/article/details/7388617" target="_blank" rel="external">“error while loading shared libraries: xxx.so.x” 错误的原因和解决办法</a></p>
+<p><a href="//blog.csdn.net/sahusoft/article/details/7388617">“error while loading shared libraries: xxx.so.x” 错误的原因和解决办法</a></p>
 <p><a href="https://www.zhihu.com/question/20351507/answer/14859415" target="_blank" rel="external">AMD 和 CMD 的区别有哪些</a></p>
 <p><a href="https://github.com/seajs/seajs/issues/277" target="_blank" rel="external">SeaJS和RequireJS的异同</a></p>
-<p><a href="http://www.infoq.com/cn/articles/es6-in-depth-modules" target="_blank" rel="external">深入浅出ES6（十六）：模块Modules - InfoQ</a></p>
-<p><a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="external">Module 的语法–阮一峰</a></p>
+<p><a href="//www.infoq.com/cn/articles/es6-in-depth-modules">深入浅出ES6（十六）：模块Modules - InfoQ</a></p>
+<p><a href="//es6.ruanyifeng.com/#docs/module">Module 的语法–阮一峰</a></p>
 
       
     </div>
 
     <!-- S 打赏模块 -->
     <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+        <img src="//img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
     </div>
     <!-- E 打赏模块 -->
 
@@ -424,7 +422,7 @@
     		&copy; 2017 pfan
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
+      		<a href="//hexo.io/" target="_blank">Hexo</a>  Theme <a href="//github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
       	</div>
     </div>
   </div>
