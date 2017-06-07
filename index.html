@@ -503,7 +503,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://webpack.js.org/" target="_blank" rel="external">webpack</a>是目前前端开发必不可少的一款模块加载器兼构建工具，它能极其方便的处理各种资源的打包和使用， 让前端开发获得与后端开发几乎一致的体验。</p>
 <h2 id="Webpack是什么"><a href="#Webpack是什么" class="headerlink" title="Webpack是什么"></a>Webpack是什么</h2><p>CommonJS 和 AMD 是用于 JavaScript 模块管理的两大规范，前者定义的是模块的同步加载，主要用于NodeJS；而后者则是异步加载，通过 requirejs 等工具适用于前端。随着 npm 成为主流的 JavaScript 组件发布平台，越来越多的前端项目也依赖于 npm 上的项目，或者自身就会发布到 npm 平台。因此，让前端项目更方便的使用 npm 上的资源成为一大需求。</p>
 <p>web开发中常用到的静态资源主要有JavaScript、CSS、图片、Jade等文件，webpack中将静态资源文件称之为模块。webpack是一个module bundler(模块打包工具)，其可以兼容多种js书写规范，且可以处理模块间的依赖关系，具有更强大的js模块化的功能。Webpack对它们进行统一的管理以及打包发布，其官方主页用下面这张图来说明Webpack的作用：</p>
-<p><img src="//img.pfan123.com/webpack/webpack1_1.png" alt="webpack"></p>
+<p><img src="http://img.pfan123.com/webpack/webpack1_1.png" alt="webpack"></p>
 <h2 id="Webpack的核心原理"><a href="#Webpack的核心原理" class="headerlink" title="Webpack的核心原理"></a>Webpack的核心原理</h2><p>Webpack的两个最核心的原理分别是：</p>
 <p><strong> 1.一切皆模块 </strong><br>正如js文件可以是一个“模块（module）”一样，其他的（如css、image或html）文件也可视作模 块。因此，你可以require(‘myJSfile.js’)亦可以require(‘myCSSfile.css’)。这意味着我们可以将事物（业务）分割成更小的易于管理的片段，从而达到重复利用等的目的。</p>
 <p><strong> 2.按需加载 </strong><br>传统的模块打包工具（module bundlers）最终将所有的模块编译生成一个庞大的bundle.js文件。但是在真实的app里边，“bundle.js”文件可能有10M到15M之大可能会导致应用一直处于加载中状态。因此Webpack使用许多特性来分割代码然后生成多个“bundle”文件，而且异步加载部分代码以实现按需加载。</p>
