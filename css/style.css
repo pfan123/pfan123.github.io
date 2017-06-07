@@ -1,3 +1,6 @@
+body {
+  width: 100%;
+}
 body:before,
 body:after {
   content: "";
@@ -84,7 +87,6 @@ body {
   line-height: 1;
   color: #000;
   background: #fff;
-  width: 100%;
 }
 ol,
 ul {
