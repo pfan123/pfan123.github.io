@@ -19,7 +19,7 @@ Git 钩子最常见的">
 <meta property="og:image" content="https://cdn.rawgit.com/o2team/misc/gh-pages/pfan123/githook/githook_1.png">
 <meta property="og:image" content="https://cdn.rawgit.com/o2team/misc/gh-pages/pfan123/githook/githook_2.png">
 <meta property="og:image" content="https://cdn.rawgit.com/o2team/misc/gh-pages/pfan123/githook/githook_3.png">
-<meta property="og:updated_time" content="2017-06-07T16:13:22.000Z">
+<meta property="og:updated_time" content="2017-06-07T16:34:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用 Git 钩子进行自动部署">
 <meta name="twitter:description" content="Git 钩子Git 钩子(hooks)是在 Git 仓库中特定事件(certain points)触发后被调用的脚本。通过钩子可以自定义 Git 内部的相关（如 git push）行为，在开发周期中的关键点触发自定义的行为。Git 含有两种类型的钩子：客户端的和服务器端的。客户端钩子由诸如提交和合并这样的操作所调用，而服务器端钩子作用于诸如接收被推送的提交这样的联网操作。 
@@ -174,7 +174,7 @@ Git 钩子最常见的">
 					
 			          <a target="_blank" class="main-nav-link switch-friends-link" href="//www.cnblogs.com/pingfan1990/">博客园博客</a>
 			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="//case.pfan123.com/">pfan展示平台</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://case.pfan123.com/">pfan展示平台</a>
 			        
 			          <a target="_blank" class="main-nav-link switch-friends-link" href="//docs.pfan123.com/">pfan前端开发导航平台</a>
 			        
@@ -306,14 +306,14 @@ Git 钩子最常见的">
 <p>3.本地仓库添加 remote 源</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin user@1.2.3.4:/home/git/xxx-bare.git</span><br><span class="line">//例如git remote add origin ssh://root@41.72.11.11:26244/home/www/BRIDGE_REPO.git</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
 <p>参考资料：</p>
-<p><a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="external">自定义 Git - Git 钩子</a><br><a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.4-Git%E9%92%A9%E5%AD%90%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81" target="_blank" rel="external">Git钩子：自定义你的工作流</a><br><a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a><br><a href="//sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/">如何通过Git钩子自动部署(Push to Deploy)</a><br><a href="https://segmentfault.com/a/1190000003836345" target="_blank" rel="external">用 Git Hooks 进行自动部署</a><br><a href="//stackoverflow.com/questions/4043609/getting-fatal-not-a-git-repository-when-using-post-update-hook-to-execut">“fatal: not a git repository: ‘.’”</a></p>
+<p><a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="external">自定义 Git - Git 钩子</a><br><a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.4-Git%E9%92%A9%E5%AD%90%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81" target="_blank" rel="external">Git钩子：自定义你的工作流</a><br><a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a><br><a href="http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/" target="_blank" rel="external">如何通过Git钩子自动部署(Push to Deploy)</a><br><a href="https://segmentfault.com/a/1190000003836345" target="_blank" rel="external">用 Git Hooks 进行自动部署</a><br><a href="http://stackoverflow.com/questions/4043609/getting-fatal-not-a-git-repository-when-using-post-update-hook-to-execut" target="_blank" rel="external">“fatal: not a git repository: ‘.’”</a></p>
 
       
     </div>
 
     <!-- S 打赏模块 -->
     <div class="pfan_payment" style="max-width: 500px;margin: 0 auto">
-        <img src="//img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
+        <img src="http://img.pfan123.com/payment.png" alt="" style="width: 100%;height: 10%;">
     </div>
     <!-- E 打赏模块 -->
 
@@ -334,8 +334,8 @@ Git 钩子最常见的">
     </a>
   
   
-    <a href="/2017/03/10/Webhook 实践/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Webhook 进行网站自动化部署</div>
+    <a href="/2017/03/10/使用 letsencrypt 生成SSL证书开启https/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用 letsencrypt 生成 SSL 证书开启 HTTPS</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
