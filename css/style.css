@@ -165,7 +165,7 @@ h6 {
 a {
   text-decoration: none;
   outline-width: 0;
-  color: #258fb8;
+  color: #2196f3;
   outline: none;
 }
 .alignleft {
@@ -234,7 +234,7 @@ a {
 }
 #container .left-col {
   background: #fff;
-  width: 300px;
+  width: 240px;
   position: fixed;
   opacity: 1;
   -webkit-transition: all 0.2s ease-in;
@@ -260,7 +260,7 @@ a {
   right: 0;
   min-height: 100%;
   background: #eaeaea;
-  left: 300px;
+  left: 240px;
   width: auto;
 }
 @media screen and (max-width: 800px) {
@@ -858,9 +858,9 @@ a {
   margin-bottom: 80px;
 }
 .article {
-  margin: 30px;
+  margin: 0 0 20px;
   position: relative;
-  border: 1px solid #ddd;
+  border: 1px solid #ededed;
   background: #fff;
   -webkit-transition: all 0.2s ease-in;
 }
@@ -928,9 +928,9 @@ a {
   color: #c8c8c8;
 }
 .article-title {
-  color: #696969;
+  color: #258fb8;
   margin-left: 0px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 35px;
   margin-bottom: 20px;
   font-size: 26px;
@@ -950,7 +950,6 @@ a {
   margin-bottom: 20px;
 }
 .article-header {
-  border-left: 5px solid;
   padding: 15px 0px 15px 25px;
 }
 .article-info.info-on-right {
@@ -1031,10 +1030,10 @@ a {
 }
 .article-entry h2 {
   margin-top: 20px;
-  font-weight: 300;
-  color: #574c4c;
+  font-weight: 500;
+  color: #333;
   padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dedede;
 }
 .article-entry h3,
 .article-entry h4,
@@ -1044,7 +1043,6 @@ a {
   font-weight: 300;
   color: #574c4c;
   padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
 }
 .article-entry video {
   max-width: 100%;
@@ -1083,7 +1081,7 @@ a {
 }
 .article-entry table {
   width: 100%;
-  border: 1px solid #dedede;
+  border: 1px solid #f4f4f4;
   margin: 15px 0;
   border-collapse: collapse;
 }
@@ -1094,12 +1092,9 @@ a {
 .article-entry table thead tr {
   background: #f8f8f8;
 }
-.article-entry table tbody tr:hover {
-  background: #efefef;
-}
 .article-entry table td,
 .article-entry table th {
-  border: 1px solid #dedede;
+  border: 1px solid #f4f4f4;
   padding: 0 10px;
 }
 .article-entry figure table {
