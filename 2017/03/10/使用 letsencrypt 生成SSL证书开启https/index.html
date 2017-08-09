@@ -18,7 +18,7 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
 <meta property="og:image" content="http://img.pfan123.com/https_certbot.png">
 <meta property="og:image" content="http://img.pfan123.com/https_certbot1.png">
 <meta property="og:image" content="http://img.pfan123.com/https_certbot2.png">
-<meta property="og:updated_time" content="2017-06-07T16:34:42.000Z">
+<meta property="og:updated_time" content="2017-08-09T15:54:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 letsencrypt 生成 SSL 证书开启 HTTPS">
 <meta name="twitter:description" content="HTTP 和 HTTPS 是什么？　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 http://yun.pfan123.com，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。
@@ -89,7 +89,7 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
 						<li>Links</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -314,6 +314,10 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
 <p>5.验证服务器证书</p>
 <p>如上修改过 nginx 配置，并 reload 过 nginx 服务后，使用浏览器访问 <a href="https://yun.pfan123.com" target="_blank" rel="external">https://yun.pfan123.com</a>，验证服务器证书是否正确生效。</p>
 <p>也可以使用 <a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="external">ssllabs</a> 在线测试服务器证书强度及配置正确性.</p>
+<p>6.<a href="https://certbot.eff.org/docs/using.html#renewal" target="_blank" rel="external">letsencrypt 证书更新</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certbot renew --pre-hook &quot;service nginx stop&quot; --post-hook &quot;service nginx start&quot;</span><br></pre></td></tr></table></figure>
+<p>cron 自动更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 2 15 * * /root/ssl/certbot-auto renew &gt;&gt; /var/log/le-renew.log</span><br></pre></td></tr></table></figure>
 <p>参考资料：</p>
 <p><a href="https://certbot.eff.org/" target="_blank" rel="external">certbot</a></p>
 <p><a href="https://github.com/certbot/certbot" target="_blank" rel="external">certbot github</a></p>
@@ -335,18 +339,18 @@ HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是�
     
 <nav id="article-nav">
   
-    <a href="/2017/03/10/Webhook 实践/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/03/12/用 Git Hooks 进行自动部署/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Webhook 进行网站自动化部署
+          用 Git 钩子进行自动部署
         
       </div>
     </a>
   
   
-    <a href="/2017/03/04/探究iPhone显示模式下device-width区别/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">探究iPhone不同显示模式device-width值变化</div>
+    <a href="/2017/03/10/Webhook 实践/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Webhook 进行网站自动化部署</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
