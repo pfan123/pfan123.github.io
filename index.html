@@ -80,7 +80,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -1261,10 +1261,10 @@
 
 
   
-    <article id="post-使用 letsencrypt 生成SSL证书开启https" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Webhook 实践" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/10/使用 letsencrypt 生成SSL证书开启https/" class="article-date">
+      <a href="/2017/03/10/Webhook 实践/" class="article-date">
   	<time datetime="2017-03-10T02:00:21.000Z" itemprop="datePublished">2017-03-10</time>
 </a>
     </div>
@@ -1278,7 +1278,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/使用 letsencrypt 生成SSL证书开启https/">使用 letsencrypt 生成 SSL 证书开启 HTTPS</a>
+      <a class="article-title" href="/2017/03/10/Webhook 实践/">Webhook 进行网站自动化部署</a>
     </h1>
   
 
@@ -1287,56 +1287,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="HTTP-和-HTTPS-是什么？"><a href="#HTTP-和-HTTPS-是什么？" class="headerlink" title="HTTP 和 HTTPS 是什么？"></a>HTTP 和 HTTPS 是什么？</h2><p>　 HTTP 是一个传输网页内容的协议，比如你看到的 http 开头的网站 <a href="http://yun.pfan123.com" target="_blank" rel="external">http://yun.pfan123.com</a>，其网页上的文字、图片、CSS、JS 等文件都是通过 http 协议传输到我们浏览器的。</p>
-<p>HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。</p>
-<h2 id="SSL-TLS-是什么？"><a href="#SSL-TLS-是什么？" class="headerlink" title="SSL/TLS 是什么？"></a>SSL/TLS 是什么？</h2><p>SSL是一个介于HTTP协议与TCP之间的一个可选层，其位置大致如下:</p>
-<p><img src="http://img.pfan123.com/https_ssl.png" alt="svg基本形状"></p>
-<ul>
-<li><p>SSL：（Secure Socket Layer，安全套接字层），为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，可确保数据在网络上之传输过程中不会被截取。当前版本为3.0，它已被广泛地用于Web浏览器与服务器之间的身份认证和加密数据传输。<br>SSL协议位于TCP/IP协议与各种应用层协议之间，为数据通讯提供安全支持。SSL协议可分为两层： SSL记录协议（SSL Record Protocol）：它建立在可靠的传输协议（如TCP）之上，为高层协议提供数据封装、压缩、加密等基本功能的支持。 SSL握手协议（SSL Handshake Protocol）：它建立在SSL记录协议之上，用于在实际的数据传输开始前，通讯双方进行身份认证、协商加密算法、交换加密密钥等。</p>
-</li>
-<li><p>TLS：(Transport Layer Security，传输层安全协议)，用于两个应用程序之间提供保密性和数据完整性。<br>TLS 1.0是IETF（Internet Engineering Task Force，Internet工程任务组）制定的一种新的协议，它建立在SSL 3.0协议规范之上，是SSL 3.0的后续版本，可以理解为SSL 3.1，它是写入了 RFC 的。该协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。较低的层为 TLS 记录协议，位于某个可靠的传输协议（例如 TCP）上面。</p>
-</li>
-</ul>
-<p>SSL/TLS协议提供的服务主要有：</p>
-<ul>
-<li>1.认证用户和服务器，确保数据发送到正确的客户机和服务器；</li>
-<li>2.加密数据以防止数据中途被窃取；</li>
-<li>3.维护数据的完整性，确保数据在传输过程中不被改变。</li>
-</ul>
-<h2 id="HTTPS与HTTP的一些区别"><a href="#HTTPS与HTTP的一些区别" class="headerlink" title="HTTPS与HTTP的一些区别"></a>HTTPS与HTTP的一些区别</h2><p>1.HTTPS协议需要到CA申请证书，一般免费证书很少，需要交费，免费的推荐可以使用 <a href="http://letsencrypt.readthedocs.io/en/latest/using.html#getting-certificates-and-choosing-plugins" target="_blank" rel="external">letsencrypt</a>。<br>2.HTTP协议运行在TCP之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的。<br>3.HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。<br>4.HTTPS可以有效的防止运营商劫持，解决了防劫持的一个大问题。</p>
-<h2 id="如何HTTPS部署改造"><a href="#如何HTTPS部署改造" class="headerlink" title="如何HTTPS部署改造"></a>如何HTTPS部署改造</h2><p>一个网站要全站由HTTP替换成HTTPS，可能需要关注以下几点：</p>
-<ul>
-<li>1.安装CA证书，一般的证书都是需要收费的，这边推荐一个比较好的购买证书网站：1）<a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a>，免费，快捷，支持多域名（不是通配符），三条命令即时签署+导出证书。2）Comodo PositiveSSL，收费，但是比较稳定。</li>
-<li>2.在购买证书之后，在证书提供的网站上配置自己的域名，将证书下载下来之后，配置自己的web服务器，同时进行代码改造。</li>
-<li>3.HTTPS 降低用户访问速度。SSL握手，HTTPS 对速度会有一定程度的降低，但是只要经过合理优化和部署，HTTPS 对速度的影响完全可以接受。在很多场景下，HTTPS 速度完全不逊于 HTTP，如果使用 SPDY，HTTPS 的速度甚至还要比 HTTP 快。</li>
-<li>4.相对于HTTPS降低访问速度，其实更需要关心的是服务器端的CPU压力，HTTPS中大量的密钥算法计算，会消耗大量的CPU资源，只有足够的优化，HTTPS 的机器成本才不会明显增加。</li>
-</ul>
-<h2 id="Let’s-Encrypt-介绍"><a href="#Let’s-Encrypt-介绍" class="headerlink" title="Let’s Encrypt 介绍"></a>Let’s Encrypt 介绍</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 是一个免费、开放，自动化的证书颁发机构，由 ISRG（Internet Security Research Group）运作。</p>
-<p>ISRG 是一个关注网络安全的公益组织，其赞助商从非商业组织到财富100强公司都有，包括 Mozilla、Akamai、Cisco、Facebook，密歇根大学等等。ISRG 以消除资金，技术领域的障碍，全面推进加密连接成为互联网标配为自己的使命。</p>
-<p>申请 Let’s Encrypt 证书不但免费，还非常简单，虽然每次只有 90 天的有效期，但可以通过<a href="https://certbot.eff.org/" target="_blank" rel="external">certbot</a>脚本定期更新，  Let’s Encrypt有了<a href="https://github.com/certbot/certbot" target="_blank" rel="external">certbot</a>自动化工具，配置管理起来非常容易。</p>
-<p><img src="http://img.pfan123.com/https_certbot.png" alt=" certbot生成证书 "></p>
-<p>1.下载安装 <code>certbot</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.eff.org/certbot-auto</span><br><span class="line">chmod a+x certbot-auto</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.pfan123.com/https_certbot1.png" alt=" certbot生成证书 "></p>
-<p>2.获取CA申请证书</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./certbot-auto certonly</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.pfan123.com/https_certbot2.png" alt=" certbot生成证书 "></p>
-<p>3.查看 <code>fullchain.pem</code> 和 <code>privkey.pem</code>， 配置nginx</p>
-<p>查看 <code>etc/letsencrypt/live/[DOMAIN]/</code>, 发现含有 <code>fullchain.pem</code> 和 <code>privkey.pem</code> ，然后配置 nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">    listen 443 ssl;</span><br><span class="line"></span><br><span class="line">    server_name yun.pfan123.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /etc/letsencrypt/live/yun.pfan123.com/fullchain.pem;</span><br><span class="line"></span><br><span class="line">    ssl_certificate_key /etc/letsencrypt/live/yun.pfan123.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    ssl_dhparam /etc/ssl/certs/dhparams.pem;</span><br><span class="line"></span><br><span class="line">    ssl_ciphers &apos;ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA&apos;;</span><br><span class="line"></span><br><span class="line">    ssl_prefer_server_ciphers  on;</span><br><span class="line"></span><br><span class="line">    ……</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>4.配置 http 强制跳转到 https：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name www.saxieyu.com;</span><br><span class="line"></span><br><span class="line">    return 301 https://$server_name$request_uri;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>5.验证服务器证书</p>
-<p>如上修改过 nginx 配置，并 reload 过 nginx 服务后，使用浏览器访问 <a href="https://yun.pfan123.com" target="_blank" rel="external">https://yun.pfan123.com</a>，验证服务器证书是否正确生效。</p>
-<p>也可以使用 <a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="external">ssllabs</a> 在线测试服务器证书强度及配置正确性.</p>
-<p>6.<a href="https://certbot.eff.org/docs/using.html#renewal" target="_blank" rel="external">letsencrypt 证书更新</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certbot renew --pre-hook &quot;service nginx stop&quot; --post-hook &quot;service nginx start&quot;</span><br></pre></td></tr></table></figure>
-<p>cron 自动更新</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 2 15 * * /root/ssl/certbot-auto renew &gt;&gt; /var/log/le-renew.log</span><br></pre></td></tr></table></figure>
+        <h2 id="Webhook-是什么？"><a href="#Webhook-是什么？" class="headerlink" title="Webhook 是什么？"></a>Webhook 是什么？</h2><p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">Webhook</a>，也就是人们常说的钩子，是一个很有用的工具。Webhook 允许第三方应用监听 Github.com 上的特定事件，在这些事件发生时通过 HTTP POST 方式通知( 超时5秒) 到第三方应用指定的 Web URL。 例如项目有新的内容 Push，或是 Merge Request 有更新等。 WebHook 可方便用户实现自动部署，自动测试，自动打包，监控项目变化等。</p>
+<p>如此一来，可以通过这种方式去自动完成一些重复性工作；比如，用 Webhook 来自动触发一些持续集成（CI）工具的运作，比如 <a href="https://github.com/integrations/travis-ci" target="_blank" rel="external">Travis CI</a>；又或者是通过 Webhook 去部署你的线上服务器。</p>
+<h2 id="Webhook使用场景"><a href="#Webhook使用场景" class="headerlink" title="Webhook使用场景"></a>Webhook使用场景</h2><p>实际工作中，经常有这样的场景，本地提交代码到git仓库以后需要网站远程自动同步代码, 大概流程如下图： </p>
+<p><img src="http://img.pfan123.com/webhook1.png" alt="Webhook"></p>
+<h2 id="Webhook自动化部署"><a href="#Webhook自动化部署" class="headerlink" title="Webhook自动化部署"></a>Webhook自动化部署</h2><p>1.为了响应 Webhook 发出的请求，从而做一些我们想做的事情，我们得先实现一个响应服务器。本文采用 Node 来实现一个原型，你当然也可以用 PHP，python 等， 这里使用了<a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&apos;http&apos;)</span><br><span class="line">const createHandler = require(&apos;github-webhook-handler&apos;)</span><br><span class="line">const handler = createHandler(&#123; path: &apos;/webhook&apos;, secret: &apos;myhashsecret&apos; &#125;)</span><br><span class="line">const exec = require(&apos;child_process&apos;).exec</span><br><span class="line"></span><br><span class="line">var commands = [</span><br><span class="line">  &apos;cd .././blog&apos;,</span><br><span class="line">  &apos;git clean -df&apos;,</span><br><span class="line">  &apos;git pull&apos;</span><br><span class="line">].join(&apos; &amp;&amp; &apos;)</span><br><span class="line"></span><br><span class="line">http.createServer(function (req, res) &#123;</span><br><span class="line">  console.log(req.url)</span><br><span class="line">  handler(req, res, function (err) &#123;</span><br><span class="line">    res.statusCode = 404</span><br><span class="line">    res.end(&apos;no such location&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(7777)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;error&apos;, function (err) &#123;</span><br><span class="line">  console.error(&apos;Error:&apos;, err.message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;push&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received a push event for %s to %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref)</span><br><span class="line"></span><br><span class="line">    //执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">    exec(commands, function (error, stdout, stderr) &#123;</span><br><span class="line">      if (error) &#123;</span><br><span class="line">        console.log(error.stack);</span><br><span class="line">        console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">      &#125;</span><br><span class="line">      console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(&apos;issues&apos;, function (event) &#123;</span><br><span class="line">  console.log(&apos;Received an issue event for %s action=%s: #%d %s&apos;,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.action,</span><br><span class="line">    event.payload.issue.number,</span><br><span class="line">    event.payload.issue.title)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>例如  <code>deploy.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//执行通关exec做操作，也可以尝试用sh脚本</span><br><span class="line">exec(&apos;sh deploy.sh&apos;, function (error, stdout, stderr) &#123;</span><br><span class="line">  if (error) &#123;</span><br><span class="line">    console.log(error.stack);</span><br><span class="line">    console.log(&apos;Error code: &apos; + error.code);</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(&apos;博客更新 deploy&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"> </span><br><span class="line">WEB_PATH=&apos;/www/blog/&apos;</span><br><span class="line"> </span><br><span class="line">echo &quot;Start deployment&quot;</span><br><span class="line"></span><br><span class="line">cd $WEB_PATH</span><br><span class="line">echo &quot;pulling source code...&quot;</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git clean -f</span><br><span class="line">git pull</span><br><span class="line">git checkout master</span><br><span class="line">echo &quot;Finished.&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="配置-Webhook"><a href="#配置-Webhook" class="headerlink" title="配置 Webhook"></a>配置 Webhook</h2><p>Webhook 的配置是十分简单的，首先进入你的 repo 主页，通过点击页面上的按钮 [settings] -&gt; [Webhooks &amp; service] 进入 Webhooks 配置主页面。也可以通过下面这个链接直接进入配置页面：</p>
+<p><img src="http://img.pfan123.com/webhook2.png" alt="Webhook"></p>
+<p>配置好 Webhook 后，Github 会发送一个 ping 来测试这个地址。如果成功了，那么这个 Webhook 前就会加上一个绿色的勾；如果你得到的是一个红色的叉，那就好好检查一下哪儿出问题了吧！</p>
+<p><img src="http://img.pfan123.com/webhook3.png" alt="Webhook"></p>
 <p>参考资料：</p>
-<p><a href="https://certbot.eff.org/" target="_blank" rel="external">certbot</a></p>
-<p><a href="https://github.com/certbot/certbot" target="_blank" rel="external">certbot github</a></p>
-<p><a href="http://letsencrypt.readthedocs.io/en/latest/using.html#getting-certificates-and-choosing-plugins" target="_blank" rel="external">letsencrypt docs</a></p>
+<p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">Webhook</a></p>
+<p><a href="https://coding.net/help/doc/git/webhook.html" target="_blank" rel="external">coding Webhook</a></p>
+<p><a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a></p>
 
       
     </div>
@@ -1353,7 +1320,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/letsencrypt、HTTPS、SSL、TSL/">letsencrypt、HTTPS、SSL、TSL</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webhook，git/">Webhook，git</a></li></ul>
 	</div>
 
       
@@ -1387,7 +1354,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 pfan
+    		&copy; 2018 pfan
     	</div>
       	<div class="footer-right">
       		<a href="//hexo.io/" target="_blank">Hexo</a>  Theme <a href="//github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>
